@@ -57,6 +57,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\DBfacade.cs" />
+    <Compile Include="Model\TwitterFacade.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -90,9 +92,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config\" />
-    <Folder Include="Model\" />
-    <Folder Include="Twitter\" />
+    <Folder Include="Model\db\" />
+    <Folder Include="Model\Twitter\" />
     <Folder Include="ViewModel\" />
+    <Folder Include="View\item\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\MainWindow.xaml">
