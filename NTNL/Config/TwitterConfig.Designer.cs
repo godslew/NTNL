@@ -25,7 +25,7 @@ namespace NTNL.Config {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("QHXBuLPQSWf27bVxSKpa81mUc")]
         public string CK {
             get {
                 return ((string)(this["CK"]));
@@ -34,7 +34,7 @@ namespace NTNL.Config {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Xloms6Uk104mOyrOfUVdNPONWY6C18UhfCeUXvpdGRR8TZjtk1")]
         public string CS {
             get {
                 return ((string)(this["CS"]));

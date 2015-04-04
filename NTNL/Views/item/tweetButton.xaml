@@ -1,0 +1,20 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:local="clr-namespace:NTNL"
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+	mc:Ignorable="d"
+	x:Class="NTNL.tweetButton" Height="39.832" Width="118.193">
+    <UserControl.Resources>
+        <local:tweetButtonModel x:Key="tweetButtonModelDataSource" />
+    </UserControl.Resources>
+	<Button x:Name="button" Content="New Tweet" HorizontalAlignment="Left" VerticalAlignment="Top" Width="144.327" Height="45.699" Background="#FF0B196C" FontSize="18.667" FontWeight="Bold" Foreground="White" TextOptions.TextFormattingMode="Display" Margin="0,0,-26.134,-5.867" d:DataContext="{StaticResource tweetButtonModelDataSource}" DataContext="{DynamicResource tweetButtonModelDataSource}">
+		<i:Interaction.Triggers>
+			<i:EventTrigger EventName="Click" SourceName="button">
+				<ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="openMessageBox"/>
+			</i:EventTrigger>
+		</i:Interaction.Triggers>
+	</Button>
+</UserControl>

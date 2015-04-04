@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,8 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Interactions" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -62,10 +65,18 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>TwitterConfig.settings</DependentUpon>
     </Compile>
-    <Compile Include="Model\DBfacade.cs" />
-    <Compile Include="Model\TwitterFacade.cs" />
-    <Compile Include="View\MainWindow.xaml.cs">
+    <Compile Include="Models\DBfacade.cs" />
+    <Compile Include="Models\TwitterFacade.cs" />
+    <Compile Include="ViewModels\columnManagerModel.cs" />
+    <Compile Include="ViewModels\tweetButtonModel.cs" />
+    <Compile Include="Views\item\columnManager.xaml.cs">
+      <DependentUpon>columnManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\item\tweetButton.xaml.cs">
+      <DependentUpon>tweetButton.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -100,15 +111,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\db\" />
-    <Folder Include="Model\Twitter\" />
-    <Folder Include="ViewModel\" />
-    <Folder Include="View\item\" />
+    <Folder Include="Models\db\dao\" />
+    <Folder Include="Models\db\dto\" />
+    <Folder Include="Models\Twitter\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="View\MainWindow.xaml">
+    <Page Include="Views\item\columnManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\item\tweetButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
