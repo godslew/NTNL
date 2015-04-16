@@ -62,5 +62,28 @@ namespace NTNL.ViewModels
         public void Initialize()
         {
         }
+
+        #region OpenTextBoxCommand
+        private ViewModelCommand _OpenTextBoxCommand;
+
+        public ViewModelCommand OpenTextBoxCommand
+        {
+            get
+            {
+                if (_OpenTextBoxCommand == null)
+                {
+                    _OpenTextBoxCommand = new ViewModelCommand(OpenTextBox);
+                }
+                return _OpenTextBoxCommand;
+            }
+        }
+
+        public void OpenTextBox()
+        {
+            Console.WriteLine("test");
+            
+        }
+        #endregion
+
     }
 }
