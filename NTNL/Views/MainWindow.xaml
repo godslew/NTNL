@@ -37,6 +37,6 @@
                 VerticalAlignment="Top" Width="149.03" Height="45.493" Background="#9E000C7B"
                 IsCancel="True" FontSize="18.667" FontFamily="Meiryo UI" Command="{Binding OpenTextBoxCommand}"/>
 
-        
+
     </Grid>
 </Window>

@@ -75,7 +75,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\Analyzer\AnalyzerFacade.cs" />
+    <Compile Include="Models\Analyzer\Command.cs" />
+    <Compile Include="Models\Analyzer\Spam.cs" />
+    <Compile Include="Models\Analyzer\SuperAnalyzer.cs" />
+    <Compile Include="Models\DB\DBFacade.cs" />
+    <Compile Include="Models\init\DBCreator.cs" />
     <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\Twitter\TwitterFacade.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -114,6 +121,9 @@
     <Content Include="InfrastructureAssemblies\System.Windows.Interactivity.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Models\DB\DAO\" />
+    <Folder Include="Models\DB\DTO\" />
+    <Folder Include="Models\DB\Entity\" />
     <Folder Include="Views\items\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
