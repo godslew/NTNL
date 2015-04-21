@@ -67,6 +67,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\items\ColumnList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -83,7 +87,12 @@
     <Compile Include="Models\init\DBCreator.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\Twitter\TwitterFacade.cs" />
+    <Compile Include="ViewModels\columnItemViewModel.cs" />
+    <Compile Include="ViewModels\ColumnListViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\items\ColumnList.xaml.cs">
+      <DependentUpon>ColumnList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -124,7 +133,6 @@
     <Folder Include="Models\DB\DAO\" />
     <Folder Include="Models\DB\DTO\" />
     <Folder Include="Models\DB\Entity\" />
-    <Folder Include="Views\items\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
