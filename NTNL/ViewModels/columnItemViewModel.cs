@@ -63,9 +63,10 @@ namespace NTNL.ViewModels
         {
         }
 
-        public columnItemViewModel(String title)
+        public columnItemViewModel(String title, int index)
         {
-            this._Title = title;
+            this.Title = title;
+            this.index = index;
         }
 
         #region Title変更通知プロパティ
@@ -82,6 +83,47 @@ namespace NTNL.ViewModels
                 _Title = value;
                 RaisePropertyChanged();
             }
+        }
+        #endregion
+
+
+        #region index変更通知プロパティ
+        private int _index;
+
+        public int index
+        {
+            get
+            { return _index; }
+            set
+            { 
+                if (_index == value)
+                    return;
+                _index = value;
+                RaisePropertyChanged("index");
+            }
+        }
+        #endregion
+
+
+
+        #region FocusCommand
+        private ListenerCommand<int> _FocusCommand;
+
+        public ListenerCommand<int> FocusCommand
+        {
+            get
+            {
+                if (_FocusCommand == null)
+                {
+                    _FocusCommand = new ListenerCommand<int>(Focus);
+                }
+                return _FocusCommand;
+            }
+        }
+
+        public void Focus(int parameter)
+        {
+            Console.WriteLine(parameter);
         }
         #endregion
 

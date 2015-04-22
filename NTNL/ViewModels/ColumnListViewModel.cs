@@ -87,9 +87,9 @@ namespace NTNL.ViewModels
         public ColumnListViewModel()
         {
             this.columnList = new ObservableCollection<columnItemViewModel>();
-            this.columnList.Add(new columnItemViewModel("Home"));
-            this.columnList.Add(new columnItemViewModel("Mention"));
-            this.columnList.Add(new columnItemViewModel("Activity"));
+            this.columnList.Add(new columnItemViewModel("Home",0));
+            this.columnList.Add(new columnItemViewModel("Mention",1));
+            this.columnList.Add(new columnItemViewModel("Activity",2));
 
             BindingOperations.EnableCollectionSynchronization(this.columnList, new object());
             
@@ -118,8 +118,8 @@ namespace NTNL.ViewModels
 
         public void addColumn()
         {
-            this.columnList.Add(new columnItemViewModel("test"));
-            Console.WriteLine("test");
+            this.columnList.Add(new columnItemViewModel("test", columnList.Count()));
+            Console.WriteLine("test"+columnList.Count);
         }
         #endregion
 
