@@ -40,15 +40,19 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>InfrastructureAssemblies\Livet.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Expression.Interactions">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>InfrastructureAssemblies\Microsoft.Expression.Interactions.dll</HintPath>
+    <Reference Include="MetroRadiance.Chrome">
+      <HintPath>packages\MetroRadiance.Chrome.1.0.16\lib\net45\MetroRadiance.Chrome.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroRadiance.Core">
+      <HintPath>packages\MetroRadiance.Core.1.0.0\lib\net45\MetroRadiance.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\MetroRadiance.Chrome.1.0.16\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Interactivity">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>InfrastructureAssemblies\System.Windows.Interactivity.dll</HintPath>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\MetroRadiance.Chrome.1.0.16\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,6 +75,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\items\TweetColumn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -86,12 +94,16 @@
     <Compile Include="Models\DB\DBFacade.cs" />
     <Compile Include="Models\init\DBCreator.cs" />
     <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\Twitter\Tweet.cs" />
     <Compile Include="Models\Twitter\TwitterFacade.cs" />
     <Compile Include="ViewModels\columnItemViewModel.cs" />
     <Compile Include="ViewModels\ColumnListViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\items\ColumnList.xaml.cs">
       <DependentUpon>ColumnList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\items\TweetColumn.xaml.cs">
+      <DependentUpon>TweetColumn.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -116,6 +128,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

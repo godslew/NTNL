@@ -6,11 +6,11 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:NTNL.Views"
         xmlns:vm="clr-namespace:NTNL.ViewModels"
-        xmlns:NTNL="clr-namespace:NTNL" x:Class="NTNL.Views.MainWindow"
+        xmlns:NTNL="clr-namespace:NTNL" xmlns:items="clr-namespace:NTNL.Views.items" x:Class="NTNL.Views.MainWindow"
         Title="NTNL" Height="720" Width="1280" Background="#FF464242">
     
     <Window.DataContext>
-        <vm:MainWindowViewModel/>
+        <vm:ColumnListViewModel/>
     </Window.DataContext>
     
     <i:Interaction.Triggers>
@@ -34,13 +34,10 @@
     </i:Interaction.Triggers>
     
 	<Grid>
-		<Button x:Name="tweetButton" Content="New Tweet" HorizontalAlignment="Left" 
+        <Button x:Name="tweetButton" Content="New Tweet" HorizontalAlignment="Left" 
 			VerticalAlignment="Top" Width="150" Height="45" Background="#9E000C7B"
-			IsCancel="True" FontSize="18.667" FontFamily="Meiryo UI" Command="{Binding OpenTextBoxCommand}"/>
-
-
-		<NTNL:ColumnList HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,50,0,0" Width="150"/>
-
-
-	</Grid>
+			IsCancel="True" FontSize="18.667" FontFamily="Meiryo UI"/>
+        <NTNL:ColumnList HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,50,0,0" Width="150"/>
+        <items:TweetColumn HorizontalAlignment="Left" VerticalAlignment="Top" Margin="155,0,0,0"/>
+    </Grid>
 </Window>

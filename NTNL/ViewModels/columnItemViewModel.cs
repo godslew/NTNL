@@ -12,6 +12,9 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using NTNL.Models;
+using NTNL.Models.Twitter;
+using System.Collections.ObjectModel;
+using System.Windows.Data;
 
 namespace NTNL.ViewModels
 {
@@ -63,11 +66,31 @@ namespace NTNL.ViewModels
         {
         }
 
+        #region tweetList変更通知プロパティ
+        private ObservableCollection<Tweet> _tweetList;
+
+        public ObservableCollection<Tweet> tweetList
+        {
+            get
+            { return _tweetList; }
+            set
+            {
+                if (_tweetList == value)
+                    return;
+                _tweetList = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
         public columnItemViewModel(String title, int index)
         {
             this.Title = title;
             this.index = index;
+            this.tweetList = new ObservableCollection<Tweet>();
+            BindingOperations.EnableCollectionSynchronization(this.tweetList, new object());
         }
+
 
         #region Title変更通知プロパティ
         private string _Title;
@@ -126,6 +149,8 @@ namespace NTNL.ViewModels
             Console.WriteLine(parameter);
         }
         #endregion
+
+
 
     }
 }

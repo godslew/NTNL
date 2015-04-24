@@ -66,10 +66,11 @@ namespace NTNL.ViewModels
         {
         }
 
+
         #region columnList変更通知プロパティ
         private ObservableCollection<columnItemViewModel> _columnList;
 
-        public ObservableCollection<columnItemViewModel> columnList
+         public ObservableCollection<columnItemViewModel> columnList
         {
             get
             { return _columnList; }
@@ -78,7 +79,7 @@ namespace NTNL.ViewModels
                 if (_columnList == value)
                     return;
                 _columnList = value;
-                RaisePropertyChanged("columnList");
+                RaisePropertyChanged();
             }
         }
         #endregion
@@ -119,7 +120,7 @@ namespace NTNL.ViewModels
         public void addColumn()
         {
             this.columnList.Add(new columnItemViewModel("test", columnList.Count()));
-            Console.WriteLine("test"+columnList.Count);
+            //Console.WriteLine("test" + columnList.Count);
         }
         #endregion
 
