@@ -8,17 +8,17 @@
         xmlns:vm="clr-namespace:NTNL.ViewModels"
         xmlns:NTNL="clr-namespace:NTNL" xmlns:items="clr-namespace:NTNL.Views.items" x:Class="NTNL.Views.MainWindow"
         Title="NTNL" Height="720" Width="1280" Background="#FF464242">
-    
+
     <Window.DataContext>
         <vm:ColumnListViewModel/>
     </Window.DataContext>
-    
+
     <i:Interaction.Triggers>
-    
-    	<!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
-    	<!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
-    	<!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています --> 
-        
+
+        <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
+        <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
+        <!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています -->
+
         <!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます-->
         <i:EventTrigger EventName="ContentRendered">
             <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
@@ -32,12 +32,48 @@
         <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
 
     </i:Interaction.Triggers>
-    
-	<Grid>
+
+    <Grid>
         <Button x:Name="tweetButton" Content="New Tweet" HorizontalAlignment="Left" 
-			VerticalAlignment="Top" Width="150" Height="45" Background="#9E000C7B"
+			VerticalAlignment="Top" Width="128" Height="45" Background="#9E000C7B"
 			IsCancel="True" FontSize="18.667" FontFamily="Meiryo UI"/>
-        <NTNL:ColumnList HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,50,0,0" Width="150"/>
-        <items:TweetColumn HorizontalAlignment="Left" VerticalAlignment="Top" Margin="155,0,0,0"/>
+        <StackPanel Margin="0,69,1145.6,131">
+            <ListBox x:Name="listBox" Background="#00000000" Height="416" ItemsSource="{Binding columnList, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Title}" Height="45" Width="100" Background="#00000000" FontSize="18" ToolTip="{Binding Title}" Command="{Binding FocusCommand, Mode=OneWay}" CommandParameter="{Binding index}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Content="+add column" FontSize="14" Background="#0012103D" ToolTip="Add Column" Margin="0,0,0.4,0" RenderTransformOrigin="0.485,0.509" Height="60" Command="{Binding addColumnCommand, Mode=OneWay}" VerticalAlignment="Center" Width="120"/>
+        </StackPanel>
+        <ListBox Background="Transparent" ItemsSource="{Binding columnList}" Margin="155,0,-0.4,0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" Width="300">
+                        <TextBlock Text="{Binding Title}" Height="40" Width="250" FontSize="24"/>
+                        <ListView Height="580" Width="300" Background="Transparent" ItemsSource="{Binding tweetList}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Height="Auto" Width="300">
+                                        <Image Height="50" Width="50" RenderTransformOrigin="0.484,0.544" Margin="0,33.4,250,116.6"/>
+                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding text}" VerticalAlignment="Top" Height="Auto" Margin="4,88.4,-4,0" Width="300" RenderTransformOrigin="0.489,0.461" Foreground="White"/>
+                                    </Grid>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                    </StackPanel>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+        </ListBox>
     </Grid>
 </Window>

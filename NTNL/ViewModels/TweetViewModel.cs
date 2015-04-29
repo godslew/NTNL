@@ -12,12 +12,11 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using NTNL.Models;
-using System.Collections.ObjectModel;
-using System.Windows.Data;
+using System.Windows.Controls;
 
 namespace NTNL.ViewModels
 {
-    public class ColumnItemViewModel : ViewModel
+    public class TweetViewModel : ViewModel
     {
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -65,90 +64,59 @@ namespace NTNL.ViewModels
         {
         }
 
-        #region tweetList変更通知プロパティ
-        private ObservableCollection<TweetViewModel> _tweetList;
 
-        public ObservableCollection<TweetViewModel> tweetList
+        #region id変更通知プロパティ
+        private long _id;
+
+        public long id
         {
             get
-            { return _tweetList; }
-            set
-            {
-                if (_tweetList == value)
-                    return;
-                _tweetList = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-        public ColumnItemViewModel(String title, int index)
-        {
-            this.Title = title;
-            this.index = index;
-            this.tweetList = new ObservableCollection<TweetViewModel>();
-            BindingOperations.EnableCollectionSynchronization(this.tweetList, new object());
-        }
-
-
-        #region Title変更通知プロパティ
-        private string _Title;
-
-        public string Title
-        {
-            get
-            { return _Title; }
+            { return _id; }
             set
             { 
-                if (_Title == value)
+                if (_id == value)
                     return;
-                _Title = value;
+                _id = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
 
 
-        #region index変更通知プロパティ
-        private int _index;
+        #region text変更通知プロパティ
+        private string _text;
 
-        public int index
+        public string text
         {
             get
-            { return _index; }
+            { return _text; }
             set
             { 
-                if (_index == value)
+                if (_text == value)
                     return;
-                _index = value;
-                RaisePropertyChanged("index");
+                _text = value;
+                RaisePropertyChanged();
             }
         }
         #endregion
 
 
+        #region profileImage変更通知プロパティ
+        private Image _profileImage;
 
-        #region FocusCommand
-        private ListenerCommand<int> _FocusCommand;
-
-        public ListenerCommand<int> FocusCommand
+        public Image profileImage
         {
             get
-            {
-                if (_FocusCommand == null)
-                {
-                    _FocusCommand = new ListenerCommand<int>(Focus);
-                }
-                return _FocusCommand;
+            { return _profileImage; }
+            set
+            { 
+                if (_profileImage == value)
+                    return;
+                _profileImage = value;
+                RaisePropertyChanged();
             }
         }
-
-        public void Focus(int parameter)
-        {
-            Console.WriteLine(parameter);
-        }
         #endregion
-
 
 
     }

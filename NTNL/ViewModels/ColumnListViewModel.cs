@@ -68,9 +68,9 @@ namespace NTNL.ViewModels
 
 
         #region columnList変更通知プロパティ
-        private ObservableCollection<columnItemViewModel> _columnList;
+        private ObservableCollection<ColumnItemViewModel> _columnList;
 
-         public ObservableCollection<columnItemViewModel> columnList
+         public ObservableCollection<ColumnItemViewModel> columnList
         {
             get
             { return _columnList; }
@@ -87,10 +87,10 @@ namespace NTNL.ViewModels
 
         public ColumnListViewModel()
         {
-            this.columnList = new ObservableCollection<columnItemViewModel>();
-            this.columnList.Add(new columnItemViewModel("Home",0));
-            this.columnList.Add(new columnItemViewModel("Mention",1));
-            this.columnList.Add(new columnItemViewModel("Activity",2));
+            this.columnList = new ObservableCollection<ColumnItemViewModel>();
+            this.columnList.Add(new ColumnItemViewModel("Home",0));
+            this.columnList.Add(new ColumnItemViewModel("Mention",1));
+            this.columnList.Add(new ColumnItemViewModel("Activity",2));
 
             BindingOperations.EnableCollectionSynchronization(this.columnList, new object());
             
@@ -119,7 +119,7 @@ namespace NTNL.ViewModels
 
         public void addColumn()
         {
-            this.columnList.Add(new columnItemViewModel("test", columnList.Count()));
+            this.columnList.Add(new ColumnItemViewModel("test", columnList.Count()));
             //Console.WriteLine("test" + columnList.Count);
         }
         #endregion

@@ -71,6 +71,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\SettingWindowViewModel.cs" />
+    <Compile Include="Views\SettingWindow.xaml.cs">
+      <DependentUpon>SettingWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\items\ColumnList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -94,11 +98,11 @@
     <Compile Include="Models\DB\DBFacade.cs" />
     <Compile Include="Models\init\DBCreator.cs" />
     <Compile Include="Models\Model.cs" />
-    <Compile Include="Models\Twitter\Tweet.cs" />
     <Compile Include="Models\Twitter\TwitterFacade.cs" />
-    <Compile Include="ViewModels\columnItemViewModel.cs" />
+    <Compile Include="ViewModels\ColumnItemViewModel.cs" />
     <Compile Include="ViewModels\ColumnListViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\TweetViewModel.cs" />
     <Compile Include="Views\items\ColumnList.xaml.cs">
       <DependentUpon>ColumnList.xaml</DependentUpon>
     </Compile>
@@ -109,6 +113,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\SettingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

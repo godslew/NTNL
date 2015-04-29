@@ -11,14 +11,18 @@
 		<ListBox Background="Transparent" ItemsSource="{Binding columnList}">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<StackPanel Orientation="Vertical" Width="250">
+					<StackPanel Orientation="Vertical" Width="300">
 						<TextBlock Text="{Binding Title}" Height="40" Width="250" FontSize="24"/>
-						<ListView Height="580" Width="250" Background="Transparent" ItemsSource="{Binding tweetList}">
-							<ListView.View>
-								<GridView>
-									<GridViewColumn/>
-								</GridView>
-							</ListView.View>
+						<ListView Height="580" Width="300" Background="Transparent" ItemsSource="{Binding tweetList}">
+							<ListView.ItemTemplate>
+                            <DataTemplate>
+                            	<Grid Height="Auto" Width="300">
+                            		<Image Height="50" Width="50" RenderTransformOrigin="0.484,0.544" Margin="0,33.4,250,116.6"/>
+                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding text}" VerticalAlignment="Top" Height="Auto" Margin="4,88.4,-4,0" Width="300" RenderTransformOrigin="0.489,0.461" Foreground="White"/>
+                                </Grid>
+                                
+                            </DataTemplate>
+							</ListView.ItemTemplate>
 						</ListView>
 
 					</StackPanel>
