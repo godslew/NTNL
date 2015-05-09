@@ -71,6 +71,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\DB\DAO\AccountDAO.cs" />
+    <Compile Include="Models\DB\DAO\ColumnDAO.cs" />
+    <Compile Include="Models\DB\DAO\MuteDAO.cs" />
+    <Compile Include="Models\DB\DAO\PrivateDAO.cs" />
+    <Compile Include="Models\DB\DAO\SuperDAO.cs" />
+    <Compile Include="Models\DB\DAO\TagDAO.cs" />
+    <Compile Include="Models\DB\DTO\AccountDTO.cs" />
+    <Compile Include="Models\DB\DTO\ColumnDTO.cs" />
+    <Compile Include="Models\DB\DTO\MuteDTO.cs" />
+    <Compile Include="Models\DB\DTO\PrivateDTO.cs" />
+    <Compile Include="Models\DB\DTO\TagDTO.cs" />
+    <Compile Include="Models\DB\Entity\Account.cs" />
+    <Compile Include="Models\DB\Entity\Column.cs" />
+    <Compile Include="Models\DB\Entity\Mute.cs" />
+    <Compile Include="Models\DB\Entity\Private.cs" />
+    <Compile Include="Models\DB\Entity\Tag.cs" />
     <Compile Include="ViewModels\SettingWindowViewModel.cs" />
     <Compile Include="Views\SettingWindow.xaml.cs">
       <DependentUpon>SettingWindow.xaml</DependentUpon>
@@ -150,11 +166,7 @@
     <Content Include="InfrastructureAssemblies\Microsoft.Expression.Interactions.dll" />
     <Content Include="InfrastructureAssemblies\System.Windows.Interactivity.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\DB\DAO\" />
-    <Folder Include="Models\DB\DTO\" />
-    <Folder Include="Models\DB\Entity\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
