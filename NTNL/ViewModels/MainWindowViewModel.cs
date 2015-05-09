@@ -12,6 +12,8 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using NTNL.Models;
+using System.Collections.ObjectModel;
+using System.Windows.Data;
 
 namespace NTNL.ViewModels
 {
@@ -82,6 +84,63 @@ namespace NTNL.ViewModels
         {
             Console.WriteLine("test");
             
+        }
+        #endregion
+
+         #region columnList変更通知プロパティ
+        private ObservableCollection<ColumnItemViewModel> _columnList;
+
+         public ObservableCollection<ColumnItemViewModel> columnList
+        {
+            get
+            { return _columnList; }
+            set
+            { 
+                if (_columnList == value)
+                    return;
+                _columnList = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+        public MainWindowViewModel()
+        {
+            this.columnList = new ObservableCollection<ColumnItemViewModel>();
+            this.columnList.Add(new ColumnItemViewModel("Home",0));
+            this.columnList.Add(new ColumnItemViewModel("Mention",1));
+            this.columnList.Add(new ColumnItemViewModel("Activity",2));
+
+            BindingOperations.EnableCollectionSynchronization(this.columnList, new object());
+            
+        }
+
+
+        #region addColumnCommand
+        private ViewModelCommand _addColumnCommand;
+
+        public ViewModelCommand addColumnCommand
+        {
+            get
+            {
+                if (_addColumnCommand == null)
+                {
+                    _addColumnCommand = new ViewModelCommand(addColumn, CanaddColumn);
+                }
+                return _addColumnCommand;
+            }
+        }
+
+        public bool CanaddColumn()
+        {
+            return true;
+        }
+
+        public void addColumn()
+        {
+            this.columnList.Add(new ColumnItemViewModel("test", columnList.Count()));
+            //Console.WriteLine("test" + columnList.Count);
         }
         #endregion
 

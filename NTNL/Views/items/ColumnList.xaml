@@ -8,15 +8,12 @@
     xmlns:v="clr-namespace:NTNL.Views"
 	x:Class="NTNL.ColumnList"
 	d:DesignWidth="150" d:DesignHeight="500">
-    <UserControl.DataContext>
-        <vm:ColumnListViewModel/>
-    </UserControl.DataContext>
 
     <StackPanel>
-        <ListBox Background="#00000000" Margin="0,0,0.4,0" Height="416" ItemsSource="{ Binding columnList, Mode=TwoWay}">
+        <ListBox x:Name="listBox" Background="#00000000" Margin="0,0,0.4,0" Height="416" ItemsSource="{ Binding columnList, Mode=TwoWay}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding Title}" Height="45" Width="140" Background="#00000000" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Button>
+                    <Button Content="{Binding Title}" Height="45" Width="140" Background="#00000000" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ToolTip="{Binding Title}" Command="{Binding FocusCommand, Mode=OneWay}" CommandParameter="{Binding index}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ListBox>

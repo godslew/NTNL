@@ -12,12 +12,10 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using NTNL.Models;
-using System.Collections.ObjectModel;
-using System.Windows.Data;
 
 namespace NTNL.ViewModels
 {
-    public class ColumnItemViewModel : ViewModel
+    public class SettingWindowViewModel : ViewModel
     {
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -64,92 +62,5 @@ namespace NTNL.ViewModels
         public void Initialize()
         {
         }
-
-        #region tweetList変更通知プロパティ
-        private ObservableCollection<TweetViewModel> _tweetList;
-
-        public ObservableCollection<TweetViewModel> tweetList
-        {
-            get
-            { return _tweetList; }
-            set
-            {
-                if (_tweetList == value)
-                    return;
-                _tweetList = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-        public ColumnItemViewModel(String title, int index)
-        {
-            this.Title = title;
-            this.index = index;
-            this.tweetList = new ObservableCollection<TweetViewModel>();
-            BindingOperations.EnableCollectionSynchronization(this.tweetList, new object());
-        }
-
-
-        #region Title変更通知プロパティ
-        private string _Title;
-
-        public string Title
-        {
-            get
-            { return _Title; }
-            set
-            { 
-                if (_Title == value)
-                    return;
-                _Title = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-
-        #region index変更通知プロパティ
-        private int _index;
-
-        public int index
-        {
-            get
-            { return _index; }
-            set
-            { 
-                if (_index == value)
-                    return;
-                _index = value;
-                RaisePropertyChanged("index");
-            }
-        }
-        #endregion
-
-
-
-        #region FocusCommand
-        private ListenerCommand<int> _FocusCommand;
-
-        public ListenerCommand<int> FocusCommand
-        {
-            get
-            {
-                if (_FocusCommand == null)
-                {
-                    _FocusCommand = new ListenerCommand<int>(Focus);
-                }
-                return _FocusCommand;
-            }
-        }
-
-        public void Focus(int parameter)
-        {
-            Console.WriteLine(parameter);
-        }
-        #endregion
-
-
-
     }
 }
