@@ -111,6 +111,8 @@ namespace NTNL.ViewModels
             this.columnList.Add(new ColumnItemViewModel("Home",0));
             this.columnList.Add(new ColumnItemViewModel("Mention",1));
             this.columnList.Add(new ColumnItemViewModel("Activity",2));
+            columnList.First().tweetList.Add(new TweetViewModel("testあああああああああああああああああああああああああああああああああああああああああああああああああああああああ"));
+            
 
             BindingOperations.EnableCollectionSynchronization(this.columnList, new object());
             
@@ -144,5 +146,6 @@ namespace NTNL.ViewModels
         }
         #endregion
 
+        
     }
 }

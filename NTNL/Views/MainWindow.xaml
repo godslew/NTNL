@@ -3,14 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:chrome="http://schemes.grabacr.net/winfx/2014/chrome"
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:NTNL.Views"
         xmlns:vm="clr-namespace:NTNL.ViewModels"
         xmlns:NTNL="clr-namespace:NTNL" xmlns:items="clr-namespace:NTNL.Views.items" x:Class="NTNL.Views.MainWindow"
         Title="NTNL" Height="720" Width="1280" Background="#FF464242">
 
+
     <Window.DataContext>
-        <vm:ColumnListViewModel/>
+        <vm:MainWindowViewModel/>
     </Window.DataContext>
 
     <i:Interaction.Triggers>
@@ -52,12 +54,12 @@
                 <DataTemplate>
                     <StackPanel Orientation="Vertical" Width="300">
                         <TextBlock Text="{Binding Title}" Height="40" Width="250" FontSize="24"/>
-                        <ListView Height="580" Width="300" Background="Transparent" ItemsSource="{Binding tweetList}">
+                        <ListView Height="620" Width="300" Background="Transparent" ItemsSource="{Binding tweetList}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Height="Auto" Width="300">
                                         <Image Height="50" Width="50" RenderTransformOrigin="0.484,0.544" Margin="0,33.4,250,116.6"/>
-                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding text}" VerticalAlignment="Top" Height="Auto" Margin="4,88.4,-4,0" Width="300" RenderTransformOrigin="0.489,0.461" Foreground="White"/>
+                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding text}" VerticalAlignment="Top" Height="Auto" Margin="4,88.4,-4,0" Width="250" RenderTransformOrigin="0.489,0.461" Foreground="White"/>
                                     </Grid>
 
                                 </DataTemplate>

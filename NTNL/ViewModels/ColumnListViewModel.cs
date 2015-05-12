@@ -91,7 +91,14 @@ namespace NTNL.ViewModels
             this.columnList.Add(new ColumnItemViewModel("Home",0));
             this.columnList.Add(new ColumnItemViewModel("Mention",1));
             this.columnList.Add(new ColumnItemViewModel("Activity",2));
-
+            columnList.ElementAt(0).tweetList.Add(new TweetViewModel("test"));
+            columnList.ElementAt(0).tweetList.Add(new TweetViewModel("test"));
+            columnList.ElementAt(0).tweetList.Add(new TweetViewModel("test"));
+            columnList.ElementAt(0).tweetList.Add(new TweetViewModel("test"));
+            columnList.ElementAt(0).tweetList.Add(new TweetViewModel("test"));
+            columnList.ElementAt(0).tweetList.Add(new TweetViewModel("test"));
+            columnList.ElementAt(0).tweetList.Add(new TweetViewModel("test"));
+            columnList.ElementAt(0).tweetList.Add(new TweetViewModel("test"));
             BindingOperations.EnableCollectionSynchronization(this.columnList, new object());
             
         }

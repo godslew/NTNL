@@ -22,17 +22,17 @@ namespace NTNL.Models.DB.Entity
 
         public Tag(TagDTO dto)
         {
-            this.ID = dto.getID();
-            this.TwitterID = dto.getTwitterD();
-            this.TagName = dto.getTagName();
+            this.ID = dto.ID;
+            this.TwitterID = dto.TwitterID;
+            this.TagName = dto.TagName;
         }
 
         public TagDTO createDTO()
         {
             TagDTO dto = new TagDTO();
-            dto.setID(dto.getID());
-            dto.setTwitterID(dto.getTwitterID());
-            dto.setTagName(dto.getTagName());
+            dto.ID = ID;
+            dto.TwitterID = TwitterID;
+            dto.TagName = TagName;
 
             return dto;
         }
