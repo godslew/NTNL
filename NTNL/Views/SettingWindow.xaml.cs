@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroRadiance.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace NTNL.Views
     /// <summary>
     /// SettingWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class SettingWindow : Window
+    public partial class SettingWindow : MetroWindow
     {
         public SettingWindow()
         {

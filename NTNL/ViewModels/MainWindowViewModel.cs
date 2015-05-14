@@ -83,6 +83,8 @@ namespace NTNL.ViewModels
         public void OpenTextBox()
         {
             Console.WriteLine("test");
+            App app = App.Current as App;
+            app.ShowModalView(new SettingWindowViewModel());
             
         }
         #endregion
