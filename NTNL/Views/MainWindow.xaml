@@ -35,7 +35,6 @@
         <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
 
     </i:Interaction.Triggers>
-
     <Grid>
         <metro:SystemButtons HorizontalAlignment="Right" VerticalAlignment="Top"/>
         <Button x:Name="tweetButton" Content="New Tweet" HorizontalAlignment="Left" Width="128" Height="45" Background="#9E000C7B"
