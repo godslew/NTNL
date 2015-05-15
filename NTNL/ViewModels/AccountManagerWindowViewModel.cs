@@ -12,12 +12,10 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using NTNL.Models;
-using System.Collections.ObjectModel;
-using System.Windows.Data;
 
 namespace NTNL.ViewModels
 {
-    public class MainWindowViewModel : ViewModel
+    public class AccountManagerWindowViewModel : ViewModel
     {
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -65,92 +63,27 @@ namespace NTNL.ViewModels
         {
         }
 
-        #region OpenTextBoxCommand
-        private ViewModelCommand _OpenTextBoxCommand;
 
-        public ViewModelCommand OpenTextBoxCommand
+        #region OAuthCommand
+        private ListenerCommand<string> _OAuthCommand;
+
+        public ListenerCommand<string> OAuthCommand
         {
             get
             {
-                if (_OpenTextBoxCommand == null)
+                if (_OAuthCommand == null)
                 {
-                    _OpenTextBoxCommand = new ViewModelCommand(OpenTextBox);
+                    _OAuthCommand = new ListenerCommand<string>(OAuth);
                 }
-                return _OpenTextBoxCommand;
+                return _OAuthCommand;
             }
         }
 
-        public  void OpenTextBox()
+        public void OAuth(string parameter)
         {
-            Console.WriteLine("test");
-            App app = App.Current as App;
-            
-            //app.ShowModalView(new SettingWindowViewModel());
-            //app.ShowModalView(new AccountManagerWindowViewModel());
-            app.ShowView(new AccountManagerWindowViewModel());
-            
+
         }
         #endregion
 
-         #region columnList変更通知プロパティ
-        private ObservableCollection<ColumnItemViewModel> _columnList;
-
-         public ObservableCollection<ColumnItemViewModel> columnList
-        {
-            get
-            { return _columnList; }
-            set
-            { 
-                if (_columnList == value)
-                    return;
-                _columnList = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-
-        public MainWindowViewModel()
-        {
-            this.columnList = new ObservableCollection<ColumnItemViewModel>();
-            this.columnList.Add(new ColumnItemViewModel("Home",0));
-            this.columnList.Add(new ColumnItemViewModel("Mention",1));
-            this.columnList.Add(new ColumnItemViewModel("Activity",2));
-            columnList.First().tweetList.Add(new TweetViewModel("testあああああああああああああああああああああああああああああああああああああああああああああああああああああああ"));
-            
-
-            BindingOperations.EnableCollectionSynchronization(this.columnList, new object());
-            
-        }
-
-
-        #region addColumnCommand
-        private ViewModelCommand _addColumnCommand;
-
-        public ViewModelCommand addColumnCommand
-        {
-            get
-            {
-                if (_addColumnCommand == null)
-                {
-                    _addColumnCommand = new ViewModelCommand(addColumn, CanaddColumn);
-                }
-                return _addColumnCommand;
-            }
-        }
-
-        public bool CanaddColumn()
-        {
-            return true;
-        }
-
-        public void addColumn()
-        {
-            this.columnList.Add(new ColumnItemViewModel("test", columnList.Count()));
-            //Console.WriteLine("test" + columnList.Count);
-        }
-        #endregion
-
-        
     }
 }

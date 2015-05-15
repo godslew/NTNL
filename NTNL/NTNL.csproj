@@ -130,10 +130,18 @@
     <Compile Include="Models\DB\Entity\Mute.cs" />
     <Compile Include="Models\DB\Entity\Private.cs" />
     <Compile Include="Models\DB\Entity\Tag.cs" />
+    <Compile Include="ViewModels\AccountManagerWindowViewModel.cs" />
     <Compile Include="ViewModels\SettingWindowViewModel.cs" />
+    <Compile Include="Views\AccountManagerWindow.xaml.cs">
+      <DependentUpon>AccountManagerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SettingWindow.xaml.cs">
       <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\AccountManagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\items\ColumnList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -44,6 +44,7 @@ namespace NTNL
             // ViewModel と View の対応を設定する
             ViewModels = new Dictionary<Type, Type>();
             ViewModels.Add(typeof(SettingWindowViewModel), typeof(SettingWindow));
+            ViewModels.Add(typeof(AccountManagerWindowViewModel), typeof(AccountManagerWindow));
         }
 
         // ViewModelからViewを生成する
