@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NTNL.Models.DB.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace NTNL.Models.DB.DAO
         public TagDAO(String dbConnectionString, String tableName)
             : base(dbConnectionString, tableName)
         {
-
         }
+        
     }
 }

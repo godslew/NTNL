@@ -20,10 +20,29 @@ namespace NTNL.Models.DB.DAO
             this.tableName = tableName;
         }
 
+        
+        //insert
+        
+      
+        //update
+
+
+        //select
+        
+
+        //delete
+
+
+        
+        
+         
+         
+ 
         //Account追加
         protected void AddAccount(int ID, String TwitterID, String CK, String CS, String AT, String ATS)
         {
-            using (SQLiteConnection cn = new SQLiteConnection(dbConnectionString))
+           // using (SQLiteConnection cn = new SQLiteConnection(dbConnectionString))
+            using (var cn = new SQLiteConnection(dbConnectionString))
             {
                 cn.Open();
                 using (SQLiteTransaction trans = cn.BeginTransaction())
@@ -32,7 +51,7 @@ namespace NTNL.Models.DB.DAO
 
                     // インサート文
                     cmd.CommandText = "INSERT INTO ACCOUNT(ID, TwitterID, CK, CS, AT, ATS ) VALUES (@ID_T, @TwitterID_T, @CK_T, @CS_T, @AT_T, @ATS_T)";
-
+                    
                     // パラメータのセット
                     cmd.Parameters.Add("ID_T", System.Data.DbType.Int16);
                     cmd.Parameters.Add("TwitterID_T", System.Data.DbType.String);
@@ -65,6 +84,7 @@ namespace NTNL.Models.DB.DAO
                 cn.Open();
                 SQLiteCommand cmd = cn.CreateCommand();
                 cmd.CommandText = "SELECT * FROM ACCOUNT";
+                
                 using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {
                    while (reader.Read())
