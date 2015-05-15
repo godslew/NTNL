@@ -118,6 +118,8 @@ namespace NTNL.ViewModels
         }
         #endregion
 
-
+        public TweetViewModel(String text){
+            this.text = text;
+        }
     }
 }

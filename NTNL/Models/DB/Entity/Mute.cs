@@ -23,6 +23,7 @@ namespace NTNL.Models.DB.Entity
             this.ID = ID;
             this.TwitterID = TwitterID;
             this.userID = userID;
+            this.Media = Media;
             this.Tweet = Tweet;
             this.RT = RT;
             this.Favorite = Favorite;
@@ -30,25 +31,25 @@ namespace NTNL.Models.DB.Entity
 
         public Mute(MuteDTO dto)
         {
-            this.ID = dto.getID();
-            this.TwitterID = dto.getTwitterID();
-            this.userID = dto.getUserID();
-            this.Media = dto.getMedia();
-            this.Tweet = dto.getTweet();
-            this.RT = dto.getRT();
-            this.Favorite = dto.getFavorite();
+            this.ID = dto.ID;
+            this.TwitterID = dto.TwitterID;
+            this.userID = dto.userID;
+            this.Media = dto.Media;
+            this.Tweet = dto.Tweet;
+            this.RT = dto.RT;
+            this.Favorite = dto.Favorite;
         }
 
         public MuteDTO createDTO()
         {
            MuteDTO dto = new MuteDTO();
-           dto.setID(ID);
-           dto.setTwitterID(TwitterID);
-           dto.setUserID(userID);
-           dto.setMedia(Media);
-           dto.setTweet(Tweet);
-           dto.setRT(RT);
-           dto.setFavorite(Favorite);
+           dto.ID = ID;
+           dto.TwitterID = TwitterID;
+           dto.userID = userID;
+           dto.Media = Media;
+           dto.Tweet = Tweet;
+           dto.RT = RT;
+           dto.Favorite = Favorite;
 
            return dto;
         }

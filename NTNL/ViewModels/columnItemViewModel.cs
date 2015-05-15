@@ -87,6 +87,7 @@ namespace NTNL.ViewModels
             this.Title = title;
             this.index = index;
             this.tweetList = new ObservableCollection<TweetViewModel>();
+            //tweetList.Add(new TweetViewModel("test"));
             BindingOperations.EnableCollectionSynchronization(this.tweetList, new object());
         }
 

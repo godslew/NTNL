@@ -83,6 +83,8 @@ namespace NTNL.ViewModels
         public void OpenTextBox()
         {
             Console.WriteLine("test");
+            App app = App.Current as App;
+            app.ShowModalView(new SettingWindowViewModel());
             
         }
         #endregion
@@ -111,6 +113,8 @@ namespace NTNL.ViewModels
             this.columnList.Add(new ColumnItemViewModel("Home",0));
             this.columnList.Add(new ColumnItemViewModel("Mention",1));
             this.columnList.Add(new ColumnItemViewModel("Activity",2));
+            columnList.First().tweetList.Add(new TweetViewModel("testあああああああああああああああああああああああああああああああああああああああああああああああああああああああ"));
+            
 
             BindingOperations.EnableCollectionSynchronization(this.columnList, new object());
             
@@ -144,5 +148,6 @@ namespace NTNL.ViewModels
         }
         #endregion
 
+        
     }
 }

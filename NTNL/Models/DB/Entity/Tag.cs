@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NTNL.Models.DB.DTO;
-using System.Data.Linq;
-using System.Data.Linq.Mapping;
 
 namespace NTNL.Models.DB.Entity
 {
@@ -24,17 +22,17 @@ namespace NTNL.Models.DB.Entity
 
         public Tag(TagDTO dto)
         {
-            this.ID = dto.getID();
-            this.TwitterID = dto.getTwitterID();
-            this.TagName = dto.getTagName();
+            this.ID = dto.ID;
+            this.TwitterID = dto.TwitterID;
+            this.TagName = dto.TagName;
         }
 
         public TagDTO createDTO()
         {
             TagDTO dto = new TagDTO();
-            dto.setID(dto.getID());
-            dto.setTwitterID(dto.getTwitterID());
-            dto.setTagName(dto.getTagName());
+            dto.ID = ID;
+            dto.TwitterID = TwitterID;
+            dto.TagName = TagName;
 
             return dto;
         }
