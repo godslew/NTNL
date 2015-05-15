@@ -96,6 +96,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helper\helper.cs" />
     <Compile Include="Models\DB\DAO\AccountDAO.cs" />
     <Compile Include="Models\DB\DAO\ColumnDAO.cs" />
     <Compile Include="Models\DB\DAO\MuteDAO.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Models\DB\Entity\Mute.cs" />
     <Compile Include="Models\DB\Entity\Private.cs" />
     <Compile Include="Models\DB\Entity\Tag.cs" />
+    <Compile Include="NTNL_Config\DBConstants.cs" />
     <Compile Include="ViewModels\SettingWindowViewModel.cs" />
     <Compile Include="Views\SettingWindow.xaml.cs">
       <DependentUpon>SettingWindow.xaml</DependentUpon>

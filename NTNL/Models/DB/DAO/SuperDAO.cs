@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Data.SQLite.Linq;
+using NTNL.Helper;
+using NTNL;
+using NTNL.NTNL_Config;
 
 namespace NTNL.Models.DB.DAO
 {
@@ -21,9 +24,75 @@ namespace NTNL.Models.DB.DAO
         }
 
         
+        //SQLのテンプレート
+        protected static String getSqlBaseInsert()
+        {
+            return DBConstants.SQLBASE_INSERT;
+        }
+        protected static String getSqlBaseSelect()
+        {
+            return DBConstants.SQLBASE_SELECT;
+        }
+        protected static String getSqlBaseUpdate()
+        {
+            return DBConstants.SQLBASE_UPDATE;
+        }
+        protected static String getSqlBaseDelete()
+        {
+            return DBConstants.SQLBASE_DELETE;
+        }
+/*
+        protected static String generateSqlPartsColumn(Collection<String> columnNameList)
+        {
+            if (columnNameList == null || columnNameList.isEmpty())
+            {
+                 return "*";
+            }
+                 return helper.join(columnNameList.toArray(new String[0]),",");
+        }
+        protected static String generateSqlPartsWhere(Dictionary<String, Object> where)
+        {
+            return generateSqlPartsWhere(where.Keys, null);
+        }
+        protected static String generateSqlPartsWhere(Dictionary<String, Object> where, List<String> whereLimit)
+        {
+            return generateSqlPartsWhere(where.Keys, whereLimit);
+        }
+        protected static String generateSqlPartsSet(Dictionary<String, Object> values)
+        {
+            return generateSqlPartsSet(values.Keys);
+        }
+        protected static String generateSqlPartsSet(Collection<String> values)
+        {
+            return helper.join(values.toArray(new String[0]), ",","=?");
+        }
+        protected static String generateSqlPartsValues(Dictionary<String, Object> values)
+        {
+            String[] signs = (String[])helper.filledArray("?", values.Count.toArray(new String[0]));
+            return helper.join(signs,",");
+        }
+        protected static String generateSqlPartsWhere(Collection<String> whereColumns, List<String> whereLimit)
+        {
+            String[] whereColumnsKey = (String[])whereColumns.toArray(new String[0]);
+            String sql = "";
+            for (int i = 0; i < whereColumnsKey.Length; i++)
+            {
+                sql += whereColumnsKey[i] + " " + (whereLimit != null && whereLimit[i] != null ? whereLimit[i] : "=") + " ? ";
+                if (i != whereColumnsKey.Length - 1)
+                {
+                    sql += " and ";
+                }
+            }
+        }
+
         //insert
-        
-      
+        protected int insert(Dictionary<String, Object> values, String option, String tableName)
+        {
+            String sqlBase = getSqlBaseInsert();
+            sqlBase = sqlBase.Replace(PIECE_TABLE_NAME, tableName);
+          //  sqlBase = sqlBase.Replace(PIECE_COLUMNS, );
+        }
+  */    
         //update
 
 
