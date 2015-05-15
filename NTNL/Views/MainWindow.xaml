@@ -36,10 +36,10 @@
 
     </i:Interaction.Triggers>
     <Grid>
+        <metro:CaptionIcon HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="53" Content="NTNL" FontSize="11"/>
         <metro:SystemButtons HorizontalAlignment="Right" VerticalAlignment="Top"/>
-        <Button x:Name="tweetButton" Content="New Tweet" HorizontalAlignment="Left" Width="128" Height="45" Background="#9E000C7B"
-			IsCancel="True" FontSize="18.667" FontFamily="Meiryo UI" Command="{Binding OpenTextBoxCommand, Mode=OneWay}" VerticalAlignment="Top" Margin="0,25,0,0"/>
-        <StackPanel x:Name="stackPanel" Margin="0,75,1157.6,159" RenderTransformOrigin="0.5,0.5">
+        <metro:CaptionButton x:Name="tweetButton" Content="New Tweet" HorizontalAlignment="Left" Width="128" Height="45" Background="#9E000C7B" FontSize="18.667" FontFamily="Meiryo UI" Command="{Binding OpenTextBoxCommand, Mode=OneWay}" VerticalAlignment="Top" Margin="0,30,0,0"/>
+        <StackPanel x:Name="stackPanel" Margin="0,80,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
             <StackPanel.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -48,16 +48,16 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </StackPanel.RenderTransform>
-            <ListBox x:Name="listBox" Background="#00000000" Height="416" ItemsSource="{Binding columnList, Mode=TwoWay}" Margin="0,0,-13,0" BorderThickness="1">
+            <ListBox x:Name="listBox" Background="#00000000" Height="416" ItemsSource="{Binding columnList, Mode=TwoWay}" Margin="0,0,-13,0" BorderThickness="3" HorizontalAlignment="Left" BorderBrush="#FF2E3136">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Button Content="{Binding Title}" Height="45" Width="100" Background="#00000000" FontSize="18" ToolTip="{Binding Title}" Command="{Binding FocusCommand, Mode=OneWay}" CommandParameter="{Binding index}"/>
+                        <metro:CaptionButton Content="{Binding Title}" Height="45" Width="100" Background="#00000000" FontSize="18" ToolTip="{Binding Title}" Command="{Binding FocusCommand, Mode=OneWay}" CommandParameter="{Binding index}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Content="+" FontSize="20" Background="#0012103D" ToolTip="add column" Margin="4,0,44,0" RenderTransformOrigin="0.485,0.509" Height="50" Command="{Binding addColumnCommand, Mode=OneWay}" VerticalAlignment="Center"/>
+            <metro:CaptionButton Content="+" FontSize="20" Background="#00000000" ToolTip="add column" Margin="4,0,44,0" Height="50" Command="{Binding addColumnCommand, Mode=OneWay}" VerticalAlignment="Center"/>
         </StackPanel>
-        <ListBox x:Name="listBox1" Background="Transparent" ItemsSource="{Binding columnList}" Margin="145,0,-0.4,0" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="686">
+        <ListBox x:Name="listBox1" Background="Transparent" ItemsSource="{Binding columnList}" Margin="145,30,0,0" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF2E3136" BorderThickness="5">
             <ListBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -69,8 +69,8 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical" Width="300">
-                        <TextBlock Text="{Binding Title}" Height="40" Width="250" FontSize="24"/>
-                        <ListView Height="620" Width="300" Background="Transparent" ItemsSource="{Binding tweetList}">
+                        <TextBlock Text="{Binding Title}" Height="40" Width="250" FontSize="24" ToolTip="{Binding Title}"/>
+                        <ListView Height="Auto" Width="300" Background="Transparent" ItemsSource="{Binding tweetList}" MinWidth="300" MinHeight="650" VerticalContentAlignment="Top" VerticalAlignment="Bottom" HorizontalAlignment="Left" BorderBrush="#FF2E3136" BorderThickness="3">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Height="Auto" Width="290">
