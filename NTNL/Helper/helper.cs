@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace NTNL.Helper
 {
@@ -27,14 +28,15 @@ namespace NTNL.Helper
         {
             return join(strs, glue, "");
         }
-        /*
-        public static  ArrayList<T> filledArray(T obj, int size){
-            ArrayList<T> objs = new ArrayList<T>();
+        
+        //?ArrayList間違ってるかも
+        public static  ArrayList filledArray(Object obj, int size){
+            ArrayList objs = new ArrayList();
             for(int i=0; i<size; i++){
-                objs.add(obj);
+                objs.Add(obj);
             }
             return objs;
         }
-         */
+        
     }
 }

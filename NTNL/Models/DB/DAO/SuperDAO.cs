@@ -41,14 +41,14 @@ namespace NTNL.Models.DB.DAO
         {
             return DBConstants.SQLBASE_DELETE;
         }
-/*
-        protected static String generateSqlPartsColumn(Collection<String> columnNameList)
+
+        protected static String generateSqlPartsColumns(ICollection<String> columnNameList)
         {
-            if (columnNameList == null || columnNameList.isEmpty())
+            if (columnNameList == null || columnNameList.Empty)
             {
                  return "*";
             }
-                 return helper.join(columnNameList.toArray(new String[0]),",");
+                 return helper.join(columnNameList.ToArray(new String[0]),",");
         }
         protected static String generateSqlPartsWhere(Dictionary<String, Object> where)
         {
@@ -62,18 +62,18 @@ namespace NTNL.Models.DB.DAO
         {
             return generateSqlPartsSet(values.Keys);
         }
-        protected static String generateSqlPartsSet(Collection<String> values)
+        protected static String generateSqlPartsSet(ICollection<String> values)
         {
-            return helper.join(values.toArray(new String[0]), ",","=?");
+            return helper.join(values.ToArray(new String[0]), ",","=?");
         }
         protected static String generateSqlPartsValues(Dictionary<String, Object> values)
         {
-            String[] signs = (String[])helper.filledArray("?", values.Count.toArray(new String[0]));
+            String[] signs = (String[])helper.filledArray("?", values.Count.ToArray(new String[0]));
             return helper.join(signs,",");
         }
-        protected static String generateSqlPartsWhere(Collection<String> whereColumns, List<String> whereLimit)
+        protected static String generateSqlPartsWhere(ICollection<String> whereColumns, List<String> whereLimit)
         {
-            String[] whereColumnsKey = (String[])whereColumns.toArray(new String[0]);
+            String[] whereColumnsKey = (String[])whereColumns.ToArray(new String[0]);
             String sql = "";
             for (int i = 0; i < whereColumnsKey.Length; i++)
             {
@@ -83,21 +83,49 @@ namespace NTNL.Models.DB.DAO
                     sql += " and ";
                 }
             }
+            return sql;
         }
 
+ 
         //insert
         protected int insert(Dictionary<String, Object> values, String option, String tableName)
         {
             String sqlBase = getSqlBaseInsert();
-            sqlBase = sqlBase.Replace(PIECE_TABLE_NAME, tableName);
-          //  sqlBase = sqlBase.Replace(PIECE_COLUMNS, );
-        }
-  */    
-        //update
+            sqlBase = sqlBase.Replace(DBConstants.PIECE_TABLE_NAME, tableName);
+            sqlBase = sqlBase.Replace(DBConstants.PIECE_COLUMNS,generateSqlPartsColumns(values.Keys));
+            sqlBase = sqlBase.Replace(DBConstants.PIECE_VALUES, generateSqlPartsValues(values));
+            SQLiteCommand prepStmt;
+            String sqlPrep = sqlBase + (option != null ? option : "") + ";";
+            
 
+        }
+
+        //must add "SQLException"
+        protected int insert(Dictionary<String, Object> values, String option)
+        {
+            return this.insert(values, option, this.tableName);
+        }
+
+        protected int insert(Dictionary<String, Object> values)
+        {
+            return this.insert(values, "");
+        }
 
         //select
         
+
+
+        //update
+        protected void update(Dictionary<String, Object> set, Dictionary<String, Object> where, String option, String tableName)
+        {
+            String sqlBase = getSqlBaseUpdate();
+            sqlBase = sqlBase.Replace(DBConstants.PIECE_TABLE_NAME, tableName);
+            sqlBase = sqlBase.Replace(DBConstants.PIECE_SET, generateSqlPartsSet(set));
+            sqlBase = sqlBase.Replace(DBConstants.PIECE_WHERE, generateSqlPartsWhere(where));
+            SQLiteCommand prepStmt;
+            
+        }
+
 
         //delete
 
