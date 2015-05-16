@@ -41,7 +41,7 @@ namespace NTNL.Models.DB.DAO
         {
             return DBConstants.SQLBASE_DELETE;
         }
-
+/*
         protected static String generateSqlPartsColumns(ICollection<String> columnNameList)
         {
             if (columnNameList == null || columnNameList.Empty)
@@ -172,7 +172,7 @@ namespace NTNL.Models.DB.DAO
                 }
             }
         }
-
+*/
         //Account参照
         protected void getID()
         {
@@ -193,7 +193,8 @@ namespace NTNL.Models.DB.DAO
                         Console.WriteLine("CS: " + reader["CS"].ToString() + "\t");
                         Console.WriteLine("AT: " + reader["AT"].ToString() + "\t");
                         Console.WriteLine("ATS: " + reader["ATS"].ToString() + "\n");
-                    }
+  
+ }
                 }
                 cn.Close();
             }
