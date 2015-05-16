@@ -41,10 +41,11 @@ namespace NTNL.Models.DB.DAO
         {
             return DBConstants.SQLBASE_DELETE;
         }
+
 /*
         protected static String generateSqlPartsColumns(ICollection<String> columnNameList)
         {
-            if (columnNameList == null || columnNameList.Empty)
+            if (columnNameList == null || columnNameList.Count == 0)
             {
                  return "*";
             }
@@ -86,8 +87,10 @@ namespace NTNL.Models.DB.DAO
             return sql;
         }
 
+       
  
         //insert
+        //not yet
         protected int insert(Dictionary<String, Object> values, String option, String tableName)
         {
             String sqlBase = getSqlBaseInsert();
@@ -105,7 +108,6 @@ namespace NTNL.Models.DB.DAO
         {
             return this.insert(values, option, this.tableName);
         }
-
         protected int insert(Dictionary<String, Object> values)
         {
             return this.insert(values, "");
@@ -116,6 +118,7 @@ namespace NTNL.Models.DB.DAO
 
 
         //update
+        //not yet
         protected void update(Dictionary<String, Object> set, Dictionary<String, Object> where, String option, String tableName)
         {
             String sqlBase = getSqlBaseUpdate();
@@ -125,16 +128,85 @@ namespace NTNL.Models.DB.DAO
             SQLiteCommand prepStmt;
             
         }
-
+        protected void update(Dictionary<String, Object>set, Dictionary<String, Object>where, String option)
+        {
+            this.update(set,where,option,this.tableName);
+        }
+        protected void update(Dictionary<String, Object>set, Dictionary<String, Object>where )
+        {
+            this.update(set,where,"");
+        }
 
         //delete
+        //not yet
+        protected void delete(Dictionary<String, Object>where, String option, String tableName)
+        {
+            String sqlBase = getSqlBaseDelete();
+            sqlBase = sqlBase.Replace(DBConstants.PIECE_TABLE_NAME, tableName);
+            sqlBase = sqlBase.Replace(DBConstants.PIECE_WHERE, generateSqlPartsWhere(where));
+            SQLiteCommand prepStmp;
+
+        }
+        protected void delete(Dictionary<String, Object>where , String option)
+        {
+            this.delete(where, option, this.tableName);
+        }
+        protected void delete(Dictionary<String, Object>where)
+        {
+            this.delete(where, "");
+        }
+        
+        //count 
 
 
-        
-        
-         
-         
+        //setObjects
+        protected static void setObjects(SQLiteCommand sc, Dictionary<String, Object>where, int start)
+        {
+            int i = start;
+            if (where == null || where.Count == 0)
+            {
+                return;
+            }
+            foreach(String key in where.Keys){
+                setObject(i++, sc, where[key]);
+            }
+        }
+
+        protected static void setObjects(SQLiteCommand sc, List<Object>where, int start)
+        {
+            int i = start;
+            if (where == null || where.Count == 0)
+            {
+                return;
+            }
+            foreach(Object value in where){
+                setObject(i++ , sc, value);
+            }
+        }
+
+        protected static void setObjects(SQLiteCommand sc, List<Object>where)
+        {
+            setObjects(sc, where, 1);
+        }
+
+        protected static void setObjects(SQLiteCommand sc, Dictionary<String, Object>where)
+        {
+            setObjects(sc, where, 1);
+        }
  
+        //?
+        protected static void setObject(int index, SQLiteCommand sc, Object obj)
+        {
+            if (obj is String)
+            {
+                
+            }
+        }
+*/
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         //Account追加
         protected void AddAccount(int ID, String TwitterID, String CK, String CS, String AT, String ATS)
         {
@@ -172,7 +244,7 @@ namespace NTNL.Models.DB.DAO
                 }
             }
         }
-*/
+
         //Account参照
         protected void getID()
         {
