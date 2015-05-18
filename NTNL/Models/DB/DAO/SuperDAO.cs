@@ -8,6 +8,7 @@ using System.Data.SQLite.Linq;
 using NTNL.Helper;
 using NTNL;
 using NTNL.NTNL_Config;
+using System.Collections;
 
 namespace NTNL.Models.DB.DAO
 {
@@ -43,6 +44,7 @@ namespace NTNL.Models.DB.DAO
         }
 
 /*
+
         protected static String generateSqlPartsColumns(ICollection<String> columnNameList)
         {
             if (columnNameList == null || columnNameList.Count == 0)
@@ -65,7 +67,7 @@ namespace NTNL.Models.DB.DAO
         }
         protected static String generateSqlPartsSet(ICollection<String> values)
         {
-            return helper.join(values.ToArray(new String[0]), ",","=?");
+            return helper.join(values.CopyTo(new String[], 0 ), "," , "=?");
         }
         protected static String generateSqlPartsValues(Dictionary<String, Object> values)
         {
@@ -97,10 +99,23 @@ namespace NTNL.Models.DB.DAO
             sqlBase = sqlBase.Replace(DBConstants.PIECE_TABLE_NAME, tableName);
             sqlBase = sqlBase.Replace(DBConstants.PIECE_COLUMNS,generateSqlPartsColumns(values.Keys));
             sqlBase = sqlBase.Replace(DBConstants.PIECE_VALUES, generateSqlPartsValues(values));
-            SQLiteCommand prepStmt;
-            String sqlPrep = sqlBase + (option != null ? option : "") + ";";
-            
+            using (SQLiteConnection cn = new SQLiteConnection(dbConnectionString))
+            {
+              cn.Open();
+              using (SQLiteTransaction trans = cn.BeginTransaction())
+              {
+                  SQLiteCommand cmd = cn.CreateCommand();
+                  String sqlPrep = sqlBase + (option != null ? option : "") + ";";
+                  cmd.CommandText = sqlPrep;
+                  setObjects(cmd, values);
 
+                  cmd.ExecuteNonQuery();
+                  trans.Commit();
+
+                  //?ResultSetを返す
+                  return 0;
+              }
+            }
         }
 
         //must add "SQLException"
@@ -125,7 +140,22 @@ namespace NTNL.Models.DB.DAO
             sqlBase = sqlBase.Replace(DBConstants.PIECE_TABLE_NAME, tableName);
             sqlBase = sqlBase.Replace(DBConstants.PIECE_SET, generateSqlPartsSet(set));
             sqlBase = sqlBase.Replace(DBConstants.PIECE_WHERE, generateSqlPartsWhere(where));
-            SQLiteCommand prepStmt;
+            using (SQLiteConnection cn = new SQLiteConnection(dbConnectionString))
+            {
+                cn.Open();
+                using (SQLiteTransaction trans = cn.BeginTransaction())
+                {
+                    SQLiteCommand cmd = cn.CreateCommand();
+                    String sqlPrep = sqlBase + (option != null ? option : "") + ";" ;
+                    setObjects(cmd, set);
+                    setObjects(cmd, where, set.Count +1);
+
+                    cmd.ExecuteNonQuery();
+                    trans.Commit();
+                }
+            }
+            
+           
             
         }
         protected void update(Dictionary<String, Object>set, Dictionary<String, Object>where, String option)
@@ -144,7 +174,21 @@ namespace NTNL.Models.DB.DAO
             String sqlBase = getSqlBaseDelete();
             sqlBase = sqlBase.Replace(DBConstants.PIECE_TABLE_NAME, tableName);
             sqlBase = sqlBase.Replace(DBConstants.PIECE_WHERE, generateSqlPartsWhere(where));
-            SQLiteCommand prepStmp;
+            using (SQLiteConnection cn = new SQLiteConnection(dbConnectionString))
+            {
+                cn.Open();
+                using (SQLiteTransaction trans = cn.BeginTransaction())
+                {
+                    SQLiteCommand cmd = cn.CreateCommand();
+                    String sqlPrep = sqlBase + (option != null ? option : "") + ";";
+                    cmd.CommandText = sqlPrep;
+                    setObjects(cmd, where);
+
+                    cmd.ExecuteNonQuery();
+                    trans.Commit();
+                }
+            }
+
 
         }
         protected void delete(Dictionary<String, Object>where , String option)
@@ -202,8 +246,8 @@ namespace NTNL.Models.DB.DAO
                 
             }
         }
-*/
 
+*/
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
