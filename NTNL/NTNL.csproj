@@ -117,6 +117,7 @@
     <Compile Include="Helper\helper.cs" />
     <Compile Include="Models\DB\DAO\AccountDAO.cs" />
     <Compile Include="Models\DB\DAO\ColumnDAO.cs" />
+    <Compile Include="Models\DB\DAO\EntityDAO.cs" />
     <Compile Include="Models\DB\DAO\MuteDAO.cs" />
     <Compile Include="Models\DB\DAO\PrivateDAO.cs" />
     <Compile Include="Models\DB\DAO\SuperDAO.cs" />
