@@ -133,6 +133,7 @@
     <Compile Include="Models\DB\Entity\Private.cs" />
     <Compile Include="Models\DB\Entity\Tag.cs" />
     <Compile Include="Models\Twitter\Account.cs" />
+    <Compile Include="Models\Twitter\TwitterUtils.cs" />
     <Compile Include="NTNL_Config\DBConstants.cs" />
     <Compile Include="ViewModels\AccountManagerWindowViewModel.cs" />
     <Compile Include="ViewModels\SettingWindowViewModel.cs" />
@@ -171,7 +172,6 @@
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\Twitter\TwitterFacade.cs" />
     <Compile Include="ViewModels\ColumnItemViewModel.cs" />
-    <Compile Include="ViewModels\ColumnListViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\TweetViewModel.cs" />
     <Compile Include="Views\items\ColumnList.xaml.cs">

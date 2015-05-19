@@ -14,6 +14,7 @@ using Livet.Messaging.Windows;
 using NTNL.Models;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
+using NTNL.Models.Twitter;
 
 namespace NTNL.ViewModels
 {
@@ -120,6 +121,7 @@ namespace NTNL.ViewModels
             
 
             BindingOperations.EnableCollectionSynchronization(this.columnList, new object());
+            var tw = new TwitterFacade();
             
         }
 
@@ -150,7 +152,6 @@ namespace NTNL.ViewModels
             //Console.WriteLine("test" + columnList.Count);
         }
         #endregion
-
         
     }
 }

@@ -55,7 +55,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <metro:CaptionButton Content="+" FontSize="20" Background="{x:Null}" ToolTip="add column" Margin="4,0,44,0" Height="50" Command="{Binding addColumnCommand, Mode=OneWay}" VerticalAlignment="Center"/>
+            <metro:CaptionButton Content="+" FontSize="20" Background="{x:Null}" ToolTip="add column" Margin="4,0,44,0" Height="50" Command="{Binding addColumnCommand, Mode=OneWay}" VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type metro:CaptionIcon}}}" Focusable="False" IsHitTestVisible="True" IsTabStop="False"/>
         </StackPanel>
         <ListBox x:Name="listBox1" Background="Transparent" ItemsSource="{Binding columnList}" Margin="145,30,0,0" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF2E3136" BorderThickness="5">
             <ListBox.RenderTransform>

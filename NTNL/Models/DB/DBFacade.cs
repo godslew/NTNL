@@ -8,5 +8,11 @@ namespace NTNL.Models.DB
 {
     class DBFacade
     {
+        //get account list from DB
+        public List<Twitter.Account> getAccountList()
+        {
+            var list = new List<Twitter.Account>();
+            return list;
+        }
     }
 }
