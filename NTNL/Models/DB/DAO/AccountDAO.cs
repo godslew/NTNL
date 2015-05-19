@@ -14,7 +14,7 @@ namespace NTNL.Models.DB.DAO
         public AccountDAO(String dbConnectionString, String tableName)
             : base(dbConnectionString, tableName)
         {
-
         }
+
     }
 }
