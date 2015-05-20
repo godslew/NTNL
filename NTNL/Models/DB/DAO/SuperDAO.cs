@@ -43,7 +43,6 @@ namespace NTNL.Models.DB.DAO
             return DBConstants.SQLBASE_DELETE;
         }
 
-
 /*
         protected static String generateSqlPartsColumns(ICollection<String> columnNameList)
         {
@@ -51,7 +50,7 @@ namespace NTNL.Models.DB.DAO
             {
                  return "*";
             }
-                 return helper.join(columnNameList.ToArray(new String[0]),",");
+                 return helper.join(columnNameList.CopyTo(new String[],0),",");
         }
         protected static String generateSqlPartsWhere(Dictionary<String, Object> where)
         {
@@ -241,19 +240,19 @@ namespace NTNL.Models.DB.DAO
         }
         
         //count
-        
+ 
         protected int count(Dictionary<String, Object> where, String option)
         {
             int n = -1;
             try(SQLiteDataReader sr = this.select(where,))
         }
-        
+*/       
         //trancate
         public void trancate(String tableName)
         {
          
         }
-*/
+
 
 
         //setObjects
