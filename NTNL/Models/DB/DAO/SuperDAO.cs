@@ -75,7 +75,7 @@ namespace NTNL.Models.DB.DAO
         }
         protected static String generateSqlPartsWhere(ICollection<String> whereColumns, List<String> whereLimit)
         {
-            String[] whereColumnsKey = (String[])whereColumns.ToArray(new String[0]);
+            String[] whereColumnsKey = (String[])whereColumns.CopyTo(new String[],0);
             String sql = "";
             for (int i = 0; i < whereColumnsKey.Length; i++)
             {
@@ -246,13 +246,13 @@ namespace NTNL.Models.DB.DAO
             int n = -1;
             try(SQLiteDataReader sr = this.select(where,))
         }
-*/       
+    
         //trancate
         public void trancate(String tableName)
         {
          
         }
-
+  */
 
 
         //setObjects

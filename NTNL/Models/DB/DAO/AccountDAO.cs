@@ -39,12 +39,12 @@ namespace NTNL.Models.DB.DAO
             Dictionary<String, Object> values = toValues(dto);
             return this.insert(values);
         }
-*/
+
         private static AccountDTO toDTO(SQLiteDataReader sr)
         {
             AccountDTO dto = new AccountDTO();
           //dto.ID = DBConstants.ACCOUNT_ID;
-            dto.TwitterID = DBConstants.ACCOUNT_TwitterID; 
+          //dto.TwitterID = DBConstants.ACCOUNT_TwitterID; 
             
             
             return dto;
@@ -66,13 +66,15 @@ namespace NTNL.Models.DB.DAO
             Dictionary<String, Object> values = new Dictionary<String, Object>();
             values.Add(DBConstants.ACCOUNT_ID, dto.ID);
             values.Add(DBConstants.ACCOUNT_TwitterID, dto.TwitterID);
-            /*
+            
             values.Add(DBConstants.ACCOUNT_CK, dto.CK);
             values.Add(DBConstants.ACCOUNT_CS, dto.CS);
             values.Add(DBConstants.ACCOUNT_AT, dto.AT);
             values.Add(DBConstants.ACCOUNT_ATS, dto.ATS);
-            */
+            
             return values;
         }
-    }
+ */
+}
+
 }
