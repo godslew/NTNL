@@ -27,7 +27,7 @@ namespace NTNL.Models.DB.DAO
              
             }
         }
-
+ */
 
         public List<AccountDTO> selectAccountAll(Dictionary<String, Object> where)
         {
@@ -74,7 +74,7 @@ namespace NTNL.Models.DB.DAO
             
             return values;
         }
- */
+ 
 }
 
 }
