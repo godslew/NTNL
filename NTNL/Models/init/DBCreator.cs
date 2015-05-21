@@ -25,6 +25,7 @@ namespace NTNL.Models.init
                 {
                     cn.Open();
                     Console.WriteLine(dbc+"に接続しました");
+
                 }
                 catch(Exception exception)
                 {

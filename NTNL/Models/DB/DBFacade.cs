@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NTNL.Models.DB.DAO;
+using NTNL.Models.DB.Entity;
 
 namespace NTNL.Models.DB
 {
@@ -33,7 +34,7 @@ namespace NTNL.Models.DB
             }
         }
 
-        private void installMutaDAO()
+        private void installMuteDAO()
         {
             if (this.muteDAO == null)
             {
@@ -49,15 +50,24 @@ namespace NTNL.Models.DB
             }
         }
         
-        private void installTagDAOz()
+        private void installTagDAO()
         {
             if (this.tagDAO == null)
             {
                 this.tagDAO = new TagDAO(this.dbConnectionString);
             }
         }
-*/ 
+*/
+        public SuperDAO createSuperDAO()
+        {
+            return new SuperDAO(dbConnectionString, "");
+        }
 
+        //Account methods
+        
+
+
+        
 
         //get account list from DB
         public List<Twitter.Account> getAccountList()
