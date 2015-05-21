@@ -17,7 +17,7 @@ namespace NTNL.Models.DB.DAO
         {
             this.primaryColumnName = primaryColumnName;
         }
-/*              
+              
                 protected SQLiteDataReader find(int id)
                 {
                     Dictionary<String,Object> where = new Dictionary<String, Object>();
@@ -31,7 +31,7 @@ namespace NTNL.Models.DB.DAO
                     where[columnName] = value;
                     return this.select(where);
                 }
-*/
+
      }
       
 }
