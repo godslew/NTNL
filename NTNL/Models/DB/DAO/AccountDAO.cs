@@ -8,6 +8,7 @@ using System.Data.SQLite.Linq;
 using NTNL.Models.DB.DTO;
 using NTNL.NTNL_Config;
 using NTNL.Models;
+using System.Collections;
 
 namespace NTNL.Models.DB.DAO
 {
@@ -18,16 +19,35 @@ namespace NTNL.Models.DB.DAO
         {
         }
 
-/*
+
         public AccountDTO findUser(int id)
         {
             AccountDTO dto;
-            try(SQLiteDataReader sr = this.find(id))
-            {
-             
-            }
+            //?try文必要かも
+            SQLiteDataReader sr = this.find(id);
+            dto = sr.NextResult() ? toDTO(sr) : null;
+
+            return dto;
         }
 
+        public AccountDTO findUserFromTwitterID(String twitterID)
+        {
+            AccountDTO dto;
+            
+            SQLiteDataReader sr = this.findIdentity(DBConstants.ACCOUNT_TwitterID, twitterID);
+            dto = sr.NextResult() ? toDTO(sr) : null;
+
+            return dto;
+        }
+
+        public AccountDTO selectAccount(Dictionary<String, Object> where)
+        {
+            AccountDTO dto;
+            SQLiteDataReader sr = this.select(where);
+            dto = sr.NextResult() ? toDTO(sr) : null;
+
+            return dto;
+        }
 
         public List<AccountDTO> selectAccountAll(Dictionary<String, Object> where)
         {
@@ -39,14 +59,12 @@ namespace NTNL.Models.DB.DAO
             Dictionary<String, Object> values = toValues(dto);
             return this.insert(values);
         }
-*/
+
         private static AccountDTO toDTO(SQLiteDataReader sr)
         {
             AccountDTO dto = new AccountDTO();
-          //dto.ID = DBConstants.ACCOUNT_ID;
-            dto.TwitterID = DBConstants.ACCOUNT_TwitterID; 
-            
-            
+            dto.ID = sr.GetInt32(sr.StepCount);
+            dto.TwitterID = sr.GetString(sr.StepCount);
             return dto;
         }
 
@@ -74,5 +92,15 @@ namespace NTNL.Models.DB.DAO
             */
             return values;
         }
-    }
+        /*
+        private static List<Dictionary<String, Object>> toValuesAll(List<AccountDTO> dtos)
+        {
+            List<Dictionary<String, Object>> valueList = new ArrayList<>();
+            foreach(AccountDTO dto in dtos){
+                valueList.Add(toValues(dto));
+            }
+        }
+        */
+}
+
 }

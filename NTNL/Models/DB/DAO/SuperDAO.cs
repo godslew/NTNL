@@ -43,39 +43,48 @@ namespace NTNL.Models.DB.DAO
             return DBConstants.SQLBASE_DELETE;
         }
 
-/*
-        protected static String generateSqlPartsColumns(ICollection<String> columnNameList)
+
+        protected static String generateSqlPartsColumns(List<String> columnNameList)
         {
             if (columnNameList == null || columnNameList.Count == 0)
             {
                  return "*";
             }
-                 return helper.join(columnNameList.CopyTo(new String[],0),",");
+                 String[] str = columnNameList.ToArray();
+                 return helper.join( str,",");
         }
+
         protected static String generateSqlPartsWhere(Dictionary<String, Object> where)
         {
-            return generateSqlPartsWhere(where.Keys, null);
+            List<String> str = where.Keys.ToList();
+            return generateSqlPartsWhere(str, null);
         }
         protected static String generateSqlPartsWhere(Dictionary<String, Object> where, List<String> whereLimit)
         {
-            return generateSqlPartsWhere(where.Keys, whereLimit);
+            List<String> str = where.Keys.ToList();
+            return generateSqlPartsWhere(str, whereLimit);
         }
         protected static String generateSqlPartsSet(Dictionary<String, Object> values)
         {
-            return generateSqlPartsSet(values.Keys);
+            List<String> keys = values.Keys.ToList();
+            return generateSqlPartsSet(keys);
         }
-        protected static String generateSqlPartsSet(ICollection<String> values)
+
+        protected static String generateSqlPartsSet(List<String> values)
         {
-            return helper.join(values.CopyTo(new String[], 0 ), "," , "=?");
+            String[] str = values.ToArray();
+            return helper.join(str, "," , "=?");
         }
+ 
         protected static String generateSqlPartsValues(Dictionary<String, Object> values)
         {
-            String[] signs = (String[])helper.filledArray("?", values.Count.ToArray(new String[0]));
+            String[] signs = (String[])helper.filledArray("?", values.Count).ToArray();
             return helper.join(signs,",");
         }
-        protected static String generateSqlPartsWhere(ICollection<String> whereColumns, List<String> whereLimit)
+        protected static String generateSqlPartsWhere(List<String> whereColumns, List<String> whereLimit)
         {
-            String[] whereColumnsKey = (String[])whereColumns.ToArray(new String[0]);
+            String[] str = whereColumns.ToArray();
+            String[] whereColumnsKey = str;
             String sql = "";
             for (int i = 0; i < whereColumnsKey.Length; i++)
             {
@@ -96,7 +105,8 @@ namespace NTNL.Models.DB.DAO
         {
             String sqlBase = getSqlBaseInsert();
             sqlBase = sqlBase.Replace(DBConstants.PIECE_TABLE_NAME, tableName);
-            sqlBase = sqlBase.Replace(DBConstants.PIECE_COLUMNS,generateSqlPartsColumns(values.Keys));
+            List<String>  keyList = values.Keys.ToList();
+            sqlBase = sqlBase.Replace(DBConstants.PIECE_COLUMNS,generateSqlPartsColumns(keyList));
             sqlBase = sqlBase.Replace(DBConstants.PIECE_VALUES, generateSqlPartsValues(values));
             using (SQLiteConnection cn = new SQLiteConnection(dbConnectionString))
             {
@@ -240,19 +250,19 @@ namespace NTNL.Models.DB.DAO
         }
         
         //count
- 
+/*
         protected int count(Dictionary<String, Object> where, String option)
         {
             int n = -1;
             try(SQLiteDataReader sr = this.select(where,))
         }
-*/       
+    
         //trancate
         public void trancate(String tableName)
         {
          
         }
-
+ */
 
 
         //setObjects
