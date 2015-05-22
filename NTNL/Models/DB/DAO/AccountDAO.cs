@@ -60,6 +60,13 @@ namespace NTNL.Models.DB.DAO
             return this.insert(values);
         }
 
+        public int registAccount(String twitterID)
+        {
+            var values = new Dictionary<String, Object>();
+            values.Add(DBConstants.ACCOUNT_TwitterID, twitterID);
+            return this.insert(values);
+        }
+
         private static AccountDTO toDTO(SQLiteDataReader sr)
         {
             AccountDTO dto = new AccountDTO();
@@ -84,23 +91,25 @@ namespace NTNL.Models.DB.DAO
             Dictionary<String, Object> values = new Dictionary<String, Object>();
             values.Add(DBConstants.ACCOUNT_ID, dto.ID);
             values.Add(DBConstants.ACCOUNT_TwitterID, dto.TwitterID);
-            /*
+            
             values.Add(DBConstants.ACCOUNT_CK, dto.CK);
             values.Add(DBConstants.ACCOUNT_CS, dto.CS);
             values.Add(DBConstants.ACCOUNT_AT, dto.AT);
             values.Add(DBConstants.ACCOUNT_ATS, dto.ATS);
-            */
+            
             return values;
         }
-        /*
+        
         private static List<Dictionary<String, Object>> toValuesAll(List<AccountDTO> dtos)
         {
-            List<Dictionary<String, Object>> valueList = new ArrayList<>();
+            //? ArrayListかも
+            var valueList = new List<Dictionary<String, Object>>(); 
             foreach(AccountDTO dto in dtos){
                 valueList.Add(toValues(dto));
             }
+            return valueList;
         }
-        */
+        
 }
 
 }

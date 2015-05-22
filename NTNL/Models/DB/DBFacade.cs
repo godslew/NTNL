@@ -7,6 +7,8 @@ using NTNL.Models.DB.DAO;
 using NTNL.Models.DB.Entity;
 using System.Data.SQLite;
 using System.Data.SQLite.Linq;
+using NTNL.Models.DB.DAO;
+using NTNL.Models.init;
 
 namespace NTNL.Models.DB
 {
@@ -66,10 +68,27 @@ namespace NTNL.Models.DB
         }
 
         //Account methods
-        
+       
 
-
+        /*
+        public Account getAccount()
+        {
+            return new Account();
+        }
+        */
         
+        public int registerAccount(String twitterID)
+        {
+            installAccountDAO();
+            return this.accountDAO.registAccount(twitterID);
+        }
+       
+        /*
+         *  DBの処理を全てしてくれる
+         *  
+         * 
+         */
+
 
         //get account list from DB
         public List<Twitter.Account> getAccountList()
