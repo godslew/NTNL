@@ -66,6 +66,22 @@ namespace NTNL.ViewModels
         {
         }
 
+        TwitterFacade tw;
+
+        public MainWindowViewModel()
+        {
+            this.columnList = new ObservableCollection<ColumnItemViewModel>();
+            this.columnList.Add(new ColumnItemViewModel("Home", 0));
+            this.columnList.Add(new ColumnItemViewModel("Mention", 1));
+            this.columnList.Add(new ColumnItemViewModel("Activity", 2));
+            columnList.First().tweetList.Add(new TweetViewModel("testあああああああああああああああああああああああああああああああああああああああああああああああああああああああ"));
+
+
+            BindingOperations.EnableCollectionSynchronization(this.columnList, new object());
+            tw = new TwitterFacade();
+
+        }
+
         #region OpenTextBoxCommand
         private ViewModelCommand _OpenTextBoxCommand;
 
@@ -88,7 +104,8 @@ namespace NTNL.ViewModels
             
             //app.ShowModalView(new SettingWindowViewModel());
             //app.ShowModalView(new AccountManagerWindowViewModel());
-            app.ShowView(new AccountManagerWindowViewModel());
+            //CoreTweet.OAuth.OAuthSession session = this.tw.OAuthStart();
+            app.ShowModalView(new AccountManagerWindowViewModel());
             
         }
         #endregion
@@ -109,21 +126,6 @@ namespace NTNL.ViewModels
             }
         }
         #endregion
-
-
-        public MainWindowViewModel()
-        {
-            this.columnList = new ObservableCollection<ColumnItemViewModel>();
-            this.columnList.Add(new ColumnItemViewModel("Home",0));
-            this.columnList.Add(new ColumnItemViewModel("Mention",1));
-            this.columnList.Add(new ColumnItemViewModel("Activity",2));
-            columnList.First().tweetList.Add(new TweetViewModel("testあああああああああああああああああああああああああああああああああああああああああああああああああああああああ"));
-            
-
-            BindingOperations.EnableCollectionSynchronization(this.columnList, new object());
-            var tw = new TwitterFacade();
-            
-        }
 
 
         #region addColumnCommand

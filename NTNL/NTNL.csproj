@@ -135,6 +135,7 @@
     <Compile Include="Models\Twitter\Account.cs" />
     <Compile Include="Models\Twitter\TwitterUtils.cs" />
     <Compile Include="NTNL_Config\DBConstants.cs" />
+    <Compile Include="NTNL_Config\TwitterConfig.cs" />
     <Compile Include="ViewModels\AccountManagerWindowViewModel.cs" />
     <Compile Include="ViewModels\SettingWindowViewModel.cs" />
     <Compile Include="Views\AccountManagerWindow.xaml.cs">

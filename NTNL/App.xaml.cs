@@ -69,6 +69,7 @@ namespace NTNL
         {
             Window view = CreateView(viewModel);
             if (view != null)
+
                 return (view.ShowDialog() == true);
             else
                 return false;

@@ -12,6 +12,10 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using NTNL.Models;
+using NTNL.Models.Twitter;
+using CoreTweet;
+using System.Threading.Tasks;
+using NTNL.Models.DB;
 
 namespace NTNL.ViewModels
 {
@@ -59,8 +63,19 @@ namespace NTNL.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
 
+
+        private TwitterFacade tw;
+        private CoreTweet.OAuth.OAuthSession session;
+
         public void Initialize()
         {
+            this.session = tw.OAuthStart();
+        }
+
+        public AccountManagerWindowViewModel()
+        {
+            tw = new TwitterFacade();
+            
         }
 
 
@@ -79,9 +94,30 @@ namespace NTNL.ViewModels
             }
         }
 
-        public void OAuth(string parameter)
+        public async void OAuth(string parameter)
         {
-
+            Console.WriteLine(parameter);
+            if (parameter == null)
+            {
+                
+            }
+            else
+            {
+                await Task.Run(() =>
+                {
+                    Tokens tokens = this.session.GetTokens(parameter);
+                    //DBFacade db = new DBFacade();
+                    try
+                    {
+                        tokens.Statuses.Update(status => "no twitter no life");
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Error");
+                    }
+                    
+                });
+            }
         }
         #endregion
 

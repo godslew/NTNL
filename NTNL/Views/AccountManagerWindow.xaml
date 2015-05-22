@@ -7,7 +7,7 @@
         xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
         xmlns:v="clr-namespace:NTNL.Views"
         xmlns:vm="clr-namespace:NTNL.ViewModels"
-        Title="AccountManagerWindow" Height="300" Width="400">
+        Title="AccountManagerWindow" Height="173.571" Width="311.071">
 
     <Window.DataContext>
         <vm:AccountManagerWindowViewModel/>
@@ -36,8 +36,8 @@
     <Grid>
         <metro:CaptionIcon HorizontalAlignment="Left" VerticalAlignment="Top" Content="AccountManager" Height="35"/>
         <metro:SystemButtons HorizontalAlignment="Right" VerticalAlignment="Top"/>
-        <metro:PromptTextBox Margin="10,70,0,0" HorizontalAlignment="Left" Width="102" VerticalAlignment="Top" Prompt="PINコードを入力"/>
-        <metro:CaptionButton Margin="117,73,242.6,182" Height="Auto" Content="認証"/>
+        <metro:PromptTextBox x:Name="promptTextBox" Margin="10,40,0,0" HorizontalAlignment="Left" Width="102" VerticalAlignment="Top" Prompt="PINコードを入力"/>
+        <metro:CaptionButton Margin="80,70,0,0" Height="23" Content="認証" Command="{Binding OAuthCommand, Mode=OneWay}" CommandParameter="{Binding Text, ElementName=promptTextBox}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="62"/>
 
     </Grid>
 </metro:MetroWindow>

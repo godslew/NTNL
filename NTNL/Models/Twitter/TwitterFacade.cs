@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CoreTweet;
 using NTNL.Models.DB;
 using NTNL.Models.DB.DAO;
+using NTNL.NTNL_Config;
 
 namespace NTNL.Models.Twitter
 {
@@ -34,5 +35,11 @@ namespace NTNL.Models.Twitter
             return true;
         }
 
+        public CoreTweet.OAuth.OAuthSession OAuthStart()
+        {
+            var session = OAuth.Authorize(TwitterConfig.CK, TwitterConfig.CS);
+            System.Diagnostics.Process.Start(session.AuthorizeUri.ToString());
+            return session;
+        }
     }
 }
