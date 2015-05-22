@@ -14,7 +14,7 @@ namespace NTNL.Models.DB.DAO
 {
     class AccountDAO : EntityDAO
     {
-        public AccountDAO(String dbConnectionString)
+        public AccountDAO(SQLiteConnection dbConnectionString)
             : base(dbConnectionString, DBConstants.ACCOUNT_ID, DBConstants.ACCOUNT_TwitterID)
         {
         }

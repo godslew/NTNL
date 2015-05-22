@@ -14,11 +14,11 @@ namespace NTNL.Models.DB.DAO
 {
     class SuperDAO
     {
-        protected String dbConnectionString ; 
+        protected SQLiteConnection dbConnectionString ; 
         protected String tableName ;
         
         //コンストラクタ
-        public SuperDAO(String dbConnectionString, String tableName)
+        public SuperDAO(SQLiteConnection dbConnectionString, String tableName)
         {
             this.dbConnectionString = dbConnectionString;
             this.tableName = tableName;
@@ -249,12 +249,13 @@ namespace NTNL.Models.DB.DAO
             this.delete(where, "");
         }
         
-        //count
 /*
+        //count
         protected int count(Dictionary<String, Object> where, String option)
         {
             int n = -1;
-            try(SQLiteDataReader sr = this.select(where,))
+            
+            SQLiteDataReader sr = this.select(where,)
         }
     
         //trancate
@@ -305,7 +306,7 @@ namespace NTNL.Models.DB.DAO
         {
             if (obj is String)
             {
-
+               
             }
         }
     }

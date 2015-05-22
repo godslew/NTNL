@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using NTNL.Models.DB.DAO;
 using NTNL.Models.DB.Entity;
+using System.Data.SQLite;
+using System.Data.SQLite.Linq;
 
 namespace NTNL.Models.DB
 {
@@ -16,7 +18,7 @@ namespace NTNL.Models.DB
         private PrivateDAO privateDAO;
         private TagDAO tagDAO;
 
-        private String dbConnectionString;
+        private SQLiteConnection dbConnectionString;
 
         private void installAccountDAO()
         {

@@ -12,7 +12,7 @@ namespace NTNL.Models.DB.DAO
     {
         protected String primaryColumnName;
 
-        public EntityDAO(String dbConnectionString, String tableName, String primaryColumnName)
+        public EntityDAO(SQLiteConnection dbConnectionString, String tableName, String primaryColumnName)
             : base(dbConnectionString, tableName)
         {
             this.primaryColumnName = primaryColumnName;
