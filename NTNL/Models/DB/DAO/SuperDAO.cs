@@ -14,8 +14,10 @@ namespace NTNL.Models.DB.DAO
 {
     class SuperDAO
     {
-        protected SQLiteConnection dbConnectionString ; 
-        protected String tableName ;
+        //protected SQLiteConnection dbConnectionString ;
+        protected String tableName; 
+        SQLiteConnection dbConnectionString = new SQLiteConnection(DBConstants.DB_CONNECTION);
+
         
         //コンストラクタ
         public SuperDAO(SQLiteConnection dbConnectionString, String tableName)
