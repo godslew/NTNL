@@ -38,7 +38,7 @@ namespace NTNL.Models.DB
                 this.columnDAO = new ColumnDAO(this.dbConnectionString);
             }
         }
-
+        */
         private void installMuteDAO()
         {
             if (this.muteDAO == null)
@@ -47,6 +47,7 @@ namespace NTNL.Models.DB
             }
         }
 
+        /*
         private void installPrivateDAO()
         {
             if (this.accountDAO == null)
@@ -54,7 +55,7 @@ namespace NTNL.Models.DB
                 this.privateDAO = new PrivateDAO(this.dbConnectionString);
             }
         }
-        
+        */
         private void installTagDAO()
         {
             if (this.tagDAO == null)
@@ -62,7 +63,7 @@ namespace NTNL.Models.DB
                 this.tagDAO = new TagDAO(this.dbConnectionString);
             }
         }
-*/
+
         public SuperDAO createSuperDAO()
         {
             return new SuperDAO(dbConnectionString, "");
@@ -89,11 +90,17 @@ namespace NTNL.Models.DB
         /*
          *  DBの処理を全てしてくれる
          */
-        public void facade()
-        {
-          
-        }
 
+        /* ???
+        public void accountFacade()
+        {
+            DBFacade facade = new DBFacade();
+            AccountDTO dto = new AccountDTO();
+            accountDAO.insertUser(dto);
+            
+            
+        }
+        */
         //get account list from DB
         public List<Twitter.Account> getAccountList()
         {

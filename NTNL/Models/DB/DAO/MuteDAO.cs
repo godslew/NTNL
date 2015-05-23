@@ -14,7 +14,7 @@ namespace NTNL.Models.DB.DAO
 {
     class MuteDAO :EntityDAO
     {
-        public MuteDAO(SQLiteConnection dbConnectionString, String tableName)
+        public MuteDAO(SQLiteConnection dbConnectionString)
            : base(dbConnectionString, DBConstants.MUTE_ID, DBConstants.MUTE_TwitterID)
         {
         }

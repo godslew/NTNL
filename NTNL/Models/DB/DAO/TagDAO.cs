@@ -13,11 +13,60 @@ using NTNL.Models;
 
 namespace NTNL.Models.DB.DAO
 {
-    class TagDAO : SuperDAO 
+    class TagDAO : EntityDAO 
     {
-        public TagDAO(SQLiteConnection dbConnectionString, String tableName)
-            : base(dbConnectionString, tableName)
+        public TagDAO(SQLiteConnection dbConnectionString)
+            : base(dbConnectionString, DBConstants.TAG_ID, DBConstants.TAG_TwitterID)
         {
+        }
+
+        public TagDTO findTag(int id)
+        {
+            TagDTO dto;
+
+            SQLiteDataReader sr = this.find(id);
+            dto = sr.NextResult() ? toDTO(sr) : null;
+
+            return dto;
+        }
+
+        public TagDTO findTagFromTwitterID(String twitterID)
+        {
+            TagDTO dto;
+
+            SQLiteDataReader sr = this.findIdentity(DBConstants.TAG_TwitterID, twitterID);
+            dto = sr.NextResult() ? toDTO(sr) : null;
+
+            return dto;
+        }
+
+        public TagDTO selectTag(Dictionary<String, Object> where)
+        {
+            TagDTO dto;
+
+            SQLiteDataReader sr = this.select(where);
+            dto = sr.NextResult() ? toDTO(sr) : null;
+
+            return dto;
+        }
+
+        public List<TagDTO> selectTagAll(Dictionary<String, Object> where)
+        {
+            return toDTOAll(this.select(where));
+        }
+
+        public int insertTag(TagDTO dto)
+        {
+            Dictionary<String, Object> values = toValues(dto);
+            return this.insert(values);
+        }
+
+        public int registTag(String TagName)
+        {
+            var values = new Dictionary<String, Object>();
+            values.Add(DBConstants.TAG_TagName, TagName);
+            return this.insert(values);
+
         }
 
         private static TagDTO toDTO(SQLiteDataReader sr)
@@ -48,8 +97,18 @@ namespace NTNL.Models.DB.DAO
             values.Add(DBConstants.TAG_TagName, dto.TagName);
 
             return values;
-        }    
+        }
 
+        private List<Dictionary<String, Object>> toValuesAll(List<TagDTO> dtos)
+        {
+            //? ArrayList
+            var ValueList = new List<Dictionary<String, Object>>();
+            foreach (TagDTO dto in dtos)
+            {
+                ValueList.Add(toValues(dto));
+            }
+            return ValueList;
+        }
         
     }
 }
