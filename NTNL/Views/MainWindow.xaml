@@ -34,6 +34,10 @@
 
         <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
 
+        <l:InteractionMessageTrigger Messenger="{Binding Messenger}">
+            <l:TransitionInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+
     </i:Interaction.Triggers>
     <Grid>
         <metro:CaptionIcon HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="53" Content="NTNL" FontSize="11"/>

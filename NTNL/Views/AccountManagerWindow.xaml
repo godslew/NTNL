@@ -10,7 +10,7 @@
         Title="AccountManagerWindow" Height="173.571" Width="311.071">
 
     <Window.DataContext>
-        <vm:AccountManagerWindowViewModel/>
+        <vm:AccountManagerViewModel/>
     </Window.DataContext>
 
     <i:Interaction.Triggers>

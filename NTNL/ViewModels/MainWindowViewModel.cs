@@ -102,10 +102,10 @@ namespace NTNL.ViewModels
             Console.WriteLine("test");
             App app = App.Current as App;
             
-            //app.ShowModalView(new SettingWindowViewModel());
-            //app.ShowModalView(new AccountManagerWindowViewModel());
-            //CoreTweet.OAuth.OAuthSession session = this.tw.OAuthStart();
-            app.ShowModalView(new AccountManagerWindowViewModel());
+       
+            //messageを使ってみた,非常につよい
+            var message = new TransitionMessage(typeof(Views.AccountManagerWindow), new AccountManagerViewModel(), TransitionMode.Modal);
+            Messenger.Raise(message);
             
         }
         #endregion

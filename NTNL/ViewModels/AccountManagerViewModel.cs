@@ -19,7 +19,7 @@ using NTNL.Models.DB;
 
 namespace NTNL.ViewModels
 {
-    public class AccountManagerWindowViewModel : ViewModel
+    public class AccountManagerViewModel : ViewModel
     {
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -72,7 +72,7 @@ namespace NTNL.ViewModels
             this.session = tw.OAuthStart();
         }
 
-        public AccountManagerWindowViewModel()
+        public AccountManagerViewModel()
         {
             tw = new TwitterFacade();
             
