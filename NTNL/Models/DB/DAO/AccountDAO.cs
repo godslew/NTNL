@@ -54,10 +54,46 @@ namespace NTNL.Models.DB.DAO
             return toDTOAll(this.select(where));
         }
 
-        public int insertAccount(AccountDTO dto)
+        public void insertAccount(AccountDTO dto)
         {
-            Dictionary<String, Object> values = toValues(dto);
-            return this.insert(values);
+            //string dbConnectionString = "Data Source=C:/sqlite3/"+DBname.Text+".sqlite3";
+            using (SQLiteConnection cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
+            {
+                cn.Open();
+                using (SQLiteTransaction trans = cn.BeginTransaction())
+                {
+                    SQLiteCommand cmd = cn.CreateCommand();
+
+                    // インサート文
+                    cmd.CommandText = "INSERT INTO ACCOUNT(ID, TwitterID, CK, CS, AT, ATS ) VALUES (@ID_T, @TwitterID_T, @CK_T, @CS_T, @AT_T, @ATS_T)";
+
+                    // パラメータのセット
+                    cmd.Parameters.Add("ID_T", System.Data.DbType.Int16);
+                    cmd.Parameters.Add("TwitterID_T", System.Data.DbType.String);
+                    cmd.Parameters.Add("CK_T", System.Data.DbType.String);
+                    cmd.Parameters.Add("CS_T", System.Data.DbType.String);
+                    cmd.Parameters.Add("AT_T", System.Data.DbType.String);
+                    cmd.Parameters.Add("ATS_T", System.Data.DbType.String);
+
+                    // データの追加
+                    cmd.Parameters["ID_T"].Value = dto.ID;
+                    cmd.Parameters["TwitterID_T"].Value = dto.TwitterID;
+                    cmd.Parameters["CK_T"].Value = dto.CK;
+                    cmd.Parameters["CS_T"].Value = dto.CS;
+                    cmd.Parameters["AT_T"].Value = dto.AT;
+                    cmd.Parameters["ATS_T"].Value = dto.ATS;
+
+                    cmd.ExecuteNonQuery();
+
+                    // コミット
+                    trans.Commit();
+
+
+
+                    Dictionary<String, Object> values = toValues(dto);
+                   // return this.insert(values);
+                }
+                }
         }
 
         public int registAccount(String twitterID)
