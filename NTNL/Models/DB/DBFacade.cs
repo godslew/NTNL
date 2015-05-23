@@ -25,6 +25,11 @@ namespace NTNL.Models.DB
         //private SQLiteConnection dbConnectionString ;
         SQLiteConnection dbConnectionString = new SQLiteConnection(DBConstants.DB_CONNECTION);
 
+        public DBFacade()
+        {
+            DBCreator.CREATE_DB();
+        }
+
         private void installAccountDAO()
         {
             if (this.accountDAO == null)
@@ -100,10 +105,11 @@ namespace NTNL.Models.DB
             dao.insertAccount(dto);
 
         }
+        /*
         public List<AccountDTO> getAccountList()
         {
             var dao = new AccountDAO(dbConnectionString);
-            var reader = new SQLiteDataReader();
+            //var reader = dao.;
             var list = new List<AccountDTO>();
             while (reader.NextResult())
             {
@@ -111,7 +117,7 @@ namespace NTNL.Models.DB
                 list.Add(_account.createDTO());
             }
             return list;
-        }
+        }*/
          
         
        

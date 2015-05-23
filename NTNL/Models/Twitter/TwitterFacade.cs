@@ -19,8 +19,8 @@ namespace NTNL.Models.Twitter
 
         public TwitterFacade()
         {
-            this.db = new DBFacade();
-            this.accountList = db.getAccountList();
+            //this.db = new DBFacade();
+            //this.accountList = db.getAccountList();
             this.twUtils = new TwitterUtils();
 
         }

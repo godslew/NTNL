@@ -106,14 +106,15 @@ namespace NTNL.ViewModels
                 await Task.Run(() =>
                 {
                     Tokens tokens = this.session.GetTokens(parameter);
-                    //DBFacade db = new DBFacade();
+                    DBFacade db = new DBFacade();
                     try
                     {
-                        tokens.Statuses.Update(status => "no twitter no life");
+                        db.insertAccount(tokens.UserId.ToString(), tokens.ConsumerKey, tokens.ConsumerSecret, tokens.AccessToken, tokens.AccessTokenSecret);
+                        //tokens.Statuses.Update(status => "no twitter no life");
                     }
                     catch (Exception)
                     {
-                        Console.WriteLine("Error");
+                        Console.WriteLine("error");
                     }
                     
                 });
