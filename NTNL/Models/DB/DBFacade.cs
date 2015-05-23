@@ -116,12 +116,13 @@ namespace NTNL.Models.DB
         
        
 
-        
+       /* 
         //get account list from DB
         public List<Twitter.Account> getAccountList()  //List<DTO.Account>でok
         {
             var list = new List<Twitter.Account>();
             return list;
         }
+        */
     }
 }
