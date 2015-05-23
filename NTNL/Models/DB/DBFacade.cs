@@ -10,6 +10,7 @@ using System.Data.SQLite.Linq;
 using NTNL.Models.DB.DAO;
 using NTNL.Models.DB.DTO;
 using NTNL.Models.init;
+using NTNL.NTNL_Config;
 
 namespace NTNL.Models.DB
 {
@@ -21,7 +22,8 @@ namespace NTNL.Models.DB
         private PrivateDAO privateDAO;
         private TagDAO tagDAO;
 
-        private SQLiteConnection dbConnectionString;
+        //private SQLiteConnection dbConnectionString ;
+        SQLiteConnection dbConnectionString = new SQLiteConnection(DBConstants.DB_CONNECTION);
 
         private void installAccountDAO()
         {
@@ -56,6 +58,11 @@ namespace NTNL.Models.DB
             }
         }
         */
+        //アカウントのデータをとってくる
+        //
+        
+        
+
         private void installTagDAO()
         {
             if (this.tagDAO == null)
@@ -70,17 +77,6 @@ namespace NTNL.Models.DB
         }
 
         //Account methods
-       
-
-        /*
-        public Account getAccount()
-        {
-            return new Account();
-        }
-        */
-        
-
-
         public int registerAccount(String twitterID)
         {
             installAccountDAO();
@@ -89,20 +85,40 @@ namespace NTNL.Models.DB
        
         /*
          *  DBの処理を全てしてくれる
-         */
-
-        /* ???
-        public void accountFacade()
+         
+        public Account getAccount(Account twitterAccount)
         {
-            DBFacade facade = new DBFacade();
-            AccountDTO dto = new AccountDTO();
-            accountDAO.insertUser(dto);
-            
-            
+            installAccountDAO();
         }
         */
+
+        public void insertAccount(String TwitterID, String CK, String CS, String AT, String ATS)
+        {
+           var _entity = new Account(0,TwitterID, CK, CS, AT, ATS);
+            var dto = _entity.createDTO();
+            var dao = new AccountDAO(dbConnectionString);
+            dao.insertAccount(dto);
+
+        }
+        public List<AccountDTO> getAccountList()
+        {
+            var dao = new AccountDAO(dbConnectionString);
+            var reader = new SQLiteDataReader();
+            var list = new List<AccountDTO>();
+            while (reader.NextResult())
+            {
+                var _account = new Account(reader.GetInt32(0), reader.GetString(1),reader.GetString(2),reader.GetString(3),reader.GetString(4),reader.GetString(5));
+                list.Add(_account.createDTO());
+            }
+            return list;
+        }
+         
+        
+       
+
+        
         //get account list from DB
-        public List<Twitter.Account> getAccountList()
+        public List<Twitter.Account> getAccountList()  //List<DTO.Account>でok
         {
             var list = new List<Twitter.Account>();
             return list;

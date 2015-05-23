@@ -54,7 +54,7 @@ namespace NTNL.Models.DB.DAO
             return toDTOAll(this.select(where));
         }
 
-        public int insertUser(AccountDTO dto)
+        public int insertAccount(AccountDTO dto)
         {
             Dictionary<String, Object> values = toValues(dto);
             return this.insert(values);
