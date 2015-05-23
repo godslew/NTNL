@@ -10,7 +10,7 @@ namespace NTNL.Models.DB.DTO
 {
     class AccountDTO
     {
-        public int ID { get; set; }
+        
         public String TwitterID { get; set; }
         public String CK { get; set; }
         public String CS { get; set; }

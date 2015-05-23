@@ -65,10 +65,9 @@ namespace NTNL.Models.DB.DAO
                     SQLiteCommand cmd = cn.CreateCommand();
 
                     // インサート文
-                    cmd.CommandText = "INSERT INTO ACCOUNT(ID, TwitterID, CK, CS, AT, ATS ) VALUES (@ID_T, @TwitterID_T, @CK_T, @CS_T, @AT_T, @ATS_T)";
+                    cmd.CommandText = "INSERT INTO ACCOUNT(TwitterID, CK, CS, AT, ATS ) VALUES (@TwitterID_T, @CK_T, @CS_T, @AT_T, @ATS_T)";
 
                     // パラメータのセット
-                    cmd.Parameters.Add("ID_T", System.Data.DbType.Int16);
                     cmd.Parameters.Add("TwitterID_T", System.Data.DbType.String);
                     cmd.Parameters.Add("CK_T", System.Data.DbType.String);
                     cmd.Parameters.Add("CS_T", System.Data.DbType.String);
@@ -76,7 +75,6 @@ namespace NTNL.Models.DB.DAO
                     cmd.Parameters.Add("ATS_T", System.Data.DbType.String);
 
                     // データの追加
-                    cmd.Parameters["ID_T"].Value = dto.ID;
                     cmd.Parameters["TwitterID_T"].Value = dto.TwitterID;
                     cmd.Parameters["CK_T"].Value = dto.CK;
                     cmd.Parameters["CS_T"].Value = dto.CS;
@@ -106,7 +104,6 @@ namespace NTNL.Models.DB.DAO
         private static AccountDTO toDTO(SQLiteDataReader sr)
         {
             AccountDTO dto = new AccountDTO();
-            dto.ID = sr.GetInt32(sr.StepCount);
             dto.TwitterID = sr.GetString(sr.StepCount);
             return dto;
         }
@@ -125,7 +122,6 @@ namespace NTNL.Models.DB.DAO
         private static Dictionary<String, Object> toValues(AccountDTO dto)
         {
             Dictionary<String, Object> values = new Dictionary<String, Object>();
-            values.Add(DBConstants.ACCOUNT_ID, dto.ID);
             values.Add(DBConstants.ACCOUNT_TwitterID, dto.TwitterID);
             
             values.Add(DBConstants.ACCOUNT_CK, dto.CK);

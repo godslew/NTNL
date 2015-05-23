@@ -99,7 +99,7 @@ namespace NTNL.Models.DB
 
         public void insertAccount(String TwitterID, String CK, String CS, String AT, String ATS)
         {
-           var _entity = new Account(0,TwitterID, CK, CS, AT, ATS);
+           var _entity = new Account(TwitterID, CK, CS, AT, ATS);
             var dto = _entity.createDTO();
             var dao = new AccountDAO(dbConnectionString);
             dao.insertAccount(dto);
@@ -117,7 +117,7 @@ namespace NTNL.Models.DB
                 list.Add(_account.createDTO());
             }
             return list;
-        }*/
+        */
          
         
        
