@@ -120,6 +120,7 @@ namespace NTNL.Models.DB.DAO
                   cmd.CommandText = sqlPrep;
                   setObjects(cmd, values);
                   cmd.ExecuteNonQuery();
+                  Console.WriteLine(sqlPrep);
                   SQLiteDataReader sr = this.select(values);
                   trans.Commit();
                   return sr.NextResult() ? sr.GetInt32(1) : -1;
@@ -153,9 +154,8 @@ namespace NTNL.Models.DB.DAO
                     String sqlPrep = sqlBase + (option != null ? option : "") + ";";
                     cmd.CommandText = sqlPrep;
                     setObjects(cmd, where);
-                    //?↓1行必要ないかも
                     cmd.ExecuteNonQuery();
-                    //
+                    Console.WriteLine(sqlPrep);
                     SQLiteDataReader sr = cmd.ExecuteReader();
                     trans.Commit();
                     return sr;
