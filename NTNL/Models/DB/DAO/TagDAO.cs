@@ -71,7 +71,7 @@ namespace NTNL.Models.DB.DAO
 
         private static TagDTO toDTO(SQLiteDataReader sr)
         {
-            TagDTO dto = new TagDTO();
+            var dto = new TagDTO();
             dto.ID = sr.GetInt32(sr.StepCount);
             dto.TwitterID = sr.GetString(sr.StepCount);
 

@@ -42,7 +42,7 @@ namespace NTNL.Models.DB.Entity
 
         public AccountDTO createDTO()
         {
-            AccountDTO dto = new AccountDTO();
+            var dto = new AccountDTO();
             
             dto.TwitterID=TwitterID;
             dto.CK = CK;

@@ -61,7 +61,7 @@ namespace NTNL.Models.DB.DAO
 
         public static MuteDTO toDTO(SQLiteDataReader sr)
         {
-            MuteDTO dto = new MuteDTO();
+            var dto = new MuteDTO();
             dto.ID = sr.GetInt32(sr.StepCount);
             dto.TwitterID = sr.GetString(sr.StepCount);
             return dto;

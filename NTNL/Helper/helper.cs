@@ -11,7 +11,7 @@ namespace NTNL.Helper
     {
         public static String join(String[] strs, String glue, String tail)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             for (int i = 0; i < strs.Length; i++)
             {
                 sb.Append(strs[i]);
@@ -31,7 +31,7 @@ namespace NTNL.Helper
         
         //?ArrayList間違ってるかも
         public static  ArrayList filledArray(Object obj, int size){
-            ArrayList objs = new ArrayList();
+            var objs = new ArrayList();
             for(int i=0; i<size; i++){
                 objs.Add(obj);
             }

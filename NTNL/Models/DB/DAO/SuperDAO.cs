@@ -80,7 +80,7 @@ namespace NTNL.Models.DB.DAO
  
         protected static String generateSqlPartsValues(Dictionary<String, Object> values)
         {
-            String[] signs = (String[])helper.filledArray("?", values.Count).ToArray();
+            var signs = (String[])helper.filledArray("?", values.Count).ToArray();
             return helper.join(signs,",");
         }
         protected static String generateSqlPartsWhere(List<String> whereColumns, List<String> whereLimit)
@@ -110,12 +110,12 @@ namespace NTNL.Models.DB.DAO
             List<String>  keyList = values.Keys.ToList();
             sqlBase = sqlBase.Replace(DBConstants.PIECE_COLUMNS,generateSqlPartsColumns(keyList));
             sqlBase = sqlBase.Replace(DBConstants.PIECE_VALUES, generateSqlPartsValues(values));
-            using (SQLiteConnection cn = new SQLiteConnection(dbConnectionString))
+            using (var cn = new SQLiteConnection(dbConnectionString))
             {
               cn.Open();
               using (SQLiteTransaction trans = cn.BeginTransaction())
               {
-                  SQLiteCommand cmd = cn.CreateCommand();
+                  var cmd = cn.CreateCommand();
                   String sqlPrep = sqlBase + (option != null ? option : "") + ";";
                   cmd.CommandText = sqlPrep;
                   setObjects(cmd, values);
@@ -145,12 +145,12 @@ namespace NTNL.Models.DB.DAO
             sqlBase = sqlBase.Replace(DBConstants.PIECE_COLUMNS, generateSqlPartsColumns(columnNameList));
             sqlBase = sqlBase.Replace(DBConstants.PIECE_TABLE_NAME, tableName);
             sqlBase = sqlBase.Replace(DBConstants.PIECE_WHERE, (where != null && where.Count !=0 ) ? generateSqlPartsWhere(where, whereLimit): "TRUE");
-            using (SQLiteConnection cn = new SQLiteConnection(dbConnectionString))
+            using (var cn = new SQLiteConnection(dbConnectionString))
             {
                 cn.Open();
                 using (SQLiteTransaction trans = cn.BeginTransaction())
                 {
-                    SQLiteCommand cmd = cn.CreateCommand();
+                    var cmd = cn.CreateCommand();
                     String sqlPrep = sqlBase + (option != null ? option : "") + ";";
                     cmd.CommandText = sqlPrep;
                     setObjects(cmd, where);
@@ -194,9 +194,9 @@ namespace NTNL.Models.DB.DAO
             using (SQLiteConnection cn = new SQLiteConnection(dbConnectionString))
             {
                 cn.Open();
-                using (SQLiteTransaction trans = cn.BeginTransaction())
+                using (var trans = cn.BeginTransaction())
                 {
-                    SQLiteCommand cmd = cn.CreateCommand();
+                    var cmd = cn.CreateCommand();
                     String sqlPrep = sqlBase + (option != null ? option : "") + ";" ;
                     setObjects(cmd, set);
                     setObjects(cmd, where, set.Count +1);
@@ -225,12 +225,12 @@ namespace NTNL.Models.DB.DAO
             String sqlBase = getSqlBaseDelete();
             sqlBase = sqlBase.Replace(DBConstants.PIECE_TABLE_NAME, tableName);
             sqlBase = sqlBase.Replace(DBConstants.PIECE_WHERE, generateSqlPartsWhere(where));
-            using (SQLiteConnection cn = new SQLiteConnection(dbConnectionString))
+            using (var cn = new SQLiteConnection(dbConnectionString))
             {
                 cn.Open();
                 using (SQLiteTransaction trans = cn.BeginTransaction())
                 {
-                    SQLiteCommand cmd = cn.CreateCommand();
+                    var cmd = cn.CreateCommand();
                     String sqlPrep = sqlBase + (option != null ? option : "") + ";";
                     cmd.CommandText = sqlPrep;
                     setObjects(cmd, where);

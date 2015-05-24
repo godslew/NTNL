@@ -42,7 +42,7 @@ namespace NTNL.Models.DB.Entity
 
         public MuteDTO createDTO()
         {
-           MuteDTO dto = new MuteDTO();
+           var dto = new MuteDTO();
            dto.ID = ID;
            dto.TwitterID = TwitterID;
            dto.userID = userID;

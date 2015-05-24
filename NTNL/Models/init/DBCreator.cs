@@ -19,7 +19,7 @@ namespace NTNL.Models.init
         public static void CREATE_DB()
         {
             String dbc = DBConstants.DB_CONNECTION;
-            using (SQLiteConnection cn = new SQLiteConnection(dbc))
+            using (var cn = new SQLiteConnection(dbc))
             {
                 try
                 {

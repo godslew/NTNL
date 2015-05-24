@@ -20,14 +20,14 @@ namespace NTNL.Models.DB.DAO
               
                 protected SQLiteDataReader find(int id)
                 {
-                    Dictionary<String,Object> where = new Dictionary<String, Object>();
+                    var where = new Dictionary<String, Object>();
                     where[this.primaryColumnName] = id;
                     return this.select(where);
                 }
 
                 protected SQLiteDataReader findIdentity(String columnName, Object value)
                 {
-                    Dictionary<String, Object> where = new Dictionary<string, object>();
+                    var where = new Dictionary<string, object>();
                     where[columnName] = value;
                     return this.select(where);
                 }

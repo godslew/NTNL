@@ -29,7 +29,7 @@ namespace NTNL.Models.DB.Entity
 
         public TagDTO createDTO()
         {
-            TagDTO dto = new TagDTO();
+            var dto = new TagDTO();
             dto.ID = ID;
             dto.TwitterID = TwitterID;
             dto.TagName = TagName;

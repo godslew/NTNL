@@ -57,7 +57,7 @@ namespace NTNL.Models.DB.DAO
         public void insertAccount(AccountDTO dto)
         {
             //string dbConnectionString = "Data Source=C:/sqlite3/"+DBname.Text+".sqlite3";
-            using (SQLiteConnection cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
+            using (var cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
             {
                 cn.Open();
                 using (SQLiteTransaction trans = cn.BeginTransaction())
@@ -103,7 +103,7 @@ namespace NTNL.Models.DB.DAO
 
         private static AccountDTO toDTO(SQLiteDataReader sr)
         {
-            AccountDTO dto = new AccountDTO();
+            var dto = new AccountDTO();
             dto.TwitterID = sr.GetString(sr.StepCount);
             return dto;
         }
@@ -121,7 +121,7 @@ namespace NTNL.Models.DB.DAO
 
         private static Dictionary<String, Object> toValues(AccountDTO dto)
         {
-            Dictionary<String, Object> values = new Dictionary<String, Object>();
+            var values = new Dictionary<String, Object>();
             values.Add(DBConstants.ACCOUNT_TwitterID, dto.TwitterID);
             
             values.Add(DBConstants.ACCOUNT_CK, dto.CK);
