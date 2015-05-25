@@ -10,7 +10,7 @@ namespace NTNL.Models.DB.DTO
 {
     class TagDTO
     {
-        public int ID { get; set; }
+        //public int ID { get; set; }
         public String TwitterID { get; set; }
         public String TagName { get; set; }
 

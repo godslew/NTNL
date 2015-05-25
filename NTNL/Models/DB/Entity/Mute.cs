@@ -11,7 +11,7 @@ namespace NTNL.Models.DB.Entity
 {
     class Mute
     {
-        private int ID;
+        //private int ID;
         private String TwitterID;
         private String userID;
         private String Media;
@@ -19,8 +19,8 @@ namespace NTNL.Models.DB.Entity
         private String RT;
         private String Favorite;
 
-        public Mute(int ID, String TwitterID, String userID, String Media, String Tweet, String RT, String Favorite){
-            this.ID = ID;
+        public Mute(String TwitterID, String userID, String Media, String Tweet, String RT, String Favorite){
+            //this.ID = ID;
             this.TwitterID = TwitterID;
             this.userID = userID;
             this.Media = Media;
@@ -31,7 +31,7 @@ namespace NTNL.Models.DB.Entity
 
         public Mute(MuteDTO dto)
         {
-            this.ID = dto.ID;
+            //this.ID = dto.ID;
             this.TwitterID = dto.TwitterID;
             this.userID = dto.userID;
             this.Media = dto.Media;
@@ -43,7 +43,7 @@ namespace NTNL.Models.DB.Entity
         public MuteDTO createDTO()
         {
            var dto = new MuteDTO();
-           dto.ID = ID;
+           //dto.ID = ID;
            dto.TwitterID = TwitterID;
            dto.userID = userID;
            dto.Media = Media;

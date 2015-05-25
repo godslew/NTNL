@@ -72,7 +72,7 @@ namespace NTNL.Models.DB.DAO
         private static TagDTO toDTO(SQLiteDataReader sr)
         {
             var dto = new TagDTO();
-            dto.ID = sr.GetInt32(sr.StepCount);
+            //dto.ID = sr.GetInt32(sr.StepCount);
             dto.TwitterID = sr.GetString(sr.StepCount);
 
             return dto;
@@ -92,7 +92,7 @@ namespace NTNL.Models.DB.DAO
         private static Dictionary<String, Object> toValues(TagDTO dto)
         {
             var values = new Dictionary<String, Object>();
-            values.Add(DBConstants.TAG_ID, dto.ID);
+            //values.Add(DBConstants.TAG_ID, dto.ID);
             values.Add(DBConstants.TAG_TwitterID, dto.TwitterID);
             values.Add(DBConstants.TAG_TagName, dto.TagName);
 

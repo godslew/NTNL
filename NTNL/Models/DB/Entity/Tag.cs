@@ -9,20 +9,20 @@ namespace NTNL.Models.DB.Entity
 {
     class Tag
     {
-        private int ID;
+       // private int ID;
         private String TwitterID;
         private String TagName;
 
-        public Tag(int ID, String TwitterID, String TagName)
+        public Tag(String TwitterID, String TagName)
         {
-            this.ID = ID;
+            //this.ID = ID;
             this.TwitterID = TwitterID;
             this.TagName = TagName;
         }
 
         public Tag(TagDTO dto)
         {
-            this.ID = dto.ID;
+            //this.ID = dto.ID;
             this.TwitterID = dto.TwitterID;
             this.TagName = dto.TagName;
         }
@@ -30,7 +30,7 @@ namespace NTNL.Models.DB.Entity
         public TagDTO createDTO()
         {
             var dto = new TagDTO();
-            dto.ID = ID;
+            //dto.ID = ID;
             dto.TwitterID = TwitterID;
             dto.TagName = TagName;
 

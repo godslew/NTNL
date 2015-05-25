@@ -62,7 +62,7 @@ namespace NTNL.Models.DB.DAO
         public static MuteDTO toDTO(SQLiteDataReader sr)
         {
             var dto = new MuteDTO();
-            dto.ID = sr.GetInt32(sr.StepCount);
+            //dto.ID = sr.GetInt32(sr.StepCount);
             dto.TwitterID = sr.GetString(sr.StepCount);
             return dto;
         }
@@ -81,7 +81,7 @@ namespace NTNL.Models.DB.DAO
         private static Dictionary<String, Object> toValues(MuteDTO dto)
         {
             var values = new Dictionary<String, Object>();
-            values.Add(DBConstants.MUTE_ID, dto.ID);
+           // values.Add(DBConstants.MUTE_ID, dto.ID);
             values.Add(DBConstants.MUTE_TwitterID, dto.TwitterID);
             values.Add(DBConstants.MUTE_UserID, dto.userID);
             values.Add(DBConstants.MUTE_Media, dto.Media);
