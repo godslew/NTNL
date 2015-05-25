@@ -306,10 +306,7 @@ namespace NTNL.Models.DB.DAO
         //not yet
         protected static void setObject(int index, SQLiteCommand cmd, Object obj)
         {
-            if (obj is String)
-            {
-               
-            }
+            cmd.Parameters.Insert(index, obj);
         }
     }
 }
