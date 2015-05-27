@@ -119,6 +119,13 @@ namespace NTNL.Models.DB.DAO
                   String sqlPrep = sqlBase + (option != null ? option : "") + ";";
                   cmd.CommandText = sqlPrep;
                   setObjects(cmd, values);
+                  /*
+                  foreach (var key in values)
+                  {
+                      cmd.Parameters[key].Value =  key.Value;
+                  }
+                  */
+                  
                   cmd.ExecuteNonQuery();
                   Console.WriteLine(sqlPrep);
                   SQLiteDataReader sr = this.select(values);
@@ -278,7 +285,7 @@ namespace NTNL.Models.DB.DAO
             }
             foreach(String key in where.Keys){
                 setObject(i++, cmd, where[key]);
-            }
+              }
         }
 
         protected static void setObjects(SQLiteCommand cmd, List<Object>where, int start)
@@ -306,7 +313,7 @@ namespace NTNL.Models.DB.DAO
         //not yet
         protected static void setObject(int index, SQLiteCommand cmd, Object obj)
         {
-            cmd.Parameters.Insert(index, obj);
+           cmd.Parameters.Insert(index, obj);
         }
     }
 }

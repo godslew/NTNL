@@ -105,26 +105,27 @@ namespace NTNL.Models.DB
             dao.insertAccount(dto);
 
         }
-        /*
+        
+        
         public List<AccountDTO> getAccountList()
         {
             var dao = new AccountDAO(dbConnectionString);
-          //  var reader = dao.;
+            var reader = dao.getAccountALL();
             var list = new List<AccountDTO>();
-            while (reader.NextResult())
+            while (reader.Read())
             {
                 var _account = new Account(reader.GetString(0),reader.GetString(1),reader.GetString(2),reader.GetString(3),reader.GetString(4));
                 list.Add(_account.createDTO());
             }
             return list;
-        */
+        }
          
         
        
 
        /* 
         //get account list from DB
-        public List<Twitter.Account> getAccountList()  //List<DTO.Account>でok
+        public List<DTO.Account> getAccountList()  //List<DTO.Account>でok
         {
             var list = new List<Twitter.Account>();
             return list;

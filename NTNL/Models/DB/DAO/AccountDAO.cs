@@ -57,6 +57,7 @@ namespace NTNL.Models.DB.DAO
         public void insertAccount(AccountDTO dto)
         {
             //string dbConnectionString = "Data Source=C:/sqlite3/"+DBname.Text+".sqlite3";
+            
             using (var cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
             {
                 cn.Open();
@@ -88,10 +89,12 @@ namespace NTNL.Models.DB.DAO
 
 
 
+
                     Dictionary<String, Object> values = toValues(dto);
-                   // return this.insert(values);
+                    //       return this.insert(values);
                 }
-                }
+             }    
+                
         }
 
         public int registAccount(String twitterID)
@@ -104,7 +107,12 @@ namespace NTNL.Models.DB.DAO
         private static AccountDTO toDTO(SQLiteDataReader sr)
         {
             var dto = new AccountDTO();
-            dto.TwitterID = sr.GetString(sr.StepCount);
+            dto.TwitterID = sr.GetString(0);
+            dto.CK = sr.GetString(1);
+            dto.CS = sr.GetString(2);
+            dto.AT = sr.GetString(3);
+            dto.ATS = sr.GetString(4);
+
             return dto;
         }
 
@@ -122,13 +130,13 @@ namespace NTNL.Models.DB.DAO
         private static Dictionary<String, Object> toValues(AccountDTO dto)
         {
             var values = new Dictionary<String, Object>();
+
             values.Add(DBConstants.ACCOUNT_TwitterID, dto.TwitterID);
-            
             values.Add(DBConstants.ACCOUNT_CK, dto.CK);
             values.Add(DBConstants.ACCOUNT_CS, dto.CS);
             values.Add(DBConstants.ACCOUNT_AT, dto.AT);
             values.Add(DBConstants.ACCOUNT_ATS, dto.ATS);
-            
+
             return values;
         }
         
@@ -141,7 +149,44 @@ namespace NTNL.Models.DB.DAO
             }
             return valueList;
         }
-        
+
+        public SQLiteDataReader getAccountALL()
+        {
+              using (var cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
+            {
+                cn.Open();
+                using (SQLiteTransaction trans = cn.BeginTransaction())
+                {
+                    SQLiteCommand cmd = cn.CreateCommand();
+
+                    // インサート文
+                    cmd.CommandText = "SELECT * FROM ACCOUNT" ;
+
+                    // パラメータのセット
+                    cmd.Parameters.Add("TwitterID_T", System.Data.DbType.String);
+                    cmd.Parameters.Add("CK_T", System.Data.DbType.String);
+                    cmd.Parameters.Add("CS_T", System.Data.DbType.String);
+                    cmd.Parameters.Add("AT_T", System.Data.DbType.String);
+                    cmd.Parameters.Add("ATS_T", System.Data.DbType.String);
+
+                    // データの追加
+                    /*
+                    cmd.Parameters["TwitterID_T"].Value = dto.TwitterID;
+                    cmd.Parameters["CK_T"].Value = dto.CK;
+                    cmd.Parameters["CS_T"].Value = dto.CS;
+                    cmd.Parameters["AT_T"].Value = dto.AT;
+                    cmd.Parameters["ATS_T"].Value = dto.ATS;
+                    */
+
+                    cmd.ExecuteNonQuery();
+                    SQLiteDataReader sr = cmd.ExecuteReader();
+                    // コミット
+                    trans.Commit();
+                    return sr;
+                }
+           }
+            
+        }
 }
 
 }
