@@ -181,7 +181,7 @@ namespace NTNL.Models.DB.DAO
                   //  cmd.ExecuteNonQuery();
                   //  SQLiteDataReader sr = cmd.ExecuteReader();
                     // コミット
-                    sr.Close();
+                    cn.Close();
                     return sr;
                   
            }
