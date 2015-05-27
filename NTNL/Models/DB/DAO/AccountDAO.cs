@@ -68,21 +68,22 @@ namespace NTNL.Models.DB.DAO
                     SQLiteCommand cmd = cn.CreateCommand();
 
                     // インサート文
-                    cmd.CommandText = "INSERT INTO ACCOUNT(TwitterID, CK, CS, AT, ATS ) VALUES (@TwitterID_T, @CK_T, @CS_T, @AT_T, @ATS_T)";
+                    //cmd.CommandText = "INSERT INTO ACCOUNT(TwitterID, CK, CS, AT, ATS ) VALUES (@TwitterID_T, @CK_T, @CS_T, @AT_T, @ATS_T)";
+                    cmd.CommandText = "INSERT INTO "+DBConstants.ACCOUNT_TABLE+"("+ DBConstants.ACCOUNT_TwitterID +","+DBConstants.ACCOUNT_CK+","+DBConstants.ACCOUNT_CS+","+DBConstants.ACCOUNT_AT+","+DBConstants.ACCOUNT_ATS+") VALUES (@"+ DBConstants.param_ACCOUNT_TwitterID +",@"+DBConstants.param_ACCOUNT_CK+",@"+DBConstants.param_ACCOUNT_CS+",@"+DBConstants.param_ACCOUNT_AT+",@"+DBConstants.param_ACCOUNT_ATS+")";
 
                     // パラメータのセット
-                    cmd.Parameters.Add("TwitterID_T", System.Data.DbType.String);
-                    cmd.Parameters.Add("CK_T", System.Data.DbType.String);
-                    cmd.Parameters.Add("CS_T", System.Data.DbType.String);
-                    cmd.Parameters.Add("AT_T", System.Data.DbType.String);
-                    cmd.Parameters.Add("ATS_T", System.Data.DbType.String);
+                    cmd.Parameters.Add(DBConstants.param_ACCOUNT_TwitterID, System.Data.DbType.String);
+                    cmd.Parameters.Add(DBConstants.param_ACCOUNT_CK, System.Data.DbType.String);
+                    cmd.Parameters.Add(DBConstants.param_ACCOUNT_CS, System.Data.DbType.String);
+                    cmd.Parameters.Add(DBConstants.param_ACCOUNT_AT, System.Data.DbType.String);
+                    cmd.Parameters.Add(DBConstants.param_ACCOUNT_ATS, System.Data.DbType.String);
 
                     // データの追加
-                    cmd.Parameters["TwitterID_T"].Value = dto.TwitterID;
-                    cmd.Parameters["CK_T"].Value = dto.CK;
-                    cmd.Parameters["CS_T"].Value = dto.CS;
-                    cmd.Parameters["AT_T"].Value = dto.AT;
-                    cmd.Parameters["ATS_T"].Value = dto.ATS;
+                    cmd.Parameters[DBConstants.param_ACCOUNT_TwitterID].Value = dto.TwitterID;
+                    cmd.Parameters[DBConstants.param_ACCOUNT_CK].Value = dto.CK;
+                    cmd.Parameters[DBConstants.param_ACCOUNT_CS].Value = dto.CS;
+                    cmd.Parameters[DBConstants.param_ACCOUNT_AT].Value = dto.AT;
+                    cmd.Parameters[DBConstants.param_ACCOUNT_ATS].Value = dto.ATS;
 
                     cmd.ExecuteNonQuery();
 
@@ -157,7 +158,7 @@ namespace NTNL.Models.DB.DAO
             {
                     cn.Open();
                     SQLiteCommand cmd = cn.CreateCommand();
-                    cmd.CommandText = "SELECT * FROM ACCOUNT" ;
+                    cmd.CommandText = "SELECT * FROM "+ DBConstants.ACCOUNT_TABLE ;
                     SQLiteDataReader sr = cmd.ExecuteReader();
 
                     var list = new List<AccountDTO>();

@@ -16,6 +16,9 @@ namespace NTNL.NTNL_Config
       public const String CREATE_TABLE_MUTE = "CREATE TABLE MUTE(TwitterID TEXT NOT NULL ,UserID TEXT NOT NULL , Media NUMERIC NOT NULL , Tweet NUMERIC NOT NULL , RT NUMERIC NOT NULL ,Favorite NUMERIC NOT NULL ,  PRIMARY KEY (TwitterID))";
       public const String CREATE_TABLE_TAG = "CREATE TABLE TAG (TwitterID TEXT NOT NULL , TagName TEXT NOT NULL ,PRIMARY KEY(TwitterID))";
 
+      public const String ACCOUNT_TABLE = "ACCOUNT";
+      public const String Mute_TABLE = "MUTE";
+      public const String Tag_TABLE = "TAG";
 
 
       public  const String PIECE_TABLE_NAME = "%TABLE_NAME%";
@@ -54,5 +57,24 @@ namespace NTNL.NTNL_Config
       public const String TAG_ID = "ID";
       public const String TAG_TwitterID = "TwitterID";
       public const String TAG_TagName = "TagName";
+
+      //SQL parametor ACCOUNT
+      public const String param_ACCOUNT_TwitterID = "TwitterID_T";
+      public const String param_ACCOUNT_CK = "CK_T";
+      public const String param_ACCOUNT_CS = "CS_T";
+      public const String param_ACCOUNT_AT = "AT_T";
+      public const String param_ACCOUNT_ATS = "ATS_T";
+
+      //SQL parametor Mute
+      public const String param_Mute_TwitterID = "TwitterID_T";
+      public const String param_Mute_UserID = "UserID_T";
+      public const String param_Mute_Media = "Media_T";
+      public const String param_Mute_Tweet = "Tweet_T";
+      public const String param_Mute_RT = "RT_T";
+      public const String param_Mute_Favorite = "Favorite_T";
+
+      //SQL paramtor Tag
+      public const String param_Tag_TwitterID = "TwitterID_T";
+      public const String param_Tag_TagName = "TagName_T";
     }
 }
