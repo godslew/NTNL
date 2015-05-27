@@ -163,12 +163,13 @@ namespace NTNL.Models.DB.DAO
                     cmd.CommandText = "SELECT * FROM ACCOUNT" ;
 
                     // パラメータのセット
+                    /*
                     cmd.Parameters.Add("TwitterID_T", System.Data.DbType.String);
                     cmd.Parameters.Add("CK_T", System.Data.DbType.String);
                     cmd.Parameters.Add("CS_T", System.Data.DbType.String);
                     cmd.Parameters.Add("AT_T", System.Data.DbType.String);
                     cmd.Parameters.Add("ATS_T", System.Data.DbType.String);
-
+                    */
                     // データの追加
                     /*
                     cmd.Parameters["TwitterID_T"].Value = dto.TwitterID;
