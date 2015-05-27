@@ -154,37 +154,36 @@ namespace NTNL.Models.DB.DAO
         {
               using (var cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
             {
-                cn.Open();
-                using (SQLiteTransaction trans = cn.BeginTransaction())
-                {
+                    cn.Open();
                     SQLiteCommand cmd = cn.CreateCommand();
-
-                    // インサート文
                     cmd.CommandText = "SELECT * FROM ACCOUNT" ;
-
-                    // パラメータのセット
-                    /*
-                    cmd.Parameters.Add("TwitterID_T", System.Data.DbType.String);
-                    cmd.Parameters.Add("CK_T", System.Data.DbType.String);
-                    cmd.Parameters.Add("CS_T", System.Data.DbType.String);
-                    cmd.Parameters.Add("AT_T", System.Data.DbType.String);
-                    cmd.Parameters.Add("ATS_T", System.Data.DbType.String);
-                    */
-                    // データの追加
-                    /*
-                    cmd.Parameters["TwitterID_T"].Value = dto.TwitterID;
-                    cmd.Parameters["CK_T"].Value = dto.CK;
-                    cmd.Parameters["CS_T"].Value = dto.CS;
-                    cmd.Parameters["AT_T"].Value = dto.AT;
-                    cmd.Parameters["ATS_T"].Value = dto.ATS;
-                    */
-
-                    cmd.ExecuteNonQuery();
                     SQLiteDataReader sr = cmd.ExecuteReader();
+                    
+
+
+                        // パラメータのセット
+                        /*
+                        cmd.Parameters.Add("TwitterID_T", System.Data.DbType.String);
+                        cmd.Parameters.Add("CK_T", System.Data.DbType.String);
+                        cmd.Parameters.Add("CS_T", System.Data.DbType.String);
+                        cmd.Parameters.Add("AT_T", System.Data.DbType.String);
+                        cmd.Parameters.Add("ATS_T", System.Data.DbType.String);
+                        */
+                        // データの追加
+                        /*
+                        cmd.Parameters["TwitterID_T"].Value = dto.TwitterID;
+                        cmd.Parameters["CK_T"].Value = dto.CK;
+                        cmd.Parameters["CS_T"].Value = dto.CS;
+                        cmd.Parameters["AT_T"].Value = dto.AT;
+                        cmd.Parameters["ATS_T"].Value = dto.ATS;
+                        */
+                    
+                  //  cmd.ExecuteNonQuery();
+                  //  SQLiteDataReader sr = cmd.ExecuteReader();
                     // コミット
-                    trans.Commit();
+                    sr.Close();
                     return sr;
-                }
+                  
            }
             
         }
