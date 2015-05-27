@@ -111,12 +111,8 @@ namespace NTNL.Models.DB
         {
             var dao = new AccountDAO(dbConnectionString);
             var reader = dao.getAccountALL();
-            var list = new List<AccountDTO>();
-            while (reader.Read())
-            {
-                var _account = new Account(reader.GetString(0),reader.GetString(1),reader.GetString(2),reader.GetString(3),reader.GetString(4));
-                list.Add(_account.createDTO());
-            }
+            var list = dao.getAccountALL();
+           
             return list;
         }
          

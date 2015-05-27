@@ -9,6 +9,7 @@ using NTNL.Models.DB.DTO;
 using NTNL.NTNL_Config;
 using NTNL.Models;
 using System.Collections;
+using NTNL.Models.DB.Entity;
 
 namespace NTNL.Models.DB.DAO
 {
@@ -57,8 +58,9 @@ namespace NTNL.Models.DB.DAO
         public void insertAccount(AccountDTO dto)
         {
             //string dbConnectionString = "Data Source=C:/sqlite3/"+DBname.Text+".sqlite3";
-            
-            using (var cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
+            try
+            {
+                using (var cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
             {
                 cn.Open();
                 using (SQLiteTransaction trans = cn.BeginTransaction())
@@ -86,15 +88,14 @@ namespace NTNL.Models.DB.DAO
 
                     // コミット
                     trans.Commit();
-
-
-
-
-                    Dictionary<String, Object> values = toValues(dto);
-                    //       return this.insert(values);
+                    cn.Close();
+                     }
                 }
-             }    
-                
+            }
+            catch (Exception){
+                Console.WriteLine("same account cannot insert.");
+            }
+
         }
 
         public int registAccount(String twitterID)
@@ -150,7 +151,7 @@ namespace NTNL.Models.DB.DAO
             return valueList;
         }
 
-        public SQLiteDataReader getAccountALL()
+        public List<AccountDTO> getAccountALL()
         {
               using (var cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
             {
@@ -158,31 +159,17 @@ namespace NTNL.Models.DB.DAO
                     SQLiteCommand cmd = cn.CreateCommand();
                     cmd.CommandText = "SELECT * FROM ACCOUNT" ;
                     SQLiteDataReader sr = cmd.ExecuteReader();
-                    
 
+                    var list = new List<AccountDTO>();
+                    while (sr.Read())
+                    {
+                        var dto = new Account(sr[DBConstants.ACCOUNT_TwitterID].ToString(), sr[DBConstants.ACCOUNT_CK].ToString(), sr[DBConstants.ACCOUNT_CS].ToString(), sr[DBConstants.ACCOUNT_AT].ToString(), sr[DBConstants.ACCOUNT_ATS].ToString());
+                        list.Add(dto.createDTO());
+                    }
 
-                        // パラメータのセット
-                        /*
-                        cmd.Parameters.Add("TwitterID_T", System.Data.DbType.String);
-                        cmd.Parameters.Add("CK_T", System.Data.DbType.String);
-                        cmd.Parameters.Add("CS_T", System.Data.DbType.String);
-                        cmd.Parameters.Add("AT_T", System.Data.DbType.String);
-                        cmd.Parameters.Add("ATS_T", System.Data.DbType.String);
-                        */
-                        // データの追加
-                        /*
-                        cmd.Parameters["TwitterID_T"].Value = dto.TwitterID;
-                        cmd.Parameters["CK_T"].Value = dto.CK;
-                        cmd.Parameters["CS_T"].Value = dto.CS;
-                        cmd.Parameters["AT_T"].Value = dto.AT;
-                        cmd.Parameters["ATS_T"].Value = dto.ATS;
-                        */
-                    
-                  //  cmd.ExecuteNonQuery();
-                  //  SQLiteDataReader sr = cmd.ExecuteReader();
-                    // コミット
+                        
                     cn.Close();
-                    return sr;
+                    return list;
                   
            }
             
