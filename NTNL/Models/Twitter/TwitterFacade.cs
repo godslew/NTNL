@@ -35,10 +35,14 @@ namespace NTNL.Models.Twitter
             return true;
         }
 
+        ///<summary>
+        ///独自でないキーを使って認証を開始する
+        ///</summary>
         public  CoreTweet.OAuth.OAuthSession OAuthStart()
         {
+           
             var session = OAuth.Authorize(TwitterConfig.CK, TwitterConfig.CS);
-                   System.Diagnostics.Process.Start(session.AuthorizeUri.ToString());
+            System.Diagnostics.Process.Start(session.AuthorizeUri.ToString());
             return session;
         }
     }

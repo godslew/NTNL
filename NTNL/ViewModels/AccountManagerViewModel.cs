@@ -110,6 +110,10 @@ namespace NTNL.ViewModels
                     try
                     {
                         db.insertAccount(tokens.UserId.ToString(), tokens.ConsumerKey, tokens.ConsumerSecret, tokens.AccessToken, tokens.AccessTokenSecret);
+                        var list = db.getAccountList();
+                        foreach(var account in list){
+                            Console.WriteLine(account.TwitterID);
+                        }
                         //tokens.Statuses.Update(status => "no twitter no life");
                     }
                     catch (Exception)
