@@ -153,26 +153,34 @@ namespace NTNL.Models.DB.DAO
 
         public List<MuteDTO> getMuteALL()
         {
-            using (var cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
+            try
             {
-                cn.Open();
-                SQLiteCommand cmd = cn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM " +DBConstants.Mute_TABLE;
-                SQLiteDataReader sr = cmd.ExecuteReader();
 
-                var list = new List<MuteDTO>();
-                while (sr.Read())
+                using (var cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
                 {
-                    var dto = new Mute(sr[DBConstants.MUTE_TwitterID].ToString(), sr[DBConstants.MUTE_UserID].ToString(), sr[DBConstants.MUTE_Media].ToString(), sr[DBConstants.MUTE_Tweet].ToString(), sr[DBConstants.MUTE_RT].ToString(), sr[DBConstants.MUTE_Favorite].ToString());
-                    list.Add(dto.createDTO());
+                    cn.Open();
+                    SQLiteCommand cmd = cn.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM " + DBConstants.Mute_TABLE;
+                    SQLiteDataReader sr = cmd.ExecuteReader();
+
+                    var list = new List<MuteDTO>();
+                    while (sr.Read())
+                    {
+                        var dto = new Mute(sr[DBConstants.MUTE_TwitterID].ToString(), sr[DBConstants.MUTE_UserID].ToString(), sr[DBConstants.MUTE_Media].ToString(), sr[DBConstants.MUTE_Tweet].ToString(), sr[DBConstants.MUTE_RT].ToString(), sr[DBConstants.MUTE_Favorite].ToString());
+                        list.Add(dto.createDTO());
+                    }
+
+
+                    cn.Close();
+                    return list;
+
                 }
-
-
-                cn.Close();
-                return list;
-
             }
-
+            catch (Exception)
+            {
+                Console.WriteLine("Cannot return MuteList");
+                return null;
+            }
         }
 
     }

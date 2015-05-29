@@ -145,33 +145,40 @@ namespace NTNL.Models.DB.DAO
             }
             catch (Exception)
             {
-                Console.WriteLine("same account cannot insert.");
+                Console.WriteLine("same tag cannot insert.");
             }
 
         }
 
         public List<TagDTO> getTagALL()
         {
-            using (var cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
+            try
             {
-                cn.Open();
-                SQLiteCommand cmd = cn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM "+DBConstants.Tag_TABLE;
-                SQLiteDataReader sr = cmd.ExecuteReader();
-
-                var list = new List<TagDTO>();
-                while (sr.Read())
+                using (var cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
                 {
-                    var dto = new Tag(sr[DBConstants.TAG_TwitterID].ToString(), sr[DBConstants.TAG_TagName].ToString());
-                    list.Add(dto.createDTO());
+                    cn.Open();
+                    SQLiteCommand cmd = cn.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM " + DBConstants.Tag_TABLE;
+                    SQLiteDataReader sr = cmd.ExecuteReader();
+
+                    var list = new List<TagDTO>();
+                    while (sr.Read())
+                    {
+                        var dto = new Tag(sr[DBConstants.TAG_TwitterID].ToString(), sr[DBConstants.TAG_TagName].ToString());
+                        list.Add(dto.createDTO());
+                    }
+
+
+                    cn.Close();
+                    return list;
+
                 }
-
-
-                cn.Close();
-                return list;
-
             }
-
+            catch(Exception)
+            {
+                Console.WriteLine("Cannot return TagList");
+                return null;
+            }
         }
 
     }

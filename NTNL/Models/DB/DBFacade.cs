@@ -115,8 +115,40 @@ namespace NTNL.Models.DB
            
             return list;
         }
-         
-        
+
+        public void insertMute(String TwitterID, String userID, String Media, String Tweet, String RT, String Favorite)
+        {
+            var _entity = new Mute(TwitterID, userID, Media, Tweet, RT, Favorite);
+            var dto = _entity.createDTO();
+            var dao = new MuteDAO(dbConnectionString);
+            dao.insertMute(dto);
+        }
+
+        public List<MuteDTO> getMuteList()
+        {
+            var dao = new MuteDAO(dbConnectionString);
+            //var reader = dao.getMuteALL();
+            var list = dao.getMuteALL();
+
+            return list;
+        }
+
+        public void insertTag(String TwitterID, String TagName)
+        {
+            var _entity = new Tag(TwitterID, TagName);
+            var dto = _entity.createDTO();
+            var dao = new TagDAO(dbConnectionString);
+            dao.insertTag(dto);
+        }
+
+        public List<TagDTO> getTagList() 
+        {
+            var dao = new TagDAO(dbConnectionString);
+            var reader = dao.getTagALL();
+            var list = dao.getTagALL();
+
+            return list;
+        }
        
 
        /* 

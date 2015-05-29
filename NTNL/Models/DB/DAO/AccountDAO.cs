@@ -154,11 +154,13 @@ namespace NTNL.Models.DB.DAO
 
         public List<AccountDTO> getAccountALL()
         {
-              using (var cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
+            try
             {
+                using (var cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
+                {
                     cn.Open();
                     SQLiteCommand cmd = cn.CreateCommand();
-                    cmd.CommandText = "SELECT * FROM "+ DBConstants.ACCOUNT_TABLE ;
+                    cmd.CommandText = "SELECT * FROM " + DBConstants.ACCOUNT_TABLE;
                     SQLiteDataReader sr = cmd.ExecuteReader();
 
                     var list = new List<AccountDTO>();
@@ -168,11 +170,17 @@ namespace NTNL.Models.DB.DAO
                         list.Add(dto.createDTO());
                     }
 
-                        
+
                     cn.Close();
                     return list;
-                  
-           }
+
+                }
+            }
+            catch(Exception)
+            {
+                Console.WriteLine("Cannot return Account List");
+                return null;
+            }
             
         }
 }
