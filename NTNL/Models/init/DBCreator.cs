@@ -15,7 +15,9 @@ namespace NTNL.Models.init
 {
     class DBCreator
     {
-        //DB作成
+        /// <summary>
+        /// DB作成
+        /// </summary>
         public static void CREATE_DB()
         {
             String dbc = DBConstants.DB_CONNECTION;

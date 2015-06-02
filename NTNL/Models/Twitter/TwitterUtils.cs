@@ -13,9 +13,36 @@ namespace NTNL.Models.Twitter
         /*
          * NotificationObjectはプロパティ変更通知の仕組みを実装したオブジェクトです。
          */
+        /// <summary>
+        /// status update
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="text"></param>
         public void updateStatus(Account account, string text)
         {
             
+        }
+
+        /// <summary>
+        /// reply
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="text"></param>
+        /// <param name="statusID"></param>
+        public void replyToStatus(Account account, String text, long statusID)
+        {
+
+        }
+
+        /// <summary>
+        /// RT
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="text"></param>
+        /// <param name="statusID"></param>
+        public void retweetStatus(Account account, String text, long statusID)
+        {
+
         }
     }
 }

@@ -1,14 +1,8 @@
 ﻿using NTNL.Models.DB.DTO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SQLite;
-using System.Data.SQLite.Linq;
-using NTNL.Models.DB.DTO;
 using NTNL.NTNL_Config;
-using NTNL.Models;
 using NTNL.Models.DB.Entity;
 
 

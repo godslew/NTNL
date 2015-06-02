@@ -25,7 +25,12 @@ namespace NTNL.Models.Twitter
 
         }
 
-        //update status for all active account 
+        /// <summary>
+        /// update status for all active account
+        /// </summary>
+        /// <param name="_list"></param>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public Boolean UpdateStatus(List<Account> _list, String text)
         {
             foreach (Account account in _list)
@@ -35,9 +40,10 @@ namespace NTNL.Models.Twitter
             return true;
         }
 
-        ///<summary>
-        ///独自でないキーを使って認証を開始する
-        ///</summary>
+        /// <summary>
+        /// 独自でないキーを使って認証を開始する
+        /// </summary>
+        /// <returns></returns>
         public  CoreTweet.OAuth.OAuthSession OAuthStart()
         {
            

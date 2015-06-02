@@ -37,6 +37,17 @@ namespace NTNL.Helper
             }
             return objs;
         }
-        
+
+        /// <summary>
+        /// string to long
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static long StringToLong(String str)
+        {
+            long id = long.Parse(str);
+
+            return id;
+        }
     }
 }
