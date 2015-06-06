@@ -14,7 +14,7 @@ namespace NTNL.Models.Twitter
          * NotificationObjectはプロパティ変更通知の仕組みを実装したオブジェクトです。
          */
         /// <summary>
-        /// status update
+        /// tweet
         /// </summary>
         /// <param name="account"></param>
         /// <param name="text"></param>
@@ -40,9 +40,71 @@ namespace NTNL.Models.Twitter
         /// <param name="account"></param>
         /// <param name="text"></param>
         /// <param name="statusID"></param>
-        public void retweetStatus(Account account, String text, long statusID)
+        public void retweetToStatus(Account account, String text, long statusID)
         {
 
         }
+
+        /// <summary>
+        /// follow
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="targetID"></param>
+        public void createFollow(Account account, long targetID)
+        {
+
+        }
+
+        /// <summary>
+        /// unfollow
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="targetID"></param>
+        public void createUnFollow(Account account, long targetID)
+        {
+
+        }
+
+        /// <summary>
+        /// get profile
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
+        public Account getUserProfile(long userID)
+        {
+
+            return null;
+        }
+
+        /// <summary>
+        /// tweet delete
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="targetID"></param>
+        public void destroyStatus(Account account, long targetID)
+        {
+
+        }
+
+        /// <summary>
+        /// favorite delete
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="targetID"></param>
+        public void destroyFavorite(Account account, long targetID)
+        {
+
+        }
+
+        /// <summary>
+        /// RT delete
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="targetID"></param>
+        public void destroyRetweet(Account account, long targetID)
+        {
+
+        }
+
     }
 }
