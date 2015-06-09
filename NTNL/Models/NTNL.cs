@@ -7,7 +7,7 @@ using Livet;
 
 namespace NTNL.Models
 {
-    public class Model : NotificationObject
+    public class NTNL : NotificationObject
     {
         /*
          * NotificationObjectはプロパティ変更通知の仕組みを実装したオブジェクトです。
