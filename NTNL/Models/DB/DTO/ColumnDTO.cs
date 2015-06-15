@@ -10,5 +10,8 @@ namespace NTNL.Models.DB.DTO
 {
     class ColumnDTO
     {
+        public int NUM {get; set; }
+        public String NAME { get; set; }
+        public String QUERY { get; set; }
     }
 }
