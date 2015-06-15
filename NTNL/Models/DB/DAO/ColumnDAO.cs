@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Data.SQLite.Linq;
+using NTNL.Models.DB.Entity;
+using NTNL.NTNL_Config;
 
 namespace NTNL.Models.DB.DAO
 {
-    class ColumnDAO : SuperDAO
+    class ColumnDAO : EntityDAO
     {
         public ColumnDAO(SQLiteConnection dbConnectionString, String tableName)
-            : base(dbConnectionString, tableName)
+            : base(dbConnectionString, DBConstants.COLUMN_NUM, DBConstants.COLUMN_NAME)
         {
 
         }
