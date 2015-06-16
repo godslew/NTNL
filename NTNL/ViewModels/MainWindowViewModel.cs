@@ -65,7 +65,6 @@ namespace NTNL.ViewModels
 
         PropertyChangedEventListener listener;
 
-        TwitterFacade tw;
         NTNLs ntnls;
 
 
@@ -101,7 +100,6 @@ namespace NTNL.ViewModels
            
 
             BindingOperations.EnableCollectionSynchronization(this.columnList, new object());
-            tw = new TwitterFacade();
 
         }
 
