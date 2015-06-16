@@ -65,30 +65,33 @@ namespace NTNL.ViewModels
         {
         }
 
-        #region tweetList変更通知プロパティ
-        private ObservableCollection<TweetViewModel> _tweetList;
+        #region StatusList変更通知プロパティ
+        private ObservableCollection<StatusViewModel> _statusList;
 
-        public ObservableCollection<TweetViewModel> tweetList
+        public ObservableCollection<StatusViewModel> statusList
         {
             get
-            { return _tweetList; }
+            { return _statusList; }
             set
             {
-                if (_tweetList == value)
+                if (_statusList == value)
                     return;
-                _tweetList = value;
+                _statusList = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
 
-        public ColumnItemViewModel(String title, int index)
+        public MainWindowViewModel main;
+
+        public ColumnItemViewModel(MainWindowViewModel _main, String title, int index)
         {
             this.Title = title;
             this.index = index;
-            this.tweetList = new ObservableCollection<TweetViewModel>();
-            //tweetList.Add(new TweetViewModel("test"));
-            BindingOperations.EnableCollectionSynchronization(this.tweetList, new object());
+            this.statusList = new ObservableCollection<StatusViewModel>();
+            main = _main;
+            //statusList.Add(new TweetViewModel("test"));
+            BindingOperations.EnableCollectionSynchronization(this.statusList, new object());
         }
 
 

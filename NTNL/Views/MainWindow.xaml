@@ -61,20 +61,12 @@
             </ListBox>
             <metro:CaptionButton Content="+" FontSize="20" Background="{x:Null}" ToolTip="add column" Margin="4,0,44,0" Height="50" Command="{Binding addColumnCommand, Mode=OneWay}" VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type metro:CaptionIcon}}}" Focusable="False" IsHitTestVisible="True" IsTabStop="False"/>
         </StackPanel>
-        <ListBox x:Name="listBox1" Background="Transparent" ItemsSource="{Binding columnList}" Margin="145,30,0,0" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF2E3136" BorderThickness="5">
-            <ListBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </ListBox.RenderTransform>
+        <ListBox x:Name="listBox1" Background="Transparent" ItemsSource="{Binding columnList}" Margin="145,30,0,0" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF2E3136" BorderThickness="5" VerticalContentAlignment="Top">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical" Width="300">
-                        <TextBlock Text="{Binding Title}" Height="40" Width="250" FontSize="24" ToolTip="{Binding Title}"/>
-                        <ListView Height="Auto" Width="300" Background="Transparent" ItemsSource="{Binding tweetList}" MinWidth="300" MinHeight="650" VerticalContentAlignment="Top" VerticalAlignment="Bottom" HorizontalAlignment="Left" BorderBrush="#FF2E3136" BorderThickness="3">
+                    <StackPanel Orientation="Vertical" Width="300" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="650" CanHorizontallyScroll="True">
+                        <TextBlock Text="{Binding Title}" Height="40" Width="250" FontSize="24" ToolTip="{Binding Title}" VerticalAlignment="Top"/>
+                        <ListView Height="Auto" Width="300" Background="Transparent" ItemsSource="{Binding statusList}" MinWidth="300" MinHeight="650" VerticalContentAlignment="Top" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="#FF2E3136" BorderThickness="3" MaxHeight="740">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Height="Auto" Width="290">
@@ -92,10 +84,14 @@
             </ListBox.ItemTemplate>
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel/>
+                    <DockPanel x:Name="columnPanel"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
 
         </ListBox>
+        <Grid Margin="-212,30,1294.6,39">
+            <TextBox HorizontalAlignment="Left" Height="99" TextWrapping="Wrap" Text="new tweet" VerticalAlignment="Top" Width="191" Margin="0,107,0,0" UndoLimit="500"/>
+            <ListBox HorizontalAlignment="Left" Height="82" Margin="0,20,0,0" VerticalAlignment="Top" Width="191" Background="Transparent"/>
+        </Grid>
     </Grid>
 </metro:MetroWindow>

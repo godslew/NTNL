@@ -139,13 +139,13 @@
     <Compile Include="Config\TwitterConfig.cs" />
     <Compile Include="ViewModels\items\AccountManagerViewModel.cs" />
     <Compile Include="ViewModels\items\SettingWindowViewModel.cs" />
-    <Compile Include="Views\AccountManagerWindow.xaml.cs">
+    <Compile Include="Views\items\AccountManagerWindow.xaml.cs">
       <DependentUpon>AccountManagerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SettingWindow.xaml.cs">
+    <Compile Include="Views\items\SettingWindow.xaml.cs">
       <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\AccountManagerWindow.xaml">
+    <Page Include="Views\items\AccountManagerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -171,11 +171,11 @@
     <Compile Include="Models\Analyzer\SuperAnalyzer.cs" />
     <Compile Include="Models\DB\DBFacade.cs" />
     <Compile Include="Models\init\DBCreator.cs" />
-    <Compile Include="Models\NTNL.cs" />
+    <Compile Include="Models\NTNLs.cs" />
     <Compile Include="Models\Twitter\TwitterFacade.cs" />
     <Compile Include="ViewModels\items\ColumnItemViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\items\TweetViewModel.cs" />
+    <Compile Include="ViewModels\items\StatusViewModel.cs" />
     <Compile Include="Views\items\ColumnList.xaml.cs">
       <DependentUpon>ColumnList.xaml</DependentUpon>
     </Compile>
@@ -186,7 +186,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\SettingWindow.xaml">
+    <Page Include="Views\items\SettingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

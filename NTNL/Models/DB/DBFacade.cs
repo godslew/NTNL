@@ -6,6 +6,7 @@ using System.Data.SQLite;
 using NTNL.Models.DB.DTO;
 using NTNL.Models.init;
 using NTNL.NTNL_Config;
+using System.Threading.Tasks;
 
 namespace NTNL.Models.DB
 {
@@ -94,10 +95,12 @@ namespace NTNL.Models.DB
 
         public void insertAccount(String TwitterID, String CK, String CS, String AT, String ATS)
         {
-            var _entity = new Account(TwitterID, CK, CS, AT, ATS);
-            var dto = _entity.createDTO();
-            var dao = new AccountDAO(dbConnectionString);
-            dao.insertAccount(dto);
+            
+                    var _entity = new Account(TwitterID, CK, CS, AT, ATS);
+                    var dto = _entity.createDTO();
+                    var dao = new AccountDAO(dbConnectionString);
+                    dao.insertAccount(dto);
+               
 
         }
         

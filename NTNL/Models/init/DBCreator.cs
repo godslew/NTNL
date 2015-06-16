@@ -26,6 +26,13 @@ namespace NTNL.Models.init
                 try
                 {
                     cn.Open();
+                    Console.WriteLine(dbc + "に接続しました");
+                    
+                }
+                catch(Exception)
+                {
+
+                    cn.Open();
                     SQLiteCommand cmd = cn.CreateCommand();
                     cmd.CommandText = DBConstants.CREATE_TABLE_ACCOUNT;
                     cmd.ExecuteNonQuery();
@@ -34,12 +41,7 @@ namespace NTNL.Models.init
                     cmd.CommandText = DBConstants.CREATE_TABLE_TAG;
                     cmd.ExecuteNonQuery();
                     Console.WriteLine(dbc + "を作成しました");
-                }
-                catch(Exception)
-                {
-
-                    cn.Open();
-                    Console.WriteLine(dbc + "に接続しました");
+                    
                    
                 }
             }

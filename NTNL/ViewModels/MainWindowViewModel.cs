@@ -62,20 +62,43 @@ namespace NTNL.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
 
-        public void Initialize()
-        {
-        }
+
+        PropertyChangedEventListener listener;
 
         TwitterFacade tw;
+        NTNLs ntnls;
+
+
+        public void Initialize()
+        {
+            ntnls = NTNLs.Instance;
+            listener = new PropertyChangedEventListener(ntnls);
+            CompositeDisposable.Add(listener);
+        }
 
         public MainWindowViewModel()
         {
             this.columnList = new ObservableCollection<ColumnItemViewModel>();
-            this.columnList.Add(new ColumnItemViewModel("Home", 0));
-            this.columnList.Add(new ColumnItemViewModel("Mention", 1));
-            this.columnList.Add(new ColumnItemViewModel("Activity", 2));
-            columnList.First().tweetList.Add(new TweetViewModel("testあああああああああああああああああああああああああああああああああああああああああああああああああああああああ"));
+            this.columnList.Add(new ColumnItemViewModel(this,"Home", 0));
+            this.columnList.Add(new ColumnItemViewModel(this,"Mention", 1));
+            this.columnList.Add(new ColumnItemViewModel(this, "Activity", 2));
+            columnList.First().statusList.Add(new StatusViewModel("testtest"));
+            columnList.First().statusList.Add(new StatusViewModel("test"));
+            columnList.First().statusList.Add(new StatusViewModel("testtest"));
+            columnList.First().statusList.Add(new StatusViewModel("test"));
+            columnList.First().statusList.Add(new StatusViewModel("testtest"));
+            columnList.First().statusList.Add(new StatusViewModel("test"));
+            columnList.First().statusList.Add(new StatusViewModel("testtest"));
+            columnList.First().statusList.Add(new StatusViewModel("test"));
+            columnList.First().statusList.Add(new StatusViewModel("testtest"));
+            columnList.First().statusList.Add(new StatusViewModel("testtest"));
+            columnList.First().statusList.Add(new StatusViewModel("testtest"));
+            columnList.First().statusList.Add(new StatusViewModel("testtest"));
+            columnList.First().statusList.Add(new StatusViewModel("testtest"));
+            columnList.First().statusList.Add(new StatusViewModel("testtest"));
+            columnList.First().statusList.Add(new StatusViewModel("testtest"));
 
+           
 
             BindingOperations.EnableCollectionSynchronization(this.columnList, new object());
             tw = new TwitterFacade();
@@ -99,9 +122,7 @@ namespace NTNL.ViewModels
 
         public  void OpenTextBox()
         {
-            Console.WriteLine("test");
-            App app = App.Current as App;
-            
+            Console.WriteLine("test");            
        
             //messageを使ってみた,非常につよい
             var message = new TransitionMessage(typeof(Views.AccountManagerWindow), new AccountManagerViewModel(), TransitionMode.Modal);
@@ -150,7 +171,7 @@ namespace NTNL.ViewModels
 
         public void addColumn()
         {
-            this.columnList.Add(new ColumnItemViewModel("test", columnList.Count()));
+            this.columnList.Add(new ColumnItemViewModel(this, "test", columnList.Count()));
             //Console.WriteLine("test" + columnList.Count);
         }
         #endregion

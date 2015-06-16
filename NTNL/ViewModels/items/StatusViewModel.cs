@@ -16,7 +16,7 @@ using System.Windows.Controls;
 
 namespace NTNL.ViewModels
 {
-    public class TweetViewModel : ViewModel
+    public class StatusViewModel : ViewModel
     {
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -118,7 +118,7 @@ namespace NTNL.ViewModels
         }
         #endregion
 
-        public TweetViewModel(String text){
+        public StatusViewModel(String text){
             this.text = text;
         }
     }
