@@ -8,7 +8,7 @@ using Livet;
 
 namespace NTNL.Models.Twitter
 {
-    public class Account : NotificationObject
+    public class NTNLAccount : NotificationObject
     {
         /*
          * NotificationObjectはプロパティ変更通知の仕組みを実装したオブジェクトです。
@@ -24,7 +24,7 @@ namespace NTNL.Models.Twitter
         /// <param name="CK"></param>
         /// <param name="AT"></param>
         /// <param name="AS"></param>
-        public Account(long _ID, String CS, String CK, String AT, String AS)
+        public NTNLAccount(long _ID, String CS, String CK, String AT, String AS)
         {
             this.ID = _ID;
             this.token = Tokens.Create(CS, CK, AT, AS);
@@ -34,10 +34,11 @@ namespace NTNL.Models.Twitter
         /// Tokenから生成
         /// </summary>
         /// <param name="_token"></param>
-        public Account(Tokens _token)
+        public NTNLAccount(Tokens _token)
         {
             this.ID = _token.UserId;
             this.token = _token;
         }
+
     }
 }

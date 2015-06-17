@@ -15,6 +15,7 @@ using NTNL.Models;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
 using NTNL.Models.Twitter;
+using System.Threading.Tasks;
 
 namespace NTNL.ViewModels
 {
@@ -100,7 +101,17 @@ namespace NTNL.ViewModels
            
 
             BindingOperations.EnableCollectionSynchronization(this.columnList, new object());
+            //test();
 
+        }
+
+        private async void test()
+        {
+            await Task.Run(() =>
+                {
+                    var list = ntnls.Accounts;
+                    ntnls.StartStreaming(list.First().token);
+                });
         }
 
         #region OpenTextBoxCommand

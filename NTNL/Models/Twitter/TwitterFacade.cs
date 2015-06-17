@@ -7,6 +7,8 @@ using CoreTweet;
 using NTNL.Models.DB;
 using NTNL.Models.DB.DAO;
 using NTNL.NTNL_Config;
+using NTNL.Models.DB.DTO;
+using NTNL.Helper;
 
 namespace NTNL.Models.Twitter
 {
@@ -14,7 +16,7 @@ namespace NTNL.Models.Twitter
     {
 
         private DBFacade db;
-        private List<Account> accountList;
+        private List<NTNLAccount> accountList;
         private TwitterUtils twUtils;
 
         public TwitterFacade()
@@ -31,13 +33,33 @@ namespace NTNL.Models.Twitter
         /// <param name="_list"></param>
         /// <param name="text"></param>
         /// <returns></returns>
-        public Boolean UpdateStatus(List<Account> _list, String text)
+        public Boolean UpdateStatus(List<NTNLAccount> _list, String text)
         {
-            foreach (Account account in _list)
+            foreach (NTNLAccount account in _list)
             {
                 twUtils.updateStatus(account, text);
             }
             return true;
+        }
+
+        public List<NTNLAccount> getAccounts()
+        {
+            var list = new List<NTNLAccount>();
+            try
+            {
+                var dtoList = db.getAccountList();
+                foreach (AccountDTO dto in dtoList)
+                {
+                    list.Add(new NTNLAccount(helper.StringToLong(dto.TwitterID), dto.CS, dto.CK, dto.AT, dto.ATS));
+                }
+
+                return list;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
         }
 
         /// <summary>

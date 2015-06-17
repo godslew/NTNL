@@ -66,10 +66,12 @@ namespace NTNL.ViewModels
 
         private TwitterFacade tw;
         private CoreTweet.OAuth.OAuthSession session;
+        NTNLs ntnls;
 
         public void Initialize()
         {
             this.session = tw.OAuthStart();
+            ntnls = NTNLs.Instance;
         }
 
         public AccountManagerViewModel()
@@ -114,7 +116,7 @@ namespace NTNL.ViewModels
                         foreach(var account in list){
                             Console.WriteLine(account.TwitterID);
                         }
-                        //tokens.Statuses.Update(status => "no twitter no life");
+                        ntnls.StartStreaming(tokens);
                     }
                     catch (Exception)
                     {

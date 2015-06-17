@@ -18,7 +18,7 @@ namespace NTNL.Models.Twitter
         /// </summary>
         /// <param name="account"></param>
         /// <param name="text"></param>
-        public void updateStatus(Account account, string text)
+        public void updateStatus(NTNLAccount account, string text)
         {
             
         }
@@ -29,7 +29,7 @@ namespace NTNL.Models.Twitter
         /// <param name="account"></param>
         /// <param name="text"></param>
         /// <param name="statusID"></param>
-        public void replyToStatus(Account account, String text, long statusID)
+        public void replyToStatus(NTNLAccount account, String text, long statusID)
         {
 
         }
@@ -40,7 +40,7 @@ namespace NTNL.Models.Twitter
         /// <param name="account"></param>
         /// <param name="text"></param>
         /// <param name="statusID"></param>
-        public void retweetToStatus(Account account, String text, long statusID)
+        public void retweetToStatus(NTNLAccount account, String text, long statusID)
         {
 
         }
@@ -50,7 +50,7 @@ namespace NTNL.Models.Twitter
         /// </summary>
         /// <param name="account"></param>
         /// <param name="targetID"></param>
-        public void createFollow(Account account, long targetID)
+        public void createFollow(NTNLAccount account, long targetID)
         {
 
         }
@@ -60,7 +60,7 @@ namespace NTNL.Models.Twitter
         /// </summary>
         /// <param name="account"></param>
         /// <param name="targetID"></param>
-        public void createUnFollow(Account account, long targetID)
+        public void createUnFollow(NTNLAccount account, long targetID)
         {
 
         }
@@ -70,7 +70,7 @@ namespace NTNL.Models.Twitter
         /// </summary>
         /// <param name="userID"></param>
         /// <returns></returns>
-        public Account getUserProfile(long userID)
+        public NTNLAccount getUserProfile(long userID)
         {
 
             return null;
@@ -81,7 +81,7 @@ namespace NTNL.Models.Twitter
         /// </summary>
         /// <param name="account"></param>
         /// <param name="targetID"></param>
-        public void destroyStatus(Account account, long targetID)
+        public void destroyStatus(NTNLAccount account, long targetID)
         {
 
         }
@@ -91,7 +91,7 @@ namespace NTNL.Models.Twitter
         /// </summary>
         /// <param name="account"></param>
         /// <param name="targetID"></param>
-        public void destroyFavorite(Account account, long targetID)
+        public void destroyFavorite(NTNLAccount account, long targetID)
         {
 
         }
@@ -101,7 +101,7 @@ namespace NTNL.Models.Twitter
         /// </summary>
         /// <param name="account"></param>
         /// <param name="targetID"></param>
-        public void destroyRetweet(Account account, long targetID)
+        public void destroyRetweet(NTNLAccount account, long targetID)
         {
 
         }

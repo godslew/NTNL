@@ -89,7 +89,7 @@ namespace NTNL.ViewModels
             this.Title = title;
             this.index = index;
             this.statusList = new ObservableCollection<StatusViewModel>();
-            main = _main;
+            this.main = _main;
             //statusList.Add(new TweetViewModel("test"));
             BindingOperations.EnableCollectionSynchronization(this.statusList, new object());
         }
@@ -130,6 +130,23 @@ namespace NTNL.ViewModels
         }
         #endregion
 
+
+        #region query変更通知プロパティ
+        private string _query;
+
+        public string query
+        {
+            get
+            { return _query; }
+            set
+            { 
+                if (_query == value)
+                    return;
+                _query = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
 
 
         #region FocusCommand

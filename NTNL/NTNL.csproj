@@ -37,6 +37,26 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CoreTweet">
       <HintPath>packages\CoreTweet.0.4.3.110\lib\net45\CoreTweet.dll</HintPath>
@@ -133,7 +153,7 @@
     <Compile Include="Models\DB\Entity\Mute.cs" />
     <Compile Include="Models\DB\Entity\Private.cs" />
     <Compile Include="Models\DB\Entity\Tag.cs" />
-    <Compile Include="Models\Twitter\Account.cs" />
+    <Compile Include="Models\Twitter\NTNLAccount.cs" />
     <Compile Include="Models\Twitter\TwitterUtils.cs" />
     <Compile Include="Config\DBConstants.cs" />
     <Compile Include="Config\TwitterConfig.cs" />
