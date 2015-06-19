@@ -13,7 +13,7 @@ namespace NTNL.Models.DB.DAO
 {
     class ColumnDAO : EntityDAO
     {
-        public ColumnDAO(SQLiteConnection dbConnectionString, String tableName)
+        public ColumnDAO(SQLiteConnection dbConnectionString)
             : base(dbConnectionString, DBConstants.COLUMN_NUM, DBConstants.COLUMN_NAME)
         {
         }
