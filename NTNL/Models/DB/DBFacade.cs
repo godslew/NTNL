@@ -33,7 +33,7 @@ namespace NTNL.Models.DB
                 this.accountDAO = new AccountDAO(this.dbConnectionString);
             }
         }
-        /*
+        
         private void installColumnDAO()
         {
             if (this.columnDAO == null)
@@ -41,7 +41,7 @@ namespace NTNL.Models.DB
                 this.columnDAO = new ColumnDAO(this.dbConnectionString);
             }
         }
-        */
+        
         private void installMuteDAO()
         {
             if (this.muteDAO == null)
@@ -58,11 +58,7 @@ namespace NTNL.Models.DB
                 this.privateDAO = new PrivateDAO(this.dbConnectionString);
             }
         }
-        */
-        //アカウントのデータをとってくる
-        //
-        
-        
+        */     
 
         private void installTagDAO()
         {
@@ -84,24 +80,12 @@ namespace NTNL.Models.DB
             return this.accountDAO.registAccount(twitterID);
         }
        
-        /*
-         *  DBの処理を全てしてくれる
-         
-        public Account getAccount(Account twitterAccount)
-        {
-            installAccountDAO();
-        }
-        */
-
         public void insertAccount(String TwitterID, String CK, String CS, String AT, String ATS)
-        {
-            
+        {     
                     var _entity = new Account(TwitterID, CK, CS, AT, ATS);
                     var dto = _entity.createDTO();
                     var dao = new AccountDAO(dbConnectionString);
-                    dao.insertAccount(dto);
-               
-
+                    dao.insertAccount(dto);      
         }
         
         
@@ -110,7 +94,6 @@ namespace NTNL.Models.DB
             var dao = new AccountDAO(dbConnectionString);
             var reader = dao.getAccountALL();
             var list = dao.getAccountALL();
-           
             return list;
         }
 
@@ -127,7 +110,6 @@ namespace NTNL.Models.DB
             var dao = new MuteDAO(dbConnectionString);
             //var reader = dao.getMuteALL();
             var list = dao.getMuteALL();
-
             return list;
         }
 
@@ -142,12 +124,19 @@ namespace NTNL.Models.DB
         public List<TagDTO> getTagList() 
         {
             var dao = new TagDAO(dbConnectionString);
-            var reader = dao.getTagALL();
+            //var reader = dao.getTagALL();
             var list = dao.getTagALL();
-
             return list;
         }
-       
+
+        public void insertColumn(int NUM, String NAME, String Query)
+        {
+            var _entity = new Column(NUM, NAME, Query);
+            var dto = _entity.createDTO();
+            var dao = new ColumnDAO(dbConnectionString);
+            dao.insertColumn(dto);
+        }
+
 
        /* 
         //get account list from DB
