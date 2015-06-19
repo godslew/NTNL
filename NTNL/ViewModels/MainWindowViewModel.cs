@@ -74,6 +74,7 @@ namespace NTNL.ViewModels
             ntnls = NTNLs.Instance;
             listener = new PropertyChangedEventListener(ntnls);
             CompositeDisposable.Add(listener);
+            test();
         }
 
         public MainWindowViewModel()
@@ -101,17 +102,21 @@ namespace NTNL.ViewModels
            
 
             BindingOperations.EnableCollectionSynchronization(this.columnList, new object());
-            //test();
+
+            
 
         }
 
-        private async void test()
+        private void test()
         {
-            await Task.Run(() =>
-                {
-                    var list = ntnls.Accounts;
-                    ntnls.StartStreaming(list.First().token);
-                });
+
+            var list = ntnls.Accounts;
+            if (list != null)
+            {
+                var ac = list.First();
+                Console.WriteLine(ac.token.UserId+""+ac.token.AccessToken);
+                ntnls.StartStreaming(list.First().token);
+            }
         }
 
         #region OpenTextBoxCommand
@@ -131,8 +136,8 @@ namespace NTNL.ViewModels
 
         public  void OpenTextBox()
         {
-            Console.WriteLine("test");            
-       
+            Console.WriteLine("test");
+           
             //messageを使ってみた,非常につよい
             var message = new TransitionMessage(typeof(Views.AccountManagerWindow), new AccountManagerViewModel(), TransitionMode.Modal);
             Messenger.Raise(message);

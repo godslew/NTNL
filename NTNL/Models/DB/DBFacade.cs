@@ -108,7 +108,6 @@ namespace NTNL.Models.DB
         public List<AccountDTO> getAccountList()
         {
             var dao = new AccountDAO(dbConnectionString);
-            var reader = dao.getAccountALL();
             var list = dao.getAccountALL();
            
             return list;

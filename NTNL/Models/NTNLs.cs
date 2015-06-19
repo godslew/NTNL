@@ -41,13 +41,16 @@ namespace NTNL.Models
         /// <summary>
         /// Account読み込み
         /// </summary>
-        private async void installAccounts()
+        private void installAccounts()
         {
             this.Accounts = new ObservableSynchronizedCollection<NTNLAccount>();
-            await Task.Run(() =>
-                 {
+            //await Task.Run(() =>
+             //    {
                      var list = tw.getAccounts();
-                     if (list == null) { this.Accounts = null; }
+                     if (list == null) { 
+                         this.Accounts = null;
+                         Console.WriteLine("Accountsはnullです");
+                     }
                      else
                      {
 
@@ -57,7 +60,7 @@ namespace NTNL.Models
                          }
 
                      }
-                 });
+               //  });
                       
         }
 
