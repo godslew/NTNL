@@ -136,6 +136,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helper\helper.cs" />
+    <Compile Include="Models\Analyzer\ColumnQuery.cs" />
     <Compile Include="Models\DB\DAO\AccountDAO.cs" />
     <Compile Include="Models\DB\DAO\ColumnDAO.cs" />
     <Compile Include="Models\DB\DAO\EntityDAO.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Models\DB\Entity\Private.cs" />
     <Compile Include="Models\DB\Entity\Tag.cs" />
     <Compile Include="Models\Twitter\NTNLAccount.cs" />
+    <Compile Include="Models\Twitter\StatusTimeLine.cs" />
     <Compile Include="Models\Twitter\TwitterUtils.cs" />
     <Compile Include="Config\DBConstants.cs" />
     <Compile Include="Config\TwitterConfig.cs" />
@@ -193,10 +195,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\Analyzer\AnalyzerFacade.cs" />
     <Compile Include="Models\Analyzer\Command.cs" />
     <Compile Include="Models\Analyzer\Spam.cs" />
-    <Compile Include="Models\Analyzer\SuperAnalyzer.cs" />
     <Compile Include="Models\DB\DBFacade.cs" />
     <Compile Include="Models\init\DBCreator.cs" />
     <Compile Include="Models\NTNLs.cs" />

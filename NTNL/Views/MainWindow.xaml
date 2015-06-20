@@ -64,9 +64,9 @@
         <ListBox x:Name="listBox1" Background="Transparent" ItemsSource="{Binding columnList}" Margin="145,30,0,0" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF2E3136" BorderThickness="5" VerticalContentAlignment="Top">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical" Width="300" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="650" CanHorizontallyScroll="True">
-                        <TextBlock Text="{Binding Title}" Height="40" Width="250" FontSize="24" ToolTip="{Binding Title}" VerticalAlignment="Top"/>
-                        <ListView Height="Auto" Width="300" Background="Transparent" ItemsSource="{Binding statusList}" MinWidth="300" MinHeight="650" VerticalContentAlignment="Top" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="#FF2E3136" BorderThickness="3" MaxHeight="740">
+                    <StackPanel Orientation="Vertical" Width="300" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="650" CanHorizontallyScroll="True" MaxWidth="300">
+                        <TextBlock Text="{Binding Title}" Height="40" Width="250" FontSize="24" ToolTip="{Binding Title}" VerticalAlignment="Top" MaxWidth="250" MaxHeight="40"/>
+                        <ListView Height="Auto" Width="300" Background="Transparent" ItemsSource="{Binding statusList}" MinWidth="300" MinHeight="650" VerticalContentAlignment="Top" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="#FF2E3136" BorderThickness="3" MaxHeight="740" MaxWidth="300">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Height="Auto" Width="290">

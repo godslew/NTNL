@@ -83,7 +83,7 @@ namespace NTNL.ViewModels
             this.columnList.Add(new ColumnItemViewModel(this,"Home", 0));
             this.columnList.Add(new ColumnItemViewModel(this,"Mention", 1));
             this.columnList.Add(new ColumnItemViewModel(this, "Activity", 2));
-            columnList.First().statusList.Add(new StatusViewModel("testtest"));
+            /*columnList.First().statusList.Add(new StatusViewModel("testtest"));
             columnList.First().statusList.Add(new StatusViewModel("test"));
             columnList.First().statusList.Add(new StatusViewModel("testtest"));
             columnList.First().statusList.Add(new StatusViewModel("test"));
@@ -97,7 +97,7 @@ namespace NTNL.ViewModels
             columnList.First().statusList.Add(new StatusViewModel("testtest"));
             columnList.First().statusList.Add(new StatusViewModel("testtest"));
             columnList.First().statusList.Add(new StatusViewModel("testtest"));
-            columnList.First().statusList.Add(new StatusViewModel("testtest"));
+            columnList.First().statusList.Add(new StatusViewModel("testtest"));*/
 
            
 
