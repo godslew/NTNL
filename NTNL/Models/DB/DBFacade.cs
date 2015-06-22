@@ -137,7 +137,17 @@ namespace NTNL.Models.DB
             dao.insertColumn(dto);
         }
 
+        public List<ColumnDTO> getColumnList()
+        {
+            var dao = new ColumnDAO(dbConnectionString);
+            var list = dao.getCoulumnALL();
+            return list;
+        }
 
+        public void deleteColumn()
+        {
+            
+        }
        /* 
         //get account list from DB
         public List<DTO.Account> getAccountList()  //List<DTO.Account>でok
