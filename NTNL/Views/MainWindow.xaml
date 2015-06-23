@@ -52,21 +52,21 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </StackPanel.RenderTransform>
-            <ListBox x:Name="listBox" Background="#00000000" Height="416" ItemsSource="{Binding columnList, Mode=TwoWay}" Margin="0,0,-13,0" BorderThickness="3" HorizontalAlignment="Left" BorderBrush="#FF2E3136">
+            <ListBox x:Name="listBox" Background="#00000000" Height="416" ItemsSource="{Binding View.StatusTimeline}" Margin="0,0,-13,0" BorderThickness="3" HorizontalAlignment="Left" BorderBrush="#FF2E3136">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <metro:CaptionButton Content="{Binding Title}" Height="45" Width="100" Background="#00000000" FontSize="18" ToolTip="{Binding Title}" Command="{Binding FocusCommand, Mode=OneWay}" CommandParameter="{Binding index}"/>
+                        <metro:CaptionButton Content="{Binding Name}" Height="45" Width="100" Background="#00000000" FontSize="18" ToolTip="{Binding Name}" Command="{Binding FocusCommand, Mode=OneWay}" CommandParameter="{Binding index}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
             <metro:CaptionButton Content="+" FontSize="20" Background="{x:Null}" ToolTip="add column" Margin="4,0,44,0" Height="50" Command="{Binding addColumnCommand, Mode=OneWay}" VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type metro:CaptionIcon}}}" Focusable="False" IsHitTestVisible="True" IsTabStop="False"/>
         </StackPanel>
-        <ListBox x:Name="listBox1" Background="Transparent" ItemsSource="{Binding columnList}" Margin="145,30,0,0" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF2E3136" BorderThickness="5" VerticalContentAlignment="Top">
+        <ListBox x:Name="listBox1" Background="Transparent" ItemsSource="{Binding View.StatusTimeline}" Margin="145,30,0,0" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF2E3136" BorderThickness="5" VerticalContentAlignment="Top">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical" Width="300" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="650" CanHorizontallyScroll="True" MaxWidth="300">
-                        <TextBlock Text="{Binding Title}" Height="40" Width="250" FontSize="24" ToolTip="{Binding Title}" VerticalAlignment="Top" MaxWidth="250" MaxHeight="40"/>
-                        <ListView Height="Auto" Width="300" Background="Transparent" ItemsSource="{Binding statusList}" MinWidth="300" MinHeight="650" VerticalContentAlignment="Top" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="#FF2E3136" BorderThickness="3" MaxHeight="740" MaxWidth="300">
+                        <TextBlock Text="{Binding Name}" Height="40" Width="250" FontSize="24" ToolTip="{Binding Name}" VerticalAlignment="Top" MaxWidth="250" MaxHeight="40"/>
+                        <ListView Height="Auto" Width="300" Background="Transparent" ItemsSource="{Binding Statuses}" MinWidth="300" MinHeight="650" VerticalContentAlignment="Top" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="#FF2E3136" BorderThickness="3" MaxHeight="740" MaxWidth="300">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Height="Auto" Width="290">

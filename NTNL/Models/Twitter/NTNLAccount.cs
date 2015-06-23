@@ -13,7 +13,6 @@ namespace NTNL.Models.Twitter
         /*
          * NotificationObjectはプロパティ変更通知の仕組みを実装したオブジェクトです。
          */
-        public long ID { get; private set; }
         public Tokens token { get; private set; }
 
         /// <summary>
@@ -39,6 +38,23 @@ namespace NTNL.Models.Twitter
             this.ID = _token.UserId;
             this.token = _token;
         }
+
+        #region UserId変更通知プロパティ
+        private long _ID;
+
+        public long ID
+        {
+            get
+            { return _ID; }
+            set
+            {
+                if (_ID == value)
+                    return;
+                _ID = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
 
     }
 }

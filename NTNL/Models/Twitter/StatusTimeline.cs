@@ -44,7 +44,35 @@ namespace NTNL.Models.Twitter
             this.Query = new ColumnQuery(_query);
         }
 
+        public void addStatus(Status _status)
+        {
+            /*
+             * collectionにstatusを格納
+             * 失敗した時のstatus追加漏れをどうするか？？
+             * */
+            try
+            {
+                //queryが定義されていたら
+                if (this.HasQuery)
+                {
 
+                }
+                else
+                {
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                Console.WriteLine("add status failed");
+                /*
+                 * ここにlogを保存する機構を搭載
+                 * NTNLsにsavelogのメソッドを使う
+                 */
+            }
+        }
 
 
     }

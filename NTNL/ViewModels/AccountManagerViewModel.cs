@@ -95,7 +95,7 @@ namespace NTNL.ViewModels
                 return _OAuthCommand;
             }
         }
-
+        #region OAuth認証
         public async void OAuth(string parameter)
         {
             Console.WriteLine(parameter);
@@ -126,6 +126,7 @@ namespace NTNL.ViewModels
                 });
             }
         }
+        #endregion
         #endregion
 
     }

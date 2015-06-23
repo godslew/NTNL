@@ -16,6 +16,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Data;
 using NTNL.Models.Twitter;
 using System.Threading.Tasks;
+using NTNL.ViewModels.items;
 
 namespace NTNL.ViewModels
 {
@@ -65,7 +66,7 @@ namespace NTNL.ViewModels
 
 
         PropertyChangedEventListener listener;
-
+        public MainWindowViewViewModel View { get; private set; }
         NTNLs ntnls;
 
 
@@ -74,12 +75,17 @@ namespace NTNL.ViewModels
             ntnls = NTNLs.Instance;
             listener = new PropertyChangedEventListener(ntnls);
             CompositeDisposable.Add(listener);
+            View.StatusTimeline = ViewModelHelper.CreateReadOnlyDispatcherCollection(
+                ntnls.StatusTimeLines,
+                p => new StatusTimeLineViewModel(this, p),
+                DispatcherHelper.UIDispatcher);
             test();
         }
 
         public MainWindowViewModel()
         {
-            this.columnList = new ObservableCollection<ColumnItemViewModel>();
+            View = new MainWindowViewViewModel();
+            /*this.columnList = new ObservableCollection<ColumnItemViewModel>();
             this.columnList.Add(new ColumnItemViewModel(this,"Home", 0));
             this.columnList.Add(new ColumnItemViewModel(this,"Mention", 1));
             this.columnList.Add(new ColumnItemViewModel(this, "Activity", 2));
@@ -99,9 +105,6 @@ namespace NTNL.ViewModels
             columnList.First().statusList.Add(new StatusViewModel("testtest"));
             columnList.First().statusList.Add(new StatusViewModel("testtest"));*/
 
-           
-
-            BindingOperations.EnableCollectionSynchronization(this.columnList, new object());
 
             
 
@@ -145,7 +148,7 @@ namespace NTNL.ViewModels
         }
         #endregion
 
-         #region columnList変更通知プロパティ
+      /*   #region columnList変更通知プロパティ
         private ObservableCollection<ColumnItemViewModel> _columnList;
 
          public ObservableCollection<ColumnItemViewModel> columnList
@@ -161,6 +164,7 @@ namespace NTNL.ViewModels
             }
         }
         #endregion
+        */
 
 
         #region addColumnCommand
@@ -185,7 +189,7 @@ namespace NTNL.ViewModels
 
         public void addColumn()
         {
-            this.columnList.Add(new ColumnItemViewModel(this, "test", columnList.Count()));
+            ntnls.StatusTimeLines.Add(new StatusTimeLine("test"));
             //Console.WriteLine("test" + columnList.Count);
         }
         #endregion

@@ -29,12 +29,15 @@ namespace NTNL.Models
         private TwitterFacade tw;
         private List<IDisposable> StreamManager { get; set; }
         public ObservableSynchronizedCollection<NTNLAccount> Accounts { get; private set; }
+        public ObservableSynchronizedCollection<StatusTimeLine> StatusTimeLines { get; private set; }
         private IConnectableObservable<StreamingMessage> Streaming { get; set; }
 
         private NTNLs()
         {
             StreamManager = new List<IDisposable>();
             tw = new TwitterFacade();
+            StatusTimeLines = new ObservableSynchronizedCollection<StatusTimeLine>();
+            StatusTimeLines.Add(new StatusTimeLine("HOME"));
             installAccounts();
         }
 
@@ -83,7 +86,7 @@ namespace NTNL.Models
         #region Streaming接続
         public void StartStreaming(Tokens token)
         {
-
+            
             Streaming = token.Streaming.StartObservableStream(
                 StreamingType.User,
                 new StreamingParameters(include_entities => "true", include_followings_activity => "true"))
@@ -96,6 +99,7 @@ namespace NTNL.Models
                     {
                         switch (p.Type)
                         {
+              
                             case MessageType.Create:
                                 NTNL_OnStatus(this, new NTNLMessageReceivedEventArgs<StatusMessage>(p as StatusMessage));
                                 break;
@@ -143,7 +147,8 @@ namespace NTNL.Models
         {
 
             var status = e.Message.Status;
-            Console.WriteLine(string.Format("{0}:{1}", status.User.ScreenName, status.Text));
+                   
+           Console.WriteLine(string.Format("{0}:{1}", status.User.ScreenName, status.Text));
            
         }
 

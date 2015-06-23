@@ -20,5 +20,7 @@ namespace NTNL.Models.Analyzer
             this.query = _query;
         }
 
+
+
     }
 }

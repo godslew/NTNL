@@ -12,6 +12,8 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using NTNL.Models;
+using NTNL.ViewModels.items;
+using System.Collections.ObjectModel;
 
 namespace NTNL.ViewModels
 {
@@ -62,5 +64,22 @@ namespace NTNL.ViewModels
         public void Initialize()
         {
         }
+
+        #region StatusTimeline変更通知プロパティ
+        private ReadOnlyDispatcherCollection<StatusTimeLineViewModel> _StatusTimeline;
+
+        public ReadOnlyDispatcherCollection<StatusTimeLineViewModel> StatusTimeline
+        {
+            get
+            { return _StatusTimeline; }
+            set
+            {
+                if (_StatusTimeline == value)
+                    return;
+                _StatusTimeline = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
     }
 }

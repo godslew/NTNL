@@ -13,6 +13,7 @@ using Livet.Messaging.Windows;
 
 using NTNL.Models;
 using System.Windows.Controls;
+using CoreTweet;
 
 namespace NTNL.ViewModels
 {
@@ -60,6 +61,14 @@ namespace NTNL.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
 
+        public Status SourceStatus { get; private set; }
+
+        public Status ReceivedStatus { get; private set; }
+
+        public NTNLs ntnls;
+        public MainWindowViewModel main;
+        public PropertyChangedEventListener listener;
+
         public void Initialize()
         {
         }
@@ -101,25 +110,14 @@ namespace NTNL.ViewModels
         #endregion
 
 
-        #region profileImage変更通知プロパティ
-        private Image _profileImage;
-
-        public Image profileImage
-        {
-            get
-            { return _profileImage; }
-            set
-            { 
-                if (_profileImage == value)
-                    return;
-                _profileImage = value;
-                RaisePropertyChanged();
-            }
+        public StatusViewModel(MainWindowViewModel mw, Status _status){
+            this.SourceStatus = _status;
+            this.main = mw;
         }
-        #endregion
 
-        public StatusViewModel(String text){
-            this.text = text;
+        public StatusViewModel(string _text)
+        {
+            this.text = _text;
         }
     }
 }
