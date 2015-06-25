@@ -17,8 +17,6 @@ namespace NTNL.Models.DB
         private MuteDAO muteDAO;
         private PrivateDAO privateDAO;
         private TagDAO tagDAO;
-
-        //private SQLiteConnection dbConnectionString ;
         SQLiteConnection dbConnectionString = new SQLiteConnection(DBConstants.DB_CONNECTION);
 
         public DBFacade()
@@ -108,7 +106,6 @@ namespace NTNL.Models.DB
         public List<MuteDTO> getMuteList()
         {
             var dao = new MuteDAO(dbConnectionString);
-            //var reader = dao.getMuteALL();
             var list = dao.getMuteALL();
             return list;
         }
@@ -124,7 +121,6 @@ namespace NTNL.Models.DB
         public List<TagDTO> getTagList() 
         {
             var dao = new TagDAO(dbConnectionString);
-            //var reader = dao.getTagALL();
             var list = dao.getTagALL();
             return list;
         }

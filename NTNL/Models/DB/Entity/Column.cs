@@ -21,19 +21,20 @@ namespace NTNL.Models.DB.Entity
             this.NAME = NAME;
             this.QUERY = QUERY;
         }
+        
         public Column(ColumnDTO dto)
         {
             this.NUM = dto.NUM;
             this.NAME = dto.NAME;
             this.QUERY = dto.QUERY;
         }
+        
         public ColumnDTO createDTO()
         {
             var dto = new ColumnDTO();
             dto.NUM = NUM;
             dto.NAME = NAME;
             dto.QUERY = QUERY;
-
             return dto;
         }
     }

@@ -29,7 +29,6 @@ namespace NTNL.Models.DB.DAO
                         SQLiteCommand cmd = cn.CreateCommand();
 
                         // インサート文
-                        //cmd.CommandText = "INSERT INTO TAG(TwitterID, TagName) VALUES (@TwitterID_T, @TagName_T)";
                         cmd.CommandText = "INSERT INTO " + DBConstants.Column_TABLE + "(" + DBConstants.COLUMN_NUM+ "," + DBConstants.COLUMN_NAME +","+DBConstants.COLUMN_QUERY+ ") VALUES (@" + DBConstants.param_COLUMN_NUM + ",@" + DBConstants.param_COLUMN_NAME +",@"+ DBConstants.param_COLUMN_QUERY + ")";
                         // パラメータのセット
                         cmd.Parameters.Add(DBConstants.param_COLUMN_NUM, System.Data.DbType.Int32);
@@ -40,7 +39,6 @@ namespace NTNL.Models.DB.DAO
                         cmd.Parameters[DBConstants.param_COLUMN_NUM].Value = dto.NUM;
                         cmd.Parameters[DBConstants.param_COLUMN_NAME].Value = dto.NAME;
                         cmd.Parameters[DBConstants.param_COLUMN_QUERY].Value = dto.QUERY;
-
 
                         cmd.ExecuteNonQuery();
 

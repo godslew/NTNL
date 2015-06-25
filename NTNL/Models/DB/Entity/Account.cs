@@ -15,7 +15,6 @@ namespace NTNL.Models.DB.Entity
 { 
     class Account
     {
-        
         private String TwitterID;
         private String CK;
         private String CS;
@@ -32,7 +31,6 @@ namespace NTNL.Models.DB.Entity
 
         public Account(AccountDTO dto)
         {
-            
             this.TwitterID = dto.TwitterID;
             this.CK = dto.CK;
             this.CS = dto.CS;
@@ -42,16 +40,13 @@ namespace NTNL.Models.DB.Entity
 
         public AccountDTO createDTO()
         {
-            var dto = new AccountDTO();
-            
+            var dto = new AccountDTO();           
             dto.TwitterID=TwitterID;
             dto.CK = CK;
             dto.CS = CS;
             dto.AT = AT;
-            dto.ATS = ATS;
-           
+            dto.ATS = ATS;      
             return dto;
         }
-        
     }
 }

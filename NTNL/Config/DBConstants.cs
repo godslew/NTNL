@@ -8,11 +8,9 @@ namespace NTNL.NTNL_Config
 {
     class DBConstants
     {
-      public  const String DB_NAME = "NTNL_DB";
-      public  const String DB_CONNECTION = "Data Source = sqlite3"+ DBConstants.DB_NAME + ".sqlite3";
-      public  const String CREATE_TABLE_ACCOUNT = "CREATE TABLE ACCOUNT(TwitterID TEXT NOT NULL, CK TEXT NOT NULL , CS TEXT NOT NULL , AT TEXT NOT NULL , ATS TEXT NOT NULL ,  PRIMARY KEY(TwitterID ))";
-      //public  const String CREATE_TABLE_MUTE = "CREATE TABLE MUTE(ID INTEGER NOT NULL , TwitterID TEXT NOT NULL ,userID TEXT NOT NULL , Media NUMERIC NOT NULL , Tweet NUMERIC NOT NULL , RT NUMERIC NOT NULL ,Favorite NUMERIC NOT NULL ,  PRIMARY KEY (ID) , FOREIGN KEY (TwitterID) REFERENCES ACCOUNT(TwitterID))";
-      //public  const String CREATE_TABLE_TAG = "CREATE TABLE TAG (ID INTEGER NOT NULL , TwitterID TEXT NOT NULL , TagName TEXT NOT NULL ,PRIMARY KEY(ID) , FOREIGN KEY(TwitterID) REFERENCES ACCOUNT(TwitterID))";
+      public const String DB_NAME = "NTNL_DB";
+      public const String DB_CONNECTION = "Data Source = sqlite3"+ DBConstants.DB_NAME + ".sqlite3";
+      public const String CREATE_TABLE_ACCOUNT = "CREATE TABLE ACCOUNT(TwitterID TEXT NOT NULL, CK TEXT NOT NULL , CS TEXT NOT NULL , AT TEXT NOT NULL , ATS TEXT NOT NULL ,  PRIMARY KEY(TwitterID ))";
       public const String CREATE_TABLE_MUTE = "CREATE TABLE MUTE(TwitterID TEXT NOT NULL ,UserID TEXT NOT NULL , Media NUMERIC NOT NULL , Tweet NUMERIC NOT NULL , RT NUMERIC NOT NULL ,Favorite NUMERIC NOT NULL ,  PRIMARY KEY (TwitterID))";
       public const String CREATE_TABLE_TAG = "CREATE TABLE TAG (TwitterID TEXT NOT NULL , TagName TEXT NOT NULL ,PRIMARY KEY(TwitterID))";
       public const String CREATE_TABLE_COLUMN = "CREATE TABLE COLUMN (NUM INTEGER NOT NULL , NAME TEXT NOT NULL , QUERY TEXT NOT NULL , PRIMARY KEY(NUM))";
@@ -21,7 +19,6 @@ namespace NTNL.NTNL_Config
       public const String Mute_TABLE = "MUTE";
       public const String Tag_TABLE = "TAG";
       public const String Column_TABLE = "COLUMN";
-
 
       public  const String PIECE_TABLE_NAME = "%TABLE_NAME%";
 	  public  const String PIECE_WHERE = "%WHERE%";
@@ -86,7 +83,6 @@ namespace NTNL.NTNL_Config
       //SQL paramtor Tag
       public const String param_Tag_TwitterID = "TwitterID_T";
       public const String param_Tag_TagName = "TagName_T";
-
       
     }
 }

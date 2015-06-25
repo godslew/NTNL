@@ -9,13 +9,11 @@ using System.Data.Linq.Mapping;
 namespace NTNL.Models.DB.DTO
 {
     class AccountDTO
-    {
-        
+    {   
         public String TwitterID { get; set; }
         public String CK { get; set; }
         public String CS { get; set; }
         public String AT { get; set; }
         public String ATS { get; set; }
-
     }
 }

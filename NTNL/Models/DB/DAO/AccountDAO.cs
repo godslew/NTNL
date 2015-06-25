@@ -20,24 +20,20 @@ namespace NTNL.Models.DB.DAO
         {
         }
 
-
         public AccountDTO findUser(int id)
         {
             AccountDTO dto;
             //?try文必要かも
             SQLiteDataReader sr = this.find(id);
             dto = sr.NextResult() ? toDTO(sr) : null;
-
             return dto;
         }
 
         public AccountDTO findUserFromTwitterID(String twitterID)
         {
             AccountDTO dto;
-            
             SQLiteDataReader sr = this.findIdentity(DBConstants.ACCOUNT_TwitterID, twitterID);
             dto = sr.NextResult() ? toDTO(sr) : null;
-
             return dto;
         }
 
@@ -46,7 +42,6 @@ namespace NTNL.Models.DB.DAO
             AccountDTO dto;
             SQLiteDataReader sr = this.select(where);
             dto = sr.NextResult() ? toDTO(sr) : null;
-
             return dto;
         }
 
@@ -57,7 +52,6 @@ namespace NTNL.Models.DB.DAO
 
         public void insertAccount(AccountDTO dto)
         {
-            //string dbConnectionString = "Data Source=C:/sqlite3/"+DBname.Text+".sqlite3";
             try
             {
                 using (var cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
@@ -66,9 +60,7 @@ namespace NTNL.Models.DB.DAO
                 using (SQLiteTransaction trans = cn.BeginTransaction())
                 {
                     SQLiteCommand cmd = cn.CreateCommand();
-
                     // インサート文
-                    //cmd.CommandText = "INSERT INTO ACCOUNT(TwitterID, CK, CS, AT, ATS ) VALUES (@TwitterID_T, @CK_T, @CS_T, @AT_T, @ATS_T)";
                     cmd.CommandText = "INSERT INTO "+DBConstants.ACCOUNT_TABLE+"("+ DBConstants.ACCOUNT_TwitterID +","+DBConstants.ACCOUNT_CK+","+DBConstants.ACCOUNT_CS+","+DBConstants.ACCOUNT_AT+","+DBConstants.ACCOUNT_ATS+") VALUES (@"+ DBConstants.param_ACCOUNT_TwitterID +",@"+DBConstants.param_ACCOUNT_CK+",@"+DBConstants.param_ACCOUNT_CS+",@"+DBConstants.param_ACCOUNT_AT+",@"+DBConstants.param_ACCOUNT_ATS+")";
 
                     // パラメータのセット
@@ -96,7 +88,6 @@ namespace NTNL.Models.DB.DAO
             catch (Exception){
                 Console.WriteLine("same account cannot insert.");
             }
-
         }
 
         public int registAccount(String twitterID)
@@ -114,7 +105,6 @@ namespace NTNL.Models.DB.DAO
             dto.CS = sr.GetString(2);
             dto.AT = sr.GetString(3);
             dto.ATS = sr.GetString(4);
-
             return dto;
         }
 
@@ -132,13 +122,11 @@ namespace NTNL.Models.DB.DAO
         private static Dictionary<String, Object> toValues(AccountDTO dto)
         {
             var values = new Dictionary<String, Object>();
-
             values.Add(DBConstants.ACCOUNT_TwitterID, dto.TwitterID);
             values.Add(DBConstants.ACCOUNT_CK, dto.CK);
             values.Add(DBConstants.ACCOUNT_CS, dto.CS);
             values.Add(DBConstants.ACCOUNT_AT, dto.AT);
             values.Add(DBConstants.ACCOUNT_ATS, dto.ATS);
-
             return values;
         }
         
@@ -162,18 +150,14 @@ namespace NTNL.Models.DB.DAO
                     SQLiteCommand cmd = cn.CreateCommand();
                     cmd.CommandText = "SELECT * FROM " + DBConstants.ACCOUNT_TABLE;
                     SQLiteDataReader sr = cmd.ExecuteReader();
-
                     var list = new List<AccountDTO>();
                     while (sr.Read())
                     {
                         var dto = new Account(sr[DBConstants.ACCOUNT_TwitterID].ToString(), sr[DBConstants.ACCOUNT_CK].ToString(), sr[DBConstants.ACCOUNT_CS].ToString(), sr[DBConstants.ACCOUNT_AT].ToString(), sr[DBConstants.ACCOUNT_ATS].ToString());
                         list.Add(dto.createDTO());
                     }
-
-
                     cn.Close();
                     return list;
-
                 }
             }
             catch(Exception)
