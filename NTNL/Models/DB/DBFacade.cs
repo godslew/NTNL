@@ -140,7 +140,7 @@ namespace NTNL.Models.DB
             return list;
         }
 
-        public void deleteColumn()
+        public void deleteColumn(int NUM)
         {
             
         }

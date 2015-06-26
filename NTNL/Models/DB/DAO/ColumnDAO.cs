@@ -95,15 +95,15 @@ namespace NTNL.Models.DB.DAO
                         SQLiteCommand cmd = cn.CreateCommand();
 
                         // デリート文
-                        cmd.CommandText = "DELETE FROM " + DBConstants.Column_TABLE + " WHERE "  + DBConstants.COLUMN_NAME + " = @" + DBConstants.param_COLUMN_NUM ;
+                        cmd.CommandText = "DELETE FROM " + DBConstants.Column_TABLE + " WHERE "  + DBConstants.COLUMN_NUM + " = @" + DBConstants.param_COLUMN_NUM ;
                         // パラメータのセット
-                        //cmd.Parameters.Add(DBConstants.param_COLUMN_NUM, System.Data.DbType.Int32);
-                        cmd.Parameters.Add(DBConstants.param_COLUMN_NAME, System.Data.DbType.String);
+                        cmd.Parameters.Add(DBConstants.param_COLUMN_NUM, System.Data.DbType.Int32);
+                        //cmd.Parameters.Add(DBConstants.param_COLUMN_NAME, System.Data.DbType.String);
                         //cmd.Parameters.Add(DBConstants.param_COLUMN_QUERY, System.Data.DbType.String);
 
                         // データの追加
-                        //cmd.Parameters[DBConstants.param_COLUMN_NUM].Value = dto.NUM;
-                        cmd.Parameters[DBConstants.param_COLUMN_NAME].Value = dto.NAME;
+                        cmd.Parameters[DBConstants.param_COLUMN_NUM].Value = dto.NUM;
+                        //cmd.Parameters[DBConstants.param_COLUMN_NAME].Value = dto.NAME;
                         //cmd.Parameters[DBConstants.param_COLUMN_QUERY].Value = dto.QUERY;
 
 
