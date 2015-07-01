@@ -12,11 +12,13 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using NTNL.Models;
+using CoreTweet;
 
 namespace NTNL.ViewModels.items
 {
     public class UserViewModel : ViewModel
     {
+        
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
          *  lvcom   : ViewModelCommand
@@ -62,5 +64,90 @@ namespace NTNL.ViewModels.items
         public void Initialize()
         {
         }
+
+        private User user;
+        private MainWindowViewModel main;
+
+        public UserViewModel(User user, MainWindowViewModel main)
+        {
+            
+            this.user = user;
+            this.main = main;
+            this.Name = user.Name;
+            this.ScreenName = user.ScreenName;
+            this.ProfileImageUri = user.ProfileImageUrlHttps;
+        }
+
+        #region Name変更通知プロパティ
+        private string _Name = "Name";
+
+        public string Name
+        {
+            get
+            { return _Name; }
+            set
+            {
+                if (_Name == value)
+                    return;
+                _Name = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+        #region ScreenName変更通知プロパティ
+        private string _ScreenName = "ScreenName";
+
+        public string ScreenName
+        {
+            get
+            { return _ScreenName; }
+            set
+            {
+                if (_ScreenName == value)
+                    return;
+                _ScreenName = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+        #region IdString変更通知プロパティ
+        private string _IdString = "";
+
+        public string IdString
+        {
+            get
+            { return _IdString; }
+            set
+            {
+                if (_IdString == value)
+                    return;
+                _IdString = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+        #region ProfileImageUri変更通知プロパティ
+        private Uri _ProfileImageUri = null;
+
+        public Uri ProfileImageUri
+        {
+            get
+            { return _ProfileImageUri; }
+            set
+            {
+                if (_ProfileImageUri == value)
+                    return;
+                _ProfileImageUri = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
     }
 }

@@ -14,6 +14,7 @@ using Livet.Messaging.Windows;
 using NTNL.Models;
 using System.Windows.Controls;
 using CoreTweet;
+using NTNL.ViewModels.items;
 
 namespace NTNL.ViewModels
 {
@@ -73,6 +74,17 @@ namespace NTNL.ViewModels
         {
         }
 
+        public StatusViewModel(MainWindowViewModel mw, Status _status){
+            this.SourceStatus = _status;
+            this.main = mw;
+            this.text = SourceStatus.Text;
+            this.User = new UserViewModel(_status.User, main);
+        }
+
+        public StatusViewModel(string _text)
+        {
+            this.text = _text;
+        }
 
         #region id変更通知プロパティ
         private long _id;
@@ -82,7 +94,7 @@ namespace NTNL.ViewModels
             get
             { return _id; }
             set
-            { 
+            {
                 if (_id == value)
                     return;
                 _id = value;
@@ -90,7 +102,6 @@ namespace NTNL.ViewModels
             }
         }
         #endregion
-
 
         #region text変更通知プロパティ
         private string _text;
@@ -100,7 +111,7 @@ namespace NTNL.ViewModels
             get
             { return _text; }
             set
-            { 
+            {
                 if (_text == value)
                     return;
                 _text = value;
@@ -109,15 +120,21 @@ namespace NTNL.ViewModels
         }
         #endregion
 
+        #region User変更通知プロパティ
+        private UserViewModel _User;
 
-        public StatusViewModel(MainWindowViewModel mw, Status _status){
-            this.SourceStatus = _status;
-            this.main = mw;
-        }
-
-        public StatusViewModel(string _text)
+        public UserViewModel User
         {
-            this.text = _text;
+            get
+            { return _User; }
+            set
+            {
+                if (_User == value)
+                    return;
+                _User = value;
+                RaisePropertyChanged();
+            }
         }
+        #endregion
     }
 }

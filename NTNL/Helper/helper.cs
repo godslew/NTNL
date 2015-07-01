@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using System.Windows.Media.Imaging;
+using System.Net;
+using System.Net.Cache;
+using System.IO;
 
 namespace NTNL.Helper
 {
@@ -48,6 +52,36 @@ namespace NTNL.Helper
             long id = long.Parse(str);
 
             return id;
+        }
+
+        public static Task<BitmapImage> GetImage(Uri uri)
+        {
+            return Task.Run(() =>
+            {
+                var wc = new WebClient { CachePolicy = new RequestCachePolicy(RequestCacheLevel.CacheIfAvailable) };
+                try
+                {
+                    var image = new BitmapImage();
+                    image.BeginInit();
+                    image.StreamSource = new MemoryStream(wc.DownloadData(uri));
+                    image.EndInit();
+                    image.Freeze();
+                    return image;
+                }
+                catch (WebException) { }
+                catch (IOException) { }
+                catch (InvalidOperationException) { }
+                finally
+                {
+                    wc.Dispose();
+                }
+                return null;
+            });
+        }
+
+        public static Task<BitmapImage> GetImage(string uri)
+        {
+            return GetImage(new Uri(uri));
         }
     }
 }

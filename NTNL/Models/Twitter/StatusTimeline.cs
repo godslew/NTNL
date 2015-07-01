@@ -56,10 +56,11 @@ namespace NTNL.Models.Twitter
                 if (this.HasQuery)
                 {
 
+
                 }
                 else
                 {
-
+                    Statuses.Insert(0, _status);
                 }
 
             }

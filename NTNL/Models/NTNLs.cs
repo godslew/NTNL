@@ -149,6 +149,10 @@ namespace NTNL.Models
             var status = e.Message.Status;
                    
            Console.WriteLine(string.Format("{0}:{1}", status.User.ScreenName, status.Text));
+           foreach (var tl in StatusTimeLines)
+           {
+               tl.addStatus(status);
+           }
            
         }
 
