@@ -153,9 +153,9 @@ namespace NTNL.Models.DB
         }
         
         //Private Methods
-        public void insertPrivtate(int NUM, String NGword)
+        public void insertPrivtate(int ID, String NGword)
         {
-            var _entity = new Private(NUM, NGword);
+            var _entity = new Private(ID, NGword);
             var dto = _entity.createDTO();
             var dao = new PrivateDAO(dbConnectionString);
             dao.insertPrivate(dto);
@@ -168,10 +168,10 @@ namespace NTNL.Models.DB
             return list;
         }
 
-        public void deletePrivate(PrivateDTO dto, int NUM)
+        public void deletePrivate(PrivateDTO dto, int ID)
         {
             var dao = new PrivateDAO(dbConnectionString);
-            dao.deletePrivate(dto, NUM);
+            dao.deletePrivate(dto, ID);
         }
     }
 }

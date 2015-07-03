@@ -35,7 +35,7 @@ namespace NTNL.Models.DB.DAO
                         cmd.Parameters.Add(DBConstants.param_Private_NGword, System.Data.DbType.String);
                         
                         // データの追加
-                        cmd.Parameters[DBConstants.param_Private_ID].Value = dto.NUM;
+                        cmd.Parameters[DBConstants.param_Private_ID].Value = dto.ID;
                         cmd.Parameters[DBConstants.param_Private_NGword].Value = dto.NGword;
                        
                         cmd.ExecuteNonQuery();
@@ -81,7 +81,7 @@ namespace NTNL.Models.DB.DAO
             }
 
         }
-        public void deletePrivate(PrivateDTO dto, int NUM)
+        public void deletePrivate(PrivateDTO dto, int ID)
         {
             try
             {
@@ -98,7 +98,7 @@ namespace NTNL.Models.DB.DAO
                         cmd.Parameters.Add(DBConstants.param_Private_ID, System.Data.DbType.Int32);
 
                         // データの追加
-                        cmd.Parameters[DBConstants.param_Private_ID].Value = NUM;
+                        cmd.Parameters[DBConstants.param_Private_ID].Value = ID;
 
                         cmd.ExecuteNonQuery();
 

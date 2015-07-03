@@ -11,25 +11,25 @@ namespace NTNL.Models.DB.Entity
 {
     class Private
     {
-        private int NUM;
+        private int ID;
         private String NGword;
 
-        public Private(int NUM , String NGword)
+        public Private(int ID , String NGword)
         {
-            this.NUM = NUM;
+            this.ID = ID;
             this.NGword = NGword;
         }
 
         public Private(PrivateDTO dto)
         {
-            this.NUM = dto.NUM;
+            this.ID = dto.ID;
             this.NGword = dto.NGword;
         }
 
         public PrivateDTO createDTO()
         {
             var dto = new PrivateDTO();
-            dto.NUM = NUM;
+            dto.ID = ID;
             dto.NGword = NGword;
             return dto;
         }
