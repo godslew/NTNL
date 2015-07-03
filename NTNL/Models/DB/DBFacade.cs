@@ -48,7 +48,6 @@ namespace NTNL.Models.DB
             }
         }
 
-        /*
         private void installPrivateDAO()
         {
             if (this.accountDAO == null)
@@ -56,7 +55,7 @@ namespace NTNL.Models.DB
                 this.privateDAO = new PrivateDAO(this.dbConnectionString);
             }
         }
-        */     
+            
 
         private void installTagDAO()
         {
@@ -71,6 +70,7 @@ namespace NTNL.Models.DB
             return new SuperDAO(dbConnectionString, "");
         }
 
+        
         //Account methods
         public int registerAccount(String twitterID)
         {
@@ -86,7 +86,6 @@ namespace NTNL.Models.DB
                     dao.insertAccount(dto);      
         }
         
-        
         public List<AccountDTO> getAccountList()
         {
             var dao = new AccountDAO(dbConnectionString);
@@ -95,6 +94,8 @@ namespace NTNL.Models.DB
             return list;
         }
 
+       
+        //Mute methods
         public void insertMute(String TwitterID, String userID, String Media, String Tweet, String RT, String Favorite)
         {
             var _entity = new Mute(TwitterID, userID, Media, Tweet, RT, Favorite);
@@ -110,6 +111,8 @@ namespace NTNL.Models.DB
             return list;
         }
 
+        
+        //Tag Methods
         public void insertTag(String TwitterID, String TagName)
         {
             var _entity = new Tag(TwitterID, TagName);
@@ -125,6 +128,8 @@ namespace NTNL.Models.DB
             return list;
         }
 
+
+        //Column Methods
         public void insertColumn(int NUM, String NAME, String Query)
         {
             var _entity = new Column(NUM, NAME, Query);
@@ -140,17 +145,33 @@ namespace NTNL.Models.DB
             return list;
         }
 
-        public void deleteColumn(int NUM)
+        public void deleteColumn(ColumnDTO dto , int NUM)
         {
-            
+            var dao = new ColumnDAO(dbConnectionString);
+            dao.deleteColumn(dto, NUM);
+
         }
-       /* 
-        //get account list from DB
-        public List<DTO.Account> getAccountList()  //List<DTO.Account>でok
+        
+        //Private Methods
+        public void insertPrivtate(int NUM, String NGword)
         {
-            var list = new List<Twitter.Account>();
+            var _entity = new Private(NUM, NGword);
+            var dto = _entity.createDTO();
+            var dao = new PrivateDAO(dbConnectionString);
+            dao.insertPrivate(dto);
+        }
+
+        public List<PrivateDTO> getPrivateList()
+        {
+            var dao = new PrivateDAO(dbConnectionString);
+            var list = dao.getPrivateALL();
             return list;
         }
-        */
+
+        public void deletePrivate(PrivateDTO dto, int NUM)
+        {
+            var dao = new PrivateDAO(dbConnectionString);
+            dao.deletePrivate(dto, NUM);
+        }
     }
 }

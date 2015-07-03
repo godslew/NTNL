@@ -83,7 +83,7 @@ namespace NTNL.Models.DB.DAO
             }
 
         }
-        public void deleteColumn(ColumnDTO dto)
+        public void deleteColumn(ColumnDTO dto , int NUM)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace NTNL.Models.DB.DAO
                         //cmd.Parameters.Add(DBConstants.param_COLUMN_QUERY, System.Data.DbType.String);
 
                         // データの追加
-                        cmd.Parameters[DBConstants.param_COLUMN_NUM].Value = dto.NUM;
+                        cmd.Parameters[DBConstants.param_COLUMN_NUM].Value = NUM;
                         //cmd.Parameters[DBConstants.param_COLUMN_NAME].Value = dto.NAME;
                         //cmd.Parameters[DBConstants.param_COLUMN_QUERY].Value = dto.QUERY;
 
