@@ -135,6 +135,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Config\NTNLQueryTemplate.cs" />
     <Compile Include="Helper\helper.cs" />
     <Compile Include="Models\Analyzer\ColumnQuery.cs" />
     <Compile Include="Models\DB\DAO\AccountDAO.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="ViewModels\AccountManagerViewModel.cs" />
     <Compile Include="ViewModels\items\AccountViewModel.cs" />
     <Compile Include="ViewModels\items\StatusTimeLineViewModel.cs" />
+    <Compile Include="ViewModels\items\TweetBoxWindowViewModel.cs" />
     <Compile Include="ViewModels\items\UserViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewViewModel.cs" />
     <Compile Include="ViewModels\SettingWindowViewModel.cs" />
@@ -177,6 +179,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\items\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\items\TweetBoxWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -200,6 +206,9 @@
     <Compile Include="Models\Twitter\TwitterFacade.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\items\StatusViewModel.cs" />
+    <Compile Include="Views\items\TweetBoxWindow.xaml.cs">
+      <DependentUpon>TweetBoxWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\items\TweetColumn.xaml.cs">
       <DependentUpon>TweetColumn.xaml</DependentUpon>
     </Compile>

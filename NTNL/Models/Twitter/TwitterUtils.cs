@@ -20,7 +20,14 @@ namespace NTNL.Models.Twitter
         /// <param name="text"></param>
         public void updateStatus(NTNLAccount account, string text)
         {
-            
+            try
+            {
+                account.Token.Statuses.UpdateAsync(status => text);
+            }
+            catch (Exception)
+            {
+                
+            }
         }
 
         /// <summary>

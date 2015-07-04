@@ -16,7 +16,6 @@ namespace NTNL.Models.Twitter
     {
 
         private DBFacade db;
-        private List<NTNLAccount> accountList;
         private TwitterUtils twUtils;
 
         public TwitterFacade()
@@ -26,6 +25,22 @@ namespace NTNL.Models.Twitter
             this.twUtils = new TwitterUtils();
 
         }
+
+        #region singleton
+        static TwitterFacade _instance;
+
+        /// <summary>
+        /// TwitterFacadeの唯一のインスタンスを取得します。
+        /// </summary>
+        public static TwitterFacade Instance
+        {
+            get
+            {
+                if (_instance == null) _instance = new TwitterFacade();
+                return _instance;
+            }
+        }
+        #endregion
 
         /// <summary>
         /// update status for all active account
@@ -37,7 +52,7 @@ namespace NTNL.Models.Twitter
         {
             foreach (NTNLAccount account in _list)
             {
-                twUtils.updateStatus(account, text);
+                UpdateStatus(account, text);
             }
             return true;
         }
@@ -72,6 +87,11 @@ namespace NTNL.Models.Twitter
             var session = OAuth.Authorize(TwitterConfig.CK, TwitterConfig.CS);
             System.Diagnostics.Process.Start(session.AuthorizeUri.ToString());
             return session;
+        }
+
+        public void UpdateStatus(NTNLAccount account, string text)
+        {
+            twUtils.updateStatus(account, text);
         }
     }
 }

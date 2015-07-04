@@ -12,11 +12,25 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using NTNL.Models;
+using NTNL.Models.Twitter;
+using CoreTweet;
 
 namespace NTNL.ViewModels.items
 {
     public class AccountViewModel : ViewModel
     {
+        public NTNLAccount account { get; private set; }
+        User user;
+
+        public AccountViewModel(NTNLAccount ac)
+        {
+            this.account = ac;
+            Token = account.Token;
+            user = account.user;
+            ScreenName = user.ScreenName;
+            id = Token.UserId.ToString();
+            Console.WriteLine(id.ToString());
+        }
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
          *  lvcom   : ViewModelCommand
@@ -62,5 +76,77 @@ namespace NTNL.ViewModels.items
         public void Initialize()
         {
         }
+
+
+        #region Token変更通知プロパティ
+        private Tokens _Token;
+
+        public Tokens Token
+        {
+            get
+            { return _Token; }
+            set
+            { 
+                if (_Token == value)
+                    return;
+                _Token = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+        
+        #region ScreenName変更通知プロパティ
+        private string _ScreenName;
+
+        public string ScreenName
+        {
+            get
+            { return _ScreenName; }
+            set
+            { 
+                if (_ScreenName == value)
+                    return;
+                _ScreenName = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region id変更通知プロパティ
+        private string _id;
+
+        public string id
+        {
+            get
+            { return _id; }
+            set
+            {
+                if (_id == value)
+                    return;
+                _id = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+        #region isSelected変更通知プロパティ
+        private bool _isSelected;
+
+        public bool isSelected
+        {
+            get
+            { return _isSelected; }
+            set
+            { 
+                if (_isSelected == value)
+                    return;
+                _isSelected = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
     }
 }

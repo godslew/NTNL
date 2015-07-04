@@ -10,9 +10,9 @@
         xmlns:vm="clr-namespace:NTNL.ViewModels"
         xmlns:NTNL="clr-namespace:NTNL" xmlns:items="clr-namespace:NTNL.Views.items" x:Class="NTNL.Views.MainWindow"
         Title="NTNL" Height="740" Width="1280" Background="#FF464242">
-	<metro:MetroWindow.Triggers>
-		<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="tweetButton"/>
-	</metro:MetroWindow.Triggers>
+    <metro:MetroWindow.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="tweetButton"/>
+    </metro:MetroWindow.Triggers>
 
 
     <Window.DataContext>
@@ -43,33 +43,23 @@
 
     </i:Interaction.Triggers>
     <Grid>
-    	<VisualStateManager.VisualStateGroups>
-    		<VisualStateGroup x:Name="VisualStateGroup">
-    			<VisualStateGroup.Transitions>
-    				<VisualTransition GeneratedDuration="0:0:1"/>
-    			</VisualStateGroup.Transitions>
-    			<VisualState x:Name="VisualState">
-    				<Storyboard>
-    					<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid">
-    						<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-    						<DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
-    					</DoubleAnimationUsingKeyFrames>
-    					<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.HorizontalContentAlignment)" Storyboard.TargetName="listBox1">
-    						<DiscreteObjectKeyFrame KeyTime="0:0:1" Value="{x:Static HorizontalAlignment.Right}"/>
-    					</ObjectAnimationUsingKeyFrames>
-    					<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="listBox1">
-    						<EasingDoubleKeyFrame KeyTime="0:0:1" Value="222"/>
-    					</DoubleAnimationUsingKeyFrames>
-    					<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid">
-    						<DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="354"/>
-    					</DoubleAnimationUsingKeyFrames>
-    					<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="grid">
-    						<DiscreteDoubleKeyFrame KeyTime="0:0:1" Value="6"/>
-    					</DoubleAnimationUsingKeyFrames>
-    				</Storyboard>
-    			</VisualState>
-    		</VisualStateGroup>
-    	</VisualStateManager.VisualStateGroups>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualStateGroup.Transitions>
+                    <VisualTransition GeneratedDuration="0:0:1"/>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="VisualState">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.HorizontalContentAlignment)" Storyboard.TargetName="listBox1">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="{x:Static HorizontalAlignment.Right}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="listBox1">
+                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="222"/>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <metro:CaptionIcon HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="53" Content="NTNL" FontSize="11"/>
         <metro:SystemButtons HorizontalAlignment="Right" VerticalAlignment="Top"/>
         <metro:CaptionButton x:Name="tweetButton" Content="New Tweet" HorizontalAlignment="Left" Width="128" Height="45" Background="#9E000C7B" FontSize="18.667" FontFamily="Meiryo UI" Command="{Binding OpenTextBoxCommand, Mode=OneWay}" VerticalAlignment="Top" Margin="0,30,0,0" IsCancel="True" IsHitTestVisible="True" Focusable="True"/>
@@ -91,15 +81,16 @@
             </ListBox>
             <metro:CaptionButton Content="+" FontSize="20" Background="{x:Null}" ToolTip="add column" Margin="4,0,44,0" Height="50" Command="{Binding addColumnCommand, Mode=OneWay}" VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type metro:CaptionIcon}}}" Focusable="False" IsHitTestVisible="True" IsTabStop="False"/>
         </StackPanel>
+        <metro:CaptionButton HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,600,0,0" Content="setting" Height="37" Width="53"></metro:CaptionButton>
         <ListBox x:Name="listBox1" Background="Transparent" ItemsSource="{Binding View.StatusTimeline}" Margin="145,30,0,0" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF2E3136" BorderThickness="5" VerticalContentAlignment="Top" IsHitTestVisible="True">
-        	<ListBox.RenderTransform>
-        		<TransformGroup>
-        			<ScaleTransform/>
-        			<SkewTransform/>
-        			<RotateTransform/>
-        			<TranslateTransform/>
-        		</TransformGroup>
-        	</ListBox.RenderTransform>
+            <ListBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ListBox.RenderTransform>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical" Width="300" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="650" CanHorizontallyScroll="True" MaxWidth="300">
@@ -111,8 +102,8 @@
                                         <Image v:Behaviors.LazySource="{Binding User.ProfileImageUri}" RenderTransformOrigin="0.484,0.544" Margin="0,0,250,0" HorizontalAlignment="Left" VerticalAlignment="Top" MaxWidth="50" MaxHeight="50"/>
                                         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding text}" VerticalAlignment="Top" Height="Auto" Margin="45,25,0,0" Width="220" RenderTransformOrigin="0.489,0.461" Foreground="White" FontSize="10"/>
                                         <DockPanel Margin="50,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-                                        	<Label Content="{Binding User.Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0" Foreground="White" FontSize="10"/>
-                                        	<Label Content="{Binding User.ScreenName}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0" Foreground="White" FontSize="10"/>
+                                            <Label Content="{Binding User.Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0" Foreground="White" FontSize="10"/>
+                                            <Label Content="{Binding User.ScreenName}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0" Foreground="White" FontSize="10"/>
                                         </DockPanel>
                                     </Grid>
 
@@ -131,17 +122,5 @@
             </ListBox.ItemsPanel>
 
         </ListBox>
-        <Grid x:Name="grid" Margin="-212,30,1294.6,39" RenderTransformOrigin="0.5,0.5">
-        	<Grid.RenderTransform>
-        		<TransformGroup>
-        			<ScaleTransform/>
-        			<SkewTransform/>
-        			<RotateTransform/>
-        			<TranslateTransform/>
-        		</TransformGroup>
-        	</Grid.RenderTransform>
-            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="99" TextWrapping="Wrap" Text="new tweet" VerticalAlignment="Top" Width="191" Margin="0,107,0,0" UndoLimit="500"/>
-            <ListBox x:Name="listBox2" HorizontalAlignment="Left" Height="82" Margin="0,20,0,0" VerticalAlignment="Top" Width="191" Background="Transparent"/>
-        </Grid>
     </Grid>
 </metro:MetroWindow>

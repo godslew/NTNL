@@ -12,16 +12,14 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using NTNL.Models;
-using System.Collections.ObjectModel;
-using System.Windows.Data;
 using NTNL.Models.Twitter;
-using System.Threading.Tasks;
-using NTNL.ViewModels.items;
 
-namespace NTNL.ViewModels
+namespace NTNL.ViewModels.items
 {
-    public class MainWindowViewModel : ViewModel
+    public class TweetBoxWindowViewModel : ViewModel
     {
+
+       
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
          *  lvcom   : ViewModelCommand
@@ -64,99 +62,153 @@ namespace NTNL.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
 
-
-        PropertyChangedEventListener listener;
-        public MainWindowViewViewModel View { get; private set; }
         NTNLs ntnls;
-
+        PropertyChangedEventListener listener;
 
         public void Initialize()
         {
             ntnls = NTNLs.Instance;
             listener = new PropertyChangedEventListener(ntnls);
             CompositeDisposable.Add(listener);
-            View.StatusTimeline = ViewModelHelper.CreateReadOnlyDispatcherCollection(
-                ntnls.StatusTimeLines,
-                p => new StatusTimeLineViewModel(this, p),
-                DispatcherHelper.UIDispatcher);
-            View.Accounts = ViewModelHelper.CreateReadOnlyDispatcherCollection(
+            Accounts = ViewModelHelper.CreateReadOnlyDispatcherCollection(
                 ntnls.Accounts,
                 p => new AccountViewModel(p),
                 DispatcherHelper.UIDispatcher);
-            test();
         }
 
-        public MainWindowViewModel()
-        {
-            View = new MainWindowViewViewModel();
-          
-        }
 
-        private void test()
-        {
+        #region Accounts変更通知プロパティ
+        private ReadOnlyDispatcherCollection<AccountViewModel> _Accounts;
 
-            var list = ntnls.Accounts;
-            if (list != null)
-            {
-                var ac = list.First();
-                Console.WriteLine(ac.Token.UserId+""+ac.Token.AccessToken);
-                ntnls.StartStreaming(list.First().Token);
+        public ReadOnlyDispatcherCollection<AccountViewModel> Accounts
+        {
+            get
+            { return _Accounts; }
+            set
+            { 
+                if (_Accounts == value)
+                    return;
+                _Accounts = value;
+                RaisePropertyChanged();
             }
         }
+        #endregion
 
-        #region OpenTextBoxCommand
-        private ViewModelCommand _OpenTextBoxCommand;
 
-        public ViewModelCommand OpenTextBoxCommand
+        #region Text変更通知プロパティ
+        private string _Text;
+
+        public string Text
+        {
+            get
+            { return _Text; }
+            set
+            { 
+                if (_Text == value)
+                    return;
+                _Text = value;
+                if (_Text != "")
+                {
+                    isWrite = true;
+                }
+                else
+                {
+                    isWrite = false;
+                }
+                RaisePropertyChanged("Text");
+            }
+        }
+        #endregion
+
+
+        #region isWrite変更通知プロパティ
+        private bool _isWrite;
+
+        public bool isWrite
+        {
+            get
+            { return _isWrite; }
+            set
+            { 
+                if (_isWrite == value)
+                    return;
+                _isWrite = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+        #region SelectedAccount変更通知プロパティ
+        private List<AccountViewModel> _SelectedAccount;
+
+        public List<AccountViewModel> SelectedAccount
+        {
+            get
+            { return _SelectedAccount; }
+            set
+            { 
+                if (_SelectedAccount == value)
+                    return;
+                _SelectedAccount = value;
+                Console.WriteLine(value.First().ScreenName);
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+        #region selectedAccount変更通知プロパティ
+        private AccountViewModel _selectedAccount;
+
+        public AccountViewModel selectedAccount
+        {
+            get
+            { return _selectedAccount; }
+            set
+            { 
+                if (_selectedAccount == value)
+                    return;
+                _selectedAccount = value;
+                Console.WriteLine(value.ScreenName);
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+        #region TweetCommand
+        private ListenerCommand<string> _TweetCommand;
+
+        public ListenerCommand<string> TweetCommand
         {
             get
             {
-                if (_OpenTextBoxCommand == null)
+                if (_TweetCommand == null)
                 {
-                    _OpenTextBoxCommand = new ViewModelCommand(OpenTextBox);
+                    _TweetCommand = new ListenerCommand<string>(Tweet);
                 }
-                return _OpenTextBoxCommand;
+                return _TweetCommand;
             }
         }
 
-        public void OpenTextBox()
+        public void Tweet(string parameter)
         {
-            
-            //messageを使ってみた,非常につよい
-            var message =  new TransitionMessage(typeof(Views.items.TweetBoxWindow), new TweetBoxWindowViewModel(), TransitionMode.NewOrActive);
-            Messenger.Raise(message);
-            
+            Console.WriteLine(parameter);
+            if (selectedAccount != null)
+            {
+                TwitterFacade.Instance.UpdateStatus(selectedAccount.account, parameter);
+            }
+            Text = "";
         }
         #endregion
 
 
 
-        #region addColumnCommand
-        private ViewModelCommand _addColumnCommand;
 
-        public ViewModelCommand addColumnCommand
+        public TweetBoxWindowViewModel()
         {
-            get
-            {
-                if (_addColumnCommand == null)
-                {
-                    _addColumnCommand = new ViewModelCommand(addColumn, CanaddColumn);
-                }
-                return _addColumnCommand;
-            }
-        }
 
-        public bool CanaddColumn()
-        {
-            return true;
         }
-
-        public void addColumn()
-        {
-            ntnls.StatusTimeLines.Add(new StatusTimeLine("test"));
-            //Console.WriteLine("test" + columnList.Count);
-        }
-        #endregion
-        
     }
 }

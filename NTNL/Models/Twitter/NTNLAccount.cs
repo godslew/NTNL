@@ -5,6 +5,7 @@ using System.Text;
 using CoreTweet;
 
 using Livet;
+using System.Threading.Tasks;
 
 namespace NTNL.Models.Twitter
 {
@@ -13,8 +14,7 @@ namespace NTNL.Models.Twitter
         /*
          * NotificationObjectはプロパティ変更通知の仕組みを実装したオブジェクトです。
          */
-        public Tokens token { get; private set; }
-
+        public User user;
         /// <summary>
         /// DBから読み込んだ時に使う
         /// </summary>
@@ -26,7 +26,8 @@ namespace NTNL.Models.Twitter
         public NTNLAccount(long _ID, String CS, String CK, String AT, String AS)
         {
             this.ID = _ID;
-            this.token = Tokens.Create(CS, CK, AT, AS);
+            this.Token = Tokens.Create(CS, CK, AT, AS);
+            user = Token.Account.VerifyCredentials();
         }
 
         /// <summary>
@@ -36,8 +37,26 @@ namespace NTNL.Models.Twitter
         public NTNLAccount(Tokens _token)
         {
             this.ID = _token.UserId;
-            this.token = _token;
+            this.Token = _token;
+            user = Token.Account.VerifyCredentials();
         }
+
+        #region Token変更通知プロパティ
+        private Tokens _Token;
+
+        public Tokens Token
+        {
+            get
+            { return _Token; }
+            set
+            {
+                if (_Token == value)
+                    return;
+                _Token = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
 
         #region UserId変更通知プロパティ
         private long _ID;
@@ -55,6 +74,13 @@ namespace NTNL.Models.Twitter
             }
         }
         #endregion
+
+        public async void installUser(){
+            await Task.Run(() =>
+            {
+                
+            });
+        }
 
     }
 }

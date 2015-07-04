@@ -26,29 +26,32 @@ namespace NTNL.Models
 
         public Tokens Token { get; set; }
         private OAuth.OAuthSession OAuthSession { get; set; }
-        private TwitterFacade tw;
+        TwitterFacade tw;
         private List<IDisposable> StreamManager { get; set; }
         public ObservableSynchronizedCollection<NTNLAccount> Accounts { get; private set; }
         public ObservableSynchronizedCollection<StatusTimeLine> StatusTimeLines { get; private set; }
         private IConnectableObservable<StreamingMessage> Streaming { get; set; }
 
+        #region construct
         private NTNLs()
         {
             StreamManager = new List<IDisposable>();
-            tw = new TwitterFacade();
+            tw = TwitterFacade.Instance;
             StatusTimeLines = new ObservableSynchronizedCollection<StatusTimeLine>();
             StatusTimeLines.Add(new StatusTimeLine("HOME"));
+            Accounts = new ObservableSynchronizedCollection<NTNLAccount>();
             installAccounts();
         }
+        #endregion
 
         /// <summary>
         /// Account読み込み
         /// </summary>
-        private void installAccounts()
+        private  void installAccounts()
         {
-            this.Accounts = new ObservableSynchronizedCollection<NTNLAccount>();
+            
             //await Task.Run(() =>
-             //    {
+                // {
                      var list = tw.getAccounts();
                      if (list == null) { 
                          this.Accounts = null;
@@ -59,6 +62,7 @@ namespace NTNL.Models
 
                          foreach (NTNLAccount ac in list)
                          {
+                             
                              this.Accounts.Add(ac);
                          }
 
@@ -101,7 +105,7 @@ namespace NTNL.Models
                         {
               
                             case MessageType.Create:
-                                NTNL_OnStatus(this, new NTNLMessageReceivedEventArgs<StatusMessage>(p as StatusMessage));
+                                NTNL_OnStatus(this, new NTNLMessageReceivedEventArgs<StatusMessage>(p as StatusMessage),token);
                                 break;
                             case MessageType.Event:
                                 //NTNL_OnEvent(this, new NTNLMessageReceivedEventArgs<EventMessage>(p as EventMessage));
@@ -143,7 +147,7 @@ namespace NTNL.Models
             StreamManager.Add(Streaming.Connect());
         }
 
-        private void NTNL_OnStatus(object sender, NTNLMessageReceivedEventArgs<StatusMessage> e)
+        private void NTNL_OnStatus(object sender, NTNLMessageReceivedEventArgs<StatusMessage> e, Tokens token)
         {
 
             var status = e.Message.Status;
@@ -151,7 +155,7 @@ namespace NTNL.Models
            Console.WriteLine(string.Format("{0}:{1}", status.User.ScreenName, status.Text));
            foreach (var tl in StatusTimeLines)
            {
-               tl.addStatus(status);
+               tl.addStatus(status, token);
            }
            
         }

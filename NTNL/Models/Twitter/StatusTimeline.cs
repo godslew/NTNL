@@ -44,7 +44,7 @@ namespace NTNL.Models.Twitter
             this.Query = new ColumnQuery(_query);
         }
 
-        public void addStatus(Status _status)
+        public void addStatus(Status _status, Tokens token)
         {
             /*
              * collectionにstatusを格納

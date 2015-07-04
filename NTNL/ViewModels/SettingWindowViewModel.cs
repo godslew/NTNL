@@ -62,5 +62,11 @@ namespace NTNL.ViewModels
         public void Initialize()
         {
         }
+        NTNLs ntnls;
+
+        public SettingWindowViewModel()
+        {
+            ntnls = NTNLs.Instance;
+        }
     }
 }

@@ -81,5 +81,22 @@ namespace NTNL.ViewModels
             }
         }
         #endregion
+
+        #region Accounts変更通知プロパティ
+        private ReadOnlyDispatcherCollection<AccountViewModel> _Accounts;
+
+        public ReadOnlyDispatcherCollection<AccountViewModel> Accounts
+        {
+            get
+            { return _Accounts; }
+            set
+            {
+                if (_Accounts == value)
+                    return;
+                _Accounts = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
     }
 }
