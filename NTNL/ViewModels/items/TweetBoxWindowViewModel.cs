@@ -198,8 +198,9 @@ namespace NTNL.ViewModels.items
             if (selectedAccount != null)
             {
                 TwitterFacade.Instance.UpdateStatus(selectedAccount.account, parameter);
+                Text = "";
             }
-            Text = "";
+            
         }
         #endregion
 

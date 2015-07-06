@@ -29,6 +29,7 @@ namespace NTNL.ViewModels.items
             user = account.user;
             ScreenName = user.ScreenName;
             id = Token.UserId.ToString();
+            ProfileImageUri = user.ProfileImageUrlHttps;
             Console.WriteLine(id.ToString());
         }
         /* コマンド、プロパティの定義にはそれぞれ 
@@ -129,19 +130,35 @@ namespace NTNL.ViewModels.items
         }
         #endregion
 
+        #region ProfileImageUri変更通知プロパティ
+        private Uri _ProfileImageUri = null;
 
-        #region isSelected変更通知プロパティ
-        private bool _isSelected;
-
-        public bool isSelected
+        public Uri ProfileImageUri
         {
             get
-            { return _isSelected; }
+            { return _ProfileImageUri; }
+            set
+            {
+                if (_ProfileImageUri == value)
+                    return;
+                _ProfileImageUri = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region IsSelected変更通知プロパティ
+        private bool _IsSelected;
+
+        public bool IsSelected
+        {
+            get
+            { return _IsSelected; }
             set
             { 
-                if (_isSelected == value)
+                if (_IsSelected == value)
                     return;
-                _isSelected = value;
+                _IsSelected = value;
                 RaisePropertyChanged();
             }
         }

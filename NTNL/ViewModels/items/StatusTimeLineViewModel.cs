@@ -120,7 +120,6 @@ namespace NTNL.ViewModels.items
 
         #region QueryText変更通知プロパティ
         private string _QueryText;
-        private StatusTimeLine p;
 
         public string QueryText
         {

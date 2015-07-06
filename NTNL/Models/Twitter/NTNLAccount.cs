@@ -75,12 +75,6 @@ namespace NTNL.Models.Twitter
         }
         #endregion
 
-        public async void installUser(){
-            await Task.Run(() =>
-            {
-                
-            });
-        }
 
     }
 }

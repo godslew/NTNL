@@ -17,6 +17,7 @@ using System.Windows.Data;
 using NTNL.Models.Twitter;
 using System.Threading.Tasks;
 using NTNL.ViewModels.items;
+using System.Windows.Controls;
 
 namespace NTNL.ViewModels
 {
@@ -79,10 +80,12 @@ namespace NTNL.ViewModels
                 ntnls.StatusTimeLines,
                 p => new StatusTimeLineViewModel(this, p),
                 DispatcherHelper.UIDispatcher);
-            View.Accounts = ViewModelHelper.CreateReadOnlyDispatcherCollection(
+            Accounts = ViewModelHelper.CreateReadOnlyDispatcherCollection(
                 ntnls.Accounts,
                 p => new AccountViewModel(p),
                 DispatcherHelper.UIDispatcher);
+            isExpand = false;
+            //SelectedAccount = new List<AccountViewModel>();
             test();
         }
 
@@ -130,7 +133,6 @@ namespace NTNL.ViewModels
         #endregion
 
 
-
         #region addColumnCommand
         private ViewModelCommand _addColumnCommand;
 
@@ -157,6 +159,156 @@ namespace NTNL.ViewModels
             //Console.WriteLine("test" + columnList.Count);
         }
         #endregion
-        
+
+
+        #region Accounts変更通知プロパティ
+        private ReadOnlyDispatcherCollection<AccountViewModel> _Accounts;
+
+        public ReadOnlyDispatcherCollection<AccountViewModel> Accounts
+        {
+            get
+            { return _Accounts; }
+            set
+            {
+                if (_Accounts == value)
+                    return;
+                _Accounts = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+        #region Text変更通知プロパティ
+        private string _Text;
+
+        public string Text
+        {
+            get
+            { return _Text; }
+            set
+            {
+                if (_Text == value)
+                    return;
+                _Text = value;
+                if (_Text != "")
+                {
+                    isWrite = true;
+                }
+                else
+                {
+                    isWrite = false;
+                }
+                RaisePropertyChanged("Text");
+            }
+        }
+        #endregion
+
+
+        #region isWrite変更通知プロパティ
+        private bool _isWrite;
+
+        public bool isWrite
+        {
+            get
+            { return _isWrite; }
+            set
+            {
+                if (_isWrite == value)
+                    return;
+                _isWrite = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+        #region isExpand変更通知プロパティ
+        private bool _isExpand;
+
+        public bool isExpand
+        {
+            get
+            { return _isExpand; }
+            set
+            { 
+                if (_isExpand == value)
+                    return;
+                _isExpand = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+
+        #region SelectedAccount変更通知プロパティ
+        private List<AccountViewModel> _SelectedAccount;
+
+        public List<AccountViewModel> SelectedAccount
+        {
+            get
+            { return _SelectedAccount; }
+            set
+            {
+                if (_SelectedAccount == value)
+                    return;
+                _SelectedAccount = value;
+
+                foreach (var item in value)
+                {
+                    Console.WriteLine(item.ScreenName);
+                }
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+        #region selectedAccount変更通知プロパティ
+        private AccountViewModel _selectedAccount;
+
+        public AccountViewModel selectedAccount
+        {
+            get
+            { return _selectedAccount; }
+            set
+            {
+                if (_selectedAccount == value)
+                    return;
+                _selectedAccount = value;
+                
+                Console.WriteLine(value.ScreenName+""+value.IsSelected.ToString());
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region TweetCommand
+        private ListenerCommand<string> _TweetCommand;
+
+        public ListenerCommand<string> TweetCommand
+        {
+            get
+            {
+                if (_TweetCommand == null)
+                {
+                    _TweetCommand = new ListenerCommand<string>(Tweet);
+                }
+                return _TweetCommand;
+            }
+        }
+
+        public void Tweet(string parameter)
+        {
+            Console.WriteLine(parameter);
+            if (selectedAccount != null)
+            {
+                TwitterFacade.Instance.UpdateStatus(selectedAccount.account, parameter);
+                Text = "";
+            }
+
+        }
+        #endregion
     }
 }
