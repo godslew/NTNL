@@ -15,6 +15,7 @@ using NTNL.Models.Twitter;
 using System.Threading.Tasks;
 using System.Reactive.Subjects;
 using System.Reactive.Linq;
+using NTNL.Models.DB;
 
 namespace NTNL.Models
 {
@@ -27,16 +28,19 @@ namespace NTNL.Models
         public Tokens Token { get; set; }
         private OAuth.OAuthSession OAuthSession { get; set; }
         TwitterFacade tw;
+        DBFacade db;
         private List<IDisposable> StreamManager { get; set; }
         public ObservableSynchronizedCollection<NTNLAccount> Accounts { get; private set; }
         public ObservableSynchronizedCollection<StatusTimeLine> StatusTimeLines { get; private set; }
         private IConnectableObservable<StreamingMessage> Streaming { get; set; }
+        public bool hasAccounts { get; set; }
 
         #region construct
         private NTNLs()
         {
             StreamManager = new List<IDisposable>();
             tw = TwitterFacade.Instance;
+            db = DBFacade.Instance;
             StatusTimeLines = new ObservableSynchronizedCollection<StatusTimeLine>();
             StatusTimeLines.Add(new StatusTimeLine("HOME"));
             Accounts = new ObservableSynchronizedCollection<NTNLAccount>();
@@ -47,23 +51,23 @@ namespace NTNL.Models
         /// <summary>
         /// Account読み込み
         /// </summary>
-        private  void installAccounts()
+        public void installAccounts()
         {
             
             //await Task.Run(() =>
                 // {
                      var list = tw.getAccounts();
                      if (list == null) { 
-                         this.Accounts = null;
-                         Console.WriteLine("Accountsはnullです");
+                         Console.WriteLine("Accountsは登録されていません");
+                         hasAccounts = false;
                      }
                      else
                      {
-
+                         Accounts.Clear();
+                         hasAccounts = true;
                          foreach (NTNLAccount ac in list)
                          {
-                             
-                             this.Accounts.Add(ac);
+                             Accounts.Add(ac);
                          }
 
                      }

@@ -70,13 +70,15 @@ namespace NTNL.ViewModels
 
         public void Initialize()
         {
+            tw = TwitterFacade.Instance;
             this.session = tw.OAuthStart();
             ntnls = NTNLs.Instance;
+            
         }
 
         public AccountManagerViewModel()
         {
-            tw = new TwitterFacade();
+            
             
         }
 
@@ -108,7 +110,7 @@ namespace NTNL.ViewModels
                 await Task.Run(() =>
                 {
                     Tokens tokens = this.session.GetTokens(parameter);
-                    DBFacade db = new DBFacade();
+                    DBFacade db = DBFacade.Instance;
                     try
                     {
                         db.insertAccount(tokens.UserId.ToString(), tokens.ConsumerKey, tokens.ConsumerSecret, tokens.AccessToken, tokens.AccessTokenSecret);
@@ -116,6 +118,7 @@ namespace NTNL.ViewModels
                         foreach(var account in list){
                             Console.WriteLine(account.TwitterID);
                         }
+                        ntnls.installAccounts();
                         ntnls.StartStreaming(tokens);
                     }
                     catch (Exception)

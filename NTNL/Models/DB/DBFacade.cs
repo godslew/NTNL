@@ -24,6 +24,22 @@ namespace NTNL.Models.DB
             DBCreator.CREATE_DB();
         }
 
+        #region singleton
+        static DBFacade _instance;
+
+        /// <summary>
+        /// DBFacadeの唯一のインスタンスを取得します。
+        /// </summary>
+        public static DBFacade Instance
+        {
+            get
+            {
+                if (_instance == null) _instance = new DBFacade();
+                return _instance;
+            }
+        }
+        #endregion
+
         private void installAccountDAO()
         {
             if (this.accountDAO == null)

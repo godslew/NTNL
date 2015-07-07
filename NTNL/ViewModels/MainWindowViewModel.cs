@@ -74,8 +74,6 @@ namespace NTNL.ViewModels
         public void Initialize()
         {
             ntnls = NTNLs.Instance;
-            listener = new PropertyChangedEventListener(ntnls);
-            CompositeDisposable.Add(listener);
             View.StatusTimeline = ViewModelHelper.CreateReadOnlyDispatcherCollection(
                 ntnls.StatusTimeLines,
                 p => new StatusTimeLineViewModel(this, p),
@@ -85,8 +83,14 @@ namespace NTNL.ViewModels
                 p => new AccountViewModel(p),
                 DispatcherHelper.UIDispatcher);
             isExpand = false;
+
+            listener = new PropertyChangedEventListener(ntnls);
+            CompositeDisposable.Add(listener);
             //SelectedAccount = new List<AccountViewModel>();
-            test();
+            if (ntnls.hasAccounts)
+            {
+                test();
+            }
         }
 
         public MainWindowViewModel()
@@ -107,26 +111,26 @@ namespace NTNL.ViewModels
             }
         }
 
-        #region OpenTextBoxCommand
-        private ViewModelCommand _OpenTextBoxCommand;
+        #region AccountManagerCommand
+        private ViewModelCommand _AccountManagerCommand;
 
-        public ViewModelCommand OpenTextBoxCommand
+        public ViewModelCommand AccountManagerCommand
         {
             get
             {
-                if (_OpenTextBoxCommand == null)
+                if (_AccountManagerCommand == null)
                 {
-                    _OpenTextBoxCommand = new ViewModelCommand(OpenTextBox);
+                    _AccountManagerCommand = new ViewModelCommand(AccountManager);
                 }
-                return _OpenTextBoxCommand;
+                return _AccountManagerCommand;
             }
         }
 
-        public void OpenTextBox()
+        public void AccountManager()
         {
             
             //messageを使ってみた,非常につよい
-            var message =  new TransitionMessage(typeof(Views.items.TweetBoxWindow), new TweetBoxWindowViewModel(), TransitionMode.NewOrActive);
+            var message =  new TransitionMessage(typeof(Views.AccountManagerWindow), new AccountManagerViewModel(), TransitionMode.NewOrActive);
             Messenger.Raise(message);
             
         }
@@ -240,8 +244,7 @@ namespace NTNL.ViewModels
         }
         #endregion
 
-
-
+        
         #region SelectedAccount変更通知プロパティ
         private List<AccountViewModel> _SelectedAccount;
 
