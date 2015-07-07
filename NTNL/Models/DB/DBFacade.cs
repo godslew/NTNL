@@ -146,9 +146,9 @@ namespace NTNL.Models.DB
 
 
         //Column Methods
-        public void insertColumn(int NUM, String NAME, String Query)
+        public void insertColumn(int NUM, String NAME, String TwitterID ,String Query)
         {
-            var _entity = new Column(NUM, NAME, Query);
+            var _entity = new Column(NUM, NAME, TwitterID,Query);
             var dto = _entity.createDTO();
             var dao = new ColumnDAO(dbConnectionString);
             dao.insertColumn(dto);
@@ -169,9 +169,9 @@ namespace NTNL.Models.DB
         }
         
         //Private Methods
-        public void insertPrivtate(int ID, String NGword)
+        public void insertPrivtate(int ID, String TwitterID, String NGword)
         {
-            var _entity = new Private(ID, NGword);
+            var _entity = new Private(ID, TwitterID, NGword);
             var dto = _entity.createDTO();
             var dao = new PrivateDAO(dbConnectionString);
             dao.insertPrivate(dto);
