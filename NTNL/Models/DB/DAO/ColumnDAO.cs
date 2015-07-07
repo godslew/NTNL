@@ -14,7 +14,7 @@ namespace NTNL.Models.DB.DAO
     class ColumnDAO : EntityDAO
     {
         public ColumnDAO(SQLiteConnection dbConnectionString)
-            : base(dbConnectionString, DBConstants.COLUMN_NUM, DBConstants.COLUMN_NAME)
+            : base(dbConnectionString, DBConstants.COLUMN_NUM, DBConstants.COLUMN_TwitterID)
         {
         }
         public void insertColumn(ColumnDTO dto)
@@ -71,7 +71,7 @@ namespace NTNL.Models.DB.DAO
                     var list = new List<ColumnDTO>();
                     while (sr.Read())
                     {
-                        var dto = new Column((int)sr[DBConstants.COLUMN_NUM], sr[DBConstants.COLUMN_NAME].ToString(), sr[DBConstants.COLUMN_QUERY].ToString());
+                        var dto = new Column((int)sr[DBConstants.COLUMN_NUM], sr[DBConstants.COLUMN_NAME].ToString(),sr[DBConstants.COLUMN_TwitterID].ToString() ,sr[DBConstants.COLUMN_QUERY].ToString());
                          list.Add(dto.createDTO());
                     }
                     cn.Close();
@@ -100,15 +100,10 @@ namespace NTNL.Models.DB.DAO
                         cmd.CommandText = "DELETE FROM " + DBConstants.Column_TABLE + " WHERE "  + DBConstants.COLUMN_NUM + " = @" + DBConstants.param_COLUMN_NUM ;
                         // パラメータのセット
                         cmd.Parameters.Add(DBConstants.param_COLUMN_NUM, System.Data.DbType.Int32);
-                        //cmd.Parameters.Add(DBConstants.param_COLUMN_NAME, System.Data.DbType.String);
-                        //cmd.Parameters.Add(DBConstants.param_COLUMN_QUERY, System.Data.DbType.String);
-
+                       
                         // データの追加
                         cmd.Parameters[DBConstants.param_COLUMN_NUM].Value = NUM;
-                        //cmd.Parameters[DBConstants.param_COLUMN_NAME].Value = dto.NAME;
-                        //cmd.Parameters[DBConstants.param_COLUMN_QUERY].Value = dto.QUERY;
-
-
+                        
                         cmd.ExecuteNonQuery();
 
                         // コミット
@@ -119,7 +114,7 @@ namespace NTNL.Models.DB.DAO
             }
             catch (Exception)
             {
-                Console.WriteLine("same column cannot insert.");
+                Console.WriteLine("column cannot delete.");
             }
 
         }

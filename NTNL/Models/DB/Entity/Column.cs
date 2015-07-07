@@ -13,12 +13,14 @@ namespace NTNL.Models.DB.Entity
     {
         private int NUM;
         private String NAME;
+        private String TwitterID;
         private String QUERY;
 
-        public Column(int NUM, String NAME, String QUERY)
+        public Column(int NUM, String NAME, String TwitterID ,String QUERY)
         {
             this.NUM = NUM;
             this.NAME = NAME;
+            this.TwitterID = TwitterID;
             this.QUERY = QUERY;
         }
         
@@ -26,6 +28,7 @@ namespace NTNL.Models.DB.Entity
         {
             this.NUM = dto.NUM;
             this.NAME = dto.NAME;
+            this.TwitterID = dto.TwitterID;
             this.QUERY = dto.QUERY;
         }
         
@@ -34,6 +37,7 @@ namespace NTNL.Models.DB.Entity
             var dto = new ColumnDTO();
             dto.NUM = NUM;
             dto.NAME = NAME;
+            dto.TwitterID = TwitterID;
             dto.QUERY = QUERY;
             return dto;
         }

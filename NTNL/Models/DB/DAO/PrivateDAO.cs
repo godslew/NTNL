@@ -14,7 +14,7 @@ namespace NTNL.Models.DB.DAO
     class PrivateDAO : EntityDAO
     {
         public PrivateDAO(SQLiteConnection dbConnectionString)
-            : base(dbConnectionString, DBConstants.Private_ID, DBConstants.Private_NGword)
+            : base(dbConnectionString, DBConstants.Private_ID, DBConstants.Private_TwitterID)
         {
         }
         public void insertPrivate(PrivateDTO dto)
@@ -29,13 +29,15 @@ namespace NTNL.Models.DB.DAO
                         SQLiteCommand cmd = cn.CreateCommand();
 
                         // インサート文
-                        cmd.CommandText = "INSERT INTO " + DBConstants.Private_TABLE + "(" + DBConstants.Private_ID + "," + DBConstants.Private_NGword +  ") VALUES (@" + DBConstants.param_Private_ID + ",@" + DBConstants.param_Private_NGword + ")";
+                        cmd.CommandText = "INSERT INTO " + DBConstants.Private_TABLE + "(" + DBConstants.Private_ID + "," + DBConstants.Private_TwitterID +","+ DBConstants.Private_NGword +  ") VALUES (@" + DBConstants.param_Private_ID + ",@" + DBConstants.param_Private_TwitterID  +",@" + DBConstants.param_Private_NGword + ")";
                         // パラメータのセット
                         cmd.Parameters.Add(DBConstants.param_Private_ID, System.Data.DbType.Int32);
+                        cmd.Parameters.Add(DBConstants.param_Private_TwitterID, System.Data.DbType.String);
                         cmd.Parameters.Add(DBConstants.param_Private_NGword, System.Data.DbType.String);
                         
                         // データの追加
                         cmd.Parameters[DBConstants.param_Private_ID].Value = dto.ID;
+                        cmd.Parameters[DBConstants.param_Private_TwitterID].Value = dto.TwitterID;
                         cmd.Parameters[DBConstants.param_Private_NGword].Value = dto.NGword;
                        
                         cmd.ExecuteNonQuery();
@@ -67,7 +69,7 @@ namespace NTNL.Models.DB.DAO
                     var list = new List<PrivateDTO>();
                     while (sr.Read())
                     {
-                        var dto = new Private((int)sr[DBConstants.Private_ID], sr[DBConstants.Private_NGword].ToString());
+                        var dto = new Private((int)sr[DBConstants.Private_ID], sr[DBConstants.param_Private_TwitterID].ToString() , sr[DBConstants.Private_NGword].ToString());
                         list.Add(dto.createDTO());
                     }
                     cn.Close();

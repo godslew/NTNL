@@ -12,17 +12,20 @@ namespace NTNL.Models.DB.Entity
     class Private
     {
         private int ID;
+        private String TwitterID;
         private String NGword;
 
-        public Private(int ID , String NGword)
+        public Private(int ID , String TwitterID , String NGword)
         {
             this.ID = ID;
+            this.TwitterID = TwitterID;
             this.NGword = NGword;
         }
 
         public Private(PrivateDTO dto)
         {
             this.ID = dto.ID;
+            this.TwitterID = dto.TwitterID;
             this.NGword = dto.NGword;
         }
 
@@ -30,6 +33,7 @@ namespace NTNL.Models.DB.Entity
         {
             var dto = new PrivateDTO();
             dto.ID = ID;
+            dto.TwitterID = TwitterID;
             dto.NGword = NGword;
             return dto;
         }
