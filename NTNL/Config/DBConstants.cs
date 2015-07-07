@@ -13,8 +13,8 @@ namespace NTNL.NTNL_Config
       public const String CREATE_TABLE_ACCOUNT = "CREATE TABLE ACCOUNT(TwitterID TEXT NOT NULL, CK TEXT NOT NULL , CS TEXT NOT NULL , AT TEXT NOT NULL , ATS TEXT NOT NULL ,  PRIMARY KEY(TwitterID ))";
       public const String CREATE_TABLE_MUTE = "CREATE TABLE MUTE(TwitterID TEXT NOT NULL ,UserID TEXT NOT NULL , Media NUMERIC NOT NULL , Tweet NUMERIC NOT NULL , RT NUMERIC NOT NULL ,Favorite NUMERIC NOT NULL ,  PRIMARY KEY (TwitterID))";
       public const String CREATE_TABLE_TAG = "CREATE TABLE TAG (TwitterID TEXT NOT NULL , TagName TEXT NOT NULL ,PRIMARY KEY(TwitterID))";
-      public const String CREATE_TABLE_COLUMN = "CREATE TABLE COLUMN (NUM INTEGER NOT NULL , NAME TEXT NOT NULL , QUERY TEXT NOT NULL , PRIMARY KEY(NUM))";
-      public const String CREATE_TABLE_PRIVATE = "CREATE TABLE PRIVATE (NUM INTEGER NOT NULL , NGword TEXT NOT NULL , PRIMARY KEY(NUM))";
+      public const String CREATE_TABLE_COLUMN = "CREATE TABLE COLUMN (NUM INTEGER NOT NULL , NAME TEXT NOT NULL, TwitterID TEXT NOT NULL , QUERY TEXT NOT NULL , PRIMARY KEY(NUM))";
+      public const String CREATE_TABLE_PRIVATE = "CREATE TABLE PRIVATE (NUM INTEGER NOT NULL , TwitterID TEXT NOT NULL, NGword TEXT NOT NULL , PRIMARY KEY(NUM))";
 
 
       public const String ACCOUNT_TABLE = "ACCOUNT";
@@ -45,6 +45,7 @@ namespace NTNL.NTNL_Config
       //COLUMN
       public const String COLUMN_NUM = "NUM";
       public const String COLUMN_NAME = "NAME";
+      public const String COLUMN_TwitterID = "TwitterID";
       public const String COLUMN_QUERY = "QUERY";
 
       //MUTE
@@ -58,6 +59,7 @@ namespace NTNL.NTNL_Config
 
       //PRIVATE
       public const String Private_ID = "ID";
+      public const String Private_TwitterID = "TwitterID";
       public const String Private_NGword = "NGword";
 
       //TAG
@@ -75,6 +77,7 @@ namespace NTNL.NTNL_Config
       //SQL parametor Column
       public const String param_COLUMN_NUM = "COLUMN_T";
       public const String param_COLUMN_NAME = "NAME_T";
+      public const String param_COLUMN_TwitterID = "TwitterID_T";
       public const String param_COLUMN_QUERY = "QUERY_T";
 
       //SQL parametor Mute
@@ -84,8 +87,10 @@ namespace NTNL.NTNL_Config
       public const String param_Mute_Tweet = "Tweet_T";
       public const String param_Mute_RT = "RT_T";
       public const String param_Mute_Favorite = "Favorite_T";
-
+      
+      //SQL parametor Private
       public const String param_Private_ID = "ID_T";
+      public const String param_Private_TwitterID = "TwitterID_T";
       public const String param_Private_NGword = "NGword_T";
         
       //SQL paramtor Tag

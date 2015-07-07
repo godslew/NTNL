@@ -33,6 +33,10 @@ namespace NTNL.Models.init
                     cmd.ExecuteNonQuery();
                     cmd.CommandText = DBConstants.CREATE_TABLE_TAG;
                     cmd.ExecuteNonQuery();
+                    cmd.CommandText = DBConstants.CREATE_TABLE_COLUMN;
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = DBConstants.CREATE_TABLE_PRIVATE;
+                    cmd.ExecuteNonQuery();
                     Console.WriteLine(dbc + "を作成しました");
                     
                    

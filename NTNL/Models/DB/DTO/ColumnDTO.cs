@@ -13,5 +13,6 @@ namespace NTNL.Models.DB.DTO
         public int NUM {get; set; }
         public String NAME { get; set; }
         public String QUERY { get; set; }
+        public String TwitterID { get; set; }
     }
 }
