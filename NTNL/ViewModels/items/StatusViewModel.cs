@@ -15,6 +15,10 @@ using NTNL.Models;
 using System.Windows.Controls;
 using CoreTweet;
 using NTNL.ViewModels.items;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using System.Windows;
+using NTNL.Models.Twitter;
 
 namespace NTNL.ViewModels
 {
@@ -69,6 +73,7 @@ namespace NTNL.ViewModels
         public NTNLs ntnls;
         public MainWindowViewModel main;
         public PropertyChangedEventListener listener;
+        public CommonViewModel common { get; set; }
 
         public void Initialize()
         {
@@ -76,9 +81,20 @@ namespace NTNL.ViewModels
 
         public StatusViewModel(MainWindowViewModel mw, Status _status){
             this.SourceStatus = _status;
+            ReceivedStatus = SourceStatus;
+            if (SourceStatus.RetweetedStatus != null)
+            {
+                SourceStatus = SourceStatus.RetweetedStatus;
+                IsRetweet = Visibility.Visible;
+                RetweetingUser = new UserViewModel(ReceivedStatus.User, main);
+                RetweetedBytext = RetweetingUser.Name;
+            }
             this.main = mw;
+            
             this.text = SourceStatus.Text;
-            this.User = new UserViewModel(_status.User, main);
+            this.id = SourceStatus.Id;
+            this.User = new UserViewModel(SourceStatus.User, main);
+            ExtractVia();
         }
 
         public StatusViewModel(string _text)
@@ -120,6 +136,23 @@ namespace NTNL.ViewModels
         }
         #endregion
 
+        #region RetweetedBytext変更通知プロパティ
+        private string _RetweetedBytext;
+
+        public string RetweetedBytext
+        {
+            get
+            { return _RetweetedBytext; }
+            set
+            {
+                if (_RetweetedBytext == value)
+                    return;
+                _RetweetedBytext = value + " retweeted";
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
         #region User変更通知プロパティ
         private UserViewModel _User;
 
@@ -136,5 +169,115 @@ namespace NTNL.ViewModels
             }
         }
         #endregion
+
+        #region IsRetweet変更通知プロパティ
+        private Visibility _IsRetweet = Visibility.Hidden;
+
+        public Visibility IsRetweet
+        {
+            get
+            { return _IsRetweet; }
+            set
+            {
+                if (_IsRetweet == value)
+                    return;
+                _IsRetweet = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region RetweetingUser変更通知プロパティ
+        private UserViewModel _RetweetingUser;
+
+        public UserViewModel RetweetingUser
+        {
+            get
+            { return _RetweetingUser; }
+            set
+            {
+                if (_RetweetingUser == value)
+                    return;
+                _RetweetingUser = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region Via変更通知プロパティ
+        private string _Via = "";
+
+        public string Via
+        {
+            get
+            { return _Via; }
+            set
+            {
+                if (_Via == value)
+                    return;
+                _Via = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        static Regex reg = new Regex("<a href=\"(?<url>.+)\" rel=\"nofollow\">(?<client>.+)</a>");
+        
+        public void ExtractVia()
+        {
+            var m = reg.Match(SourceStatus.Source);
+            if (!m.Success) return;
+
+            Via = "via" + m.Groups["client"].Value;
+            
+        }
+
+
+        #region ReplyCommand
+        private ViewModelCommand _ReplyCommand;
+
+        public ViewModelCommand ReplyCommand
+        {
+            get
+            {
+                if (_ReplyCommand == null)
+                {
+                    _ReplyCommand = new ViewModelCommand(Reply);
+                }
+                return _ReplyCommand;
+            }
+        }
+
+        public void Reply()
+        {
+            main.SetReplyTo(this);
+        }
+        #endregion
+
+        #region RetweetCommand
+        private ViewModelCommand _RetweetCommand;
+
+        public ViewModelCommand RetweetCommand
+        {
+            get
+            {
+                if (_RetweetCommand == null)
+                {
+                    _RetweetCommand = new ViewModelCommand(Retweet);
+                }
+                return _RetweetCommand;
+            }
+        }
+
+        public void Retweet()
+        {
+            if (main.selectedAccount != null)
+            {
+                TwitterFacade.Instance.RetweetStatus(main.selectedAccount.account, id);
+            }
+        }
+        #endregion
+
+
     }
 }

@@ -8,16 +8,16 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:NTNL.Views"
         xmlns:vm="clr-namespace:NTNL.ViewModels"
-        xmlns:NTNL="clr-namespace:NTNL" xmlns:items="clr-namespace:NTNL.Views.items" x:Class="NTNL.Views.MainWindow"
+        xmlns:NTNL="clr-namespace:NTNL" xmlns:items="clr-namespace:NTNL.Views.items" xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="NTNL.Views.MainWindow"
         Title="NTNL" Height="740" Width="1280" Background="#FF464242">
     <metro:MetroWindow.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="tweetButton"/>
     </metro:MetroWindow.Triggers>
 
 
-    <Window.DataContext>
+    <metro:MetroWindow.DataContext>
         <vm:MainWindowViewModel/>
-    </Window.DataContext>
+    </metro:MetroWindow.DataContext>
 
     <i:Interaction.Triggers>
 
@@ -42,116 +42,132 @@
         </l:InteractionMessageTrigger>
 
     </i:Interaction.Triggers>
-    <Grid>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
-                <VisualStateGroup.Transitions>
-                    <VisualTransition GeneratedDuration="0:0:1"/>
-                </VisualStateGroup.Transitions>
-                <VisualState x:Name="VisualState">
-                    <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.HorizontalContentAlignment)" Storyboard.TargetName="listBox1">
-                            <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="{x:Static HorizontalAlignment.Right}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="listBox1">
-                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="222"/>
-                        </DoubleAnimationUsingKeyFrames>
-                    </Storyboard>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-        <metro:CaptionIcon HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="53" Content="NTNL" FontSize="11"/>
-        <metro:SystemButtons HorizontalAlignment="Right" VerticalAlignment="Top"/>
-        <StackPanel x:Name="stackPanel" Margin="0,80,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <StackPanel.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </StackPanel.RenderTransform>
-            <ListBox x:Name="listBox" Background="#00000000" Height="416" ItemsSource="{Binding View.StatusTimeline}" Margin="0,0,-13,0" BorderThickness="3" HorizontalAlignment="Left" BorderBrush="#FF2E3136">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <metro:CaptionButton Content="{Binding Name}" Height="45" Width="100" Background="#00000000" FontSize="18" ToolTip="{Binding Name}" Command="{Binding FocusCommand, Mode=OneWay}" CommandParameter="{Binding index}"/>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <metro:CaptionButton Content="+" FontSize="20" Background="{x:Null}" ToolTip="add column" Margin="4,0,44,0" Height="50" Command="{Binding addColumnCommand, Mode=OneWay}" VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type metro:CaptionIcon}}}" Focusable="False" IsHitTestVisible="True" IsTabStop="False"/>
-        </StackPanel>
-        <metro:CaptionButton HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,600,0,0" Content="setting" Height="37" Width="53" Command="{Binding AccountManagerCommand, Mode=OneWay}"></metro:CaptionButton>
-        <DockPanel Margin="0,30,0,0">
-            <Expander x:Name="tweetButton" Background="#9E000C7B" FontSize="18.667" FontFamily="Meiryo UI"  IsHitTestVisible="True" Focusable="True" ExpandDirection="Right" VerticalAlignment="Top" IsExpanded="{Binding isExpand}">
+	<Grid>
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup x:Name="VisualStateGroup">
+				<VisualStateGroup.Transitions>
+					<VisualTransition GeneratedDuration="0:0:1"/>
+				</VisualStateGroup.Transitions>
+				<VisualState x:Name="VisualState">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.HorizontalContentAlignment)" Storyboard.TargetName="listBox1">
+							<DiscreteObjectKeyFrame KeyTime="0:0:1" Value="{x:Static HorizontalAlignment.Right}"/>
+						</ObjectAnimationUsingKeyFrames>
+						<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="listBox1">
+							<EasingDoubleKeyFrame KeyTime="0:0:1" Value="222"/>
+						</DoubleAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+		<metro:CaptionIcon HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="53" Content="NTNL" FontSize="11"/>
+		<metro:SystemButtons HorizontalAlignment="Right" VerticalAlignment="Top"/>
+		<StackPanel x:Name="stackPanel" Margin="0,80,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+			<StackPanel.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</StackPanel.RenderTransform>
+			<ListBox x:Name="listBox" Background="#00000000" Height="416" ItemsSource="{Binding View.StatusTimeline}" Margin="0,0,-13,0" BorderThickness="3" HorizontalAlignment="Left" BorderBrush="#FF2E3136">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<metro:CaptionButton Content="{Binding Name}" Height="45" Width="100" Background="#00000000" FontSize="18" ToolTip="{Binding Name}" Command="{Binding FocusCommand, Mode=OneWay}" CommandParameter="{Binding index}"/>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+			<metro:CaptionButton Content="+" FontSize="20" Background="{x:Null}" ToolTip="add column" Margin="4,0,44,0" Height="50" Command="{Binding addColumnCommand, Mode=OneWay}" VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type metro:CaptionIcon}}}" Focusable="False" IsHitTestVisible="True" IsTabStop="False"/>
+		</StackPanel>
+		<metro:CaptionButton HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,600,0,0" Content="setting" Height="37" Width="53" Command="{Binding AccountManagerCommand, Mode=OneWay}"/>
+		<DockPanel Margin="0,30,0,0">
+			<Expander x:Name="tweetButton" Background="#9E000C7B" FontSize="18.667" FontFamily="Meiryo UI"  IsHitTestVisible="True" Focusable="True" ExpandDirection="Right" VerticalAlignment="Top" IsExpanded="{Binding isExpand}">
 
-                <Expander.Header>
-                    <TextBlock Width="118" Text="New Tweet" Background="#FF132882"/>
-                </Expander.Header>
-                <Grid Height="655" Width="349">
-                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="82" Margin="158,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" ToolTip="今何してる？" UndoLimit="500" FontSize="10" Background="Transparent" Foreground="White" BorderBrush="Black" Text="{Binding Text, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}">
-                        <TextBox.InputBindings>
-                            <KeyBinding Key="Enter" Modifiers="Control" Command="{Binding TweetCommand, Mode=OneWay}" CommandParameter="{Binding Text, ElementName=textBox}"/>
-                        </TextBox.InputBindings>
-                    </TextBox>
-                    <metro:CaptionButton Margin="288,193,0,0" Content="Tweet" Width="51" Height="30"  Focusable="True" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" IsEnabled="{Binding isWrite}" CommandParameter="{Binding Text, ElementName=textBox}" Command="{Binding TweetCommand, Mode=OneWay}"/>
-                    <ListView Background="Transparent" Margin="158,0,63,554" ItemsSource="{Binding Accounts}" SelectedValue="{Binding selectedAccount}" SelectionMode="Single" >
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <DockPanel>
-                                    <TextBlock Text="{Binding ScreenName}" FontSize="10"/>
-                                </DockPanel>
+				<Expander.Header>
+					<TextBlock Width="118" Text="New Tweet" Background="#FF132882"/>
+				</Expander.Header>
+				<Grid Height="655" Width="349">
+					<TextBox x:Name="textBox" HorizontalAlignment="Left" Height="82" Margin="158,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" ToolTip="今何してる？" UndoLimit="500" FontSize="10" Background="Transparent" Foreground="White" BorderBrush="Black" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+						<TextBox.InputBindings>
+							<KeyBinding Key="Enter" Modifiers="Control" Command="{Binding TweetCommand, Mode=OneWay}" CommandParameter="{Binding Text, ElementName=textBox}"/>
+						</TextBox.InputBindings>
+					</TextBox>
+					<metro:CaptionButton Margin="288,193,0,0" Content="Tweet" Width="51" Height="30"  Focusable="True" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" IsEnabled="{Binding isWrite}" CommandParameter="{Binding Text, ElementName=textBox}" Command="{Binding TweetCommand, Mode=OneWay}"/>
+					<ListView Background="Transparent" Margin="158,0,63,554" ItemsSource="{Binding Accounts}" SelectedValue="{Binding selectedAccount}" SelectionMode="Single" >
+						<ListView.ItemTemplate>
+							<DataTemplate>
+								<DockPanel>
+									<TextBlock Text="{Binding ScreenName}" FontSize="10"/>
+								</DockPanel>
                                 
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="{x:Type ListViewItem}">
-                                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
-                </Grid>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+						<ListView.ItemContainerStyle>
+							<Style TargetType="{x:Type ListViewItem}">
+								<Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+							</Style>
+						</ListView.ItemContainerStyle>
+					</ListView>
+				</Grid>
 
-            </Expander>
-            <ListBox x:Name="listBox1" Background="Transparent" ItemsSource="{Binding View.StatusTimeline}" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF2E3136" BorderThickness="5" VerticalContentAlignment="Top" IsHitTestVisible="True">
-                <ListBox.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </ListBox.RenderTransform>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical" Width="300" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="650" CanHorizontallyScroll="True" MaxWidth="300">
-                            <TextBlock Text="{Binding Name}" Height="40" Width="250" FontSize="24" ToolTip="{Binding Name}" VerticalAlignment="Top" MaxWidth="250" MaxHeight="40"/>
-                            <ListView Height="Auto" Width="300" Background="Transparent" ItemsSource="{Binding Statuses}" MinWidth="300" MinHeight="650" VerticalContentAlignment="Top" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="#FF2E3136" BorderThickness="3" MaxHeight="740" MaxWidth="300" Foreground="White" SelectionMode="Single">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid Height="Auto" Width="290">
-                                            <Image v:Behaviors.LazySource="{Binding User.ProfileImageUri}" RenderTransformOrigin="0.484,0.544" Margin="0,0,250,0" HorizontalAlignment="Left" VerticalAlignment="Top" MaxWidth="50" MaxHeight="50"/>
-                                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding text}" VerticalAlignment="Top" Height="Auto" Margin="45,25,0,0" Width="220" RenderTransformOrigin="0.489,0.461" Foreground="White" FontSize="10"/>
-                                            <DockPanel Margin="50,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-                                                <Label Content="{Binding User.Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0" Foreground="White" FontSize="10"/>
-                                                <Label Content="{Binding User.ScreenName}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0" Foreground="White" FontSize="10"/>
-                                            </DockPanel>
-                                        </Grid>
+			</Expander>
+			<ListBox x:Name="listBox1" Background="Transparent" ItemsSource="{Binding View.StatusTimeline}" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF2E3136" BorderThickness="5" VerticalContentAlignment="Top" IsHitTestVisible="True">
+				<ListBox.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</ListBox.RenderTransform>
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<StackPanel Orientation="Vertical" Width="300" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="650" CanHorizontallyScroll="True" MaxWidth="300">
+							<TextBlock Text="{Binding Name}" Height="40" Width="250" FontSize="24" ToolTip="{Binding Name}" VerticalAlignment="Top" MaxWidth="250" MaxHeight="40"/>
+							<ListView Height="Auto" Width="300" Background="Transparent" ItemsSource="{Binding Statuses}" MinWidth="300" MinHeight="650" VerticalContentAlignment="Top" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="#FF2E3136" BorderThickness="3" MaxHeight="740" MaxWidth="300" Foreground="White" SelectionMode="Single">
+								
+								<ListView.ItemTemplate>
+									<DataTemplate>
+										<Grid Height="Auto" Width="290">
+											<Grid.ContextMenu>
+									            <ContextMenu>
+                                                    <MenuItem Header="返信" Command="{Binding ReplyCommand, Mode=OneWay}" />
+                                                    <MenuItem Header="RT" Command="{Binding RetweetCommand, Mode=OneWay}" />
+										            <MenuItem Header="favorite" />
+										        </ContextMenu>
+								             </Grid.ContextMenu>
+											<StackPanel Margin="40,25,25,0" Orientation="Vertical">
+												<TextBlock x:Name="text" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding text}" VerticalAlignment="Top" Height="Auto" Margin="0" Width="220" RenderTransformOrigin="0.489,0.461" Foreground="White" FontSize="10"/>
+												<Label x:Name="via" Content="{Binding Via}" FontSize="8"/>
+												<Label x:Name="retweet" Content="{Binding RetweetedBytext}" FontSize="8" Foreground="#FF00065C"/>
+											</StackPanel>
+											<DockPanel Margin="40,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+												<Label Content="{Binding User.Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0" Foreground="White" FontSize="10"/>
+												<Label Content="{Binding User.ScreenName}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0" Foreground="White" FontSize="10"/>
+											</DockPanel>
+											<StackPanel Orientation="Vertical">
+												<Image v:Behaviors.LazySource="{Binding User.ProfileImageUri}" RenderTransformOrigin="0.484,0.544" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" MaxWidth="30" MaxHeight="30"/>
+												<ed:RegularPolygon Fill="#FFECFF00" HorizontalAlignment="Left" Height="15" InnerRadius="0.47211" PointCount="5" Stretch="Fill" Stroke="#00000000" VerticalAlignment="Top" Width="15" StrokeThickness="1"/>
+												<Rectangle Height="15" Stroke="#FF01CE04" StrokeThickness="1" Width="15" HorizontalAlignment="Left" VerticalAlignment="Top" ClipToBounds="True" RadiusY="1" RadiusX="1" Visibility="{Binding IsRetweet}"/>
+											</StackPanel>
+										</Grid>
 
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
+									</DataTemplate>
+								</ListView.ItemTemplate>
+							</ListView>
 
-                        </StackPanel>
+						</StackPanel>
 
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <DockPanel x:Name="columnPanel"/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+				<ListBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<DockPanel x:Name="columnPanel"/>
+					</ItemsPanelTemplate>
+				</ListBox.ItemsPanel>
 
-            </ListBox>
-        </DockPanel>
-    </Grid>
+			</ListBox>
+		</DockPanel>
+	</Grid>
 </metro:MetroWindow>

@@ -118,6 +118,8 @@ namespace NTNL.Models
                                 //NTNL_OnDirectMessage(this, new NTNLMessageReceivedEventArgs<DirectMessageMessage>(p as DirectMessageMessage));
                                 break;
                             case MessageType.DeleteStatus:
+                                
+                                break;
                             case MessageType.DeleteDirectMessage:
                                 //NTNL_OnId(this, new NTNLMessageReceivedEventArgs<DeleteMessage>(p as DeleteMessage));
                                 break;

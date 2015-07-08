@@ -38,7 +38,14 @@ namespace NTNL.Models.Twitter
         /// <param name="statusID"></param>
         public void replyToStatus(NTNLAccount account, String text, long statusID)
         {
+            try
+            {
+                account.Token.Statuses.UpdateAsync(in_reply_to_status_id => statusID, status => text);
+            }
+            catch (Exception)
+            {
 
+            }
         }
 
         /// <summary>
@@ -47,9 +54,18 @@ namespace NTNL.Models.Twitter
         /// <param name="account"></param>
         /// <param name="text"></param>
         /// <param name="statusID"></param>
-        public void retweetToStatus(NTNLAccount account, String text, long statusID)
+        public void retweetStatus(NTNLAccount account, long statusID)
         {
-
+            try
+            {
+                account.Token.Statuses.RetweetAsync(id => statusID);
+            }
+            catch (Exception)
+            {
+                
+                
+            }
+            
         }
 
         /// <summary>

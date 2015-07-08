@@ -69,6 +69,7 @@ namespace NTNL.ViewModels
         PropertyChangedEventListener listener;
         public MainWindowViewViewModel View { get; private set; }
         NTNLs ntnls;
+        public CommonViewModel common { get; private set; }
 
 
         public void Initialize()
@@ -82,7 +83,7 @@ namespace NTNL.ViewModels
                 ntnls.Accounts,
                 p => new AccountViewModel(p),
                 DispatcherHelper.UIDispatcher);
-            isExpand = false;
+            common.isExpand = false;
 
             listener = new PropertyChangedEventListener(ntnls);
             CompositeDisposable.Add(listener);
@@ -96,6 +97,7 @@ namespace NTNL.ViewModels
         public MainWindowViewModel()
         {
             View = new MainWindowViewViewModel();
+            common = CommonViewModel.Instance;
           
         }
 
@@ -182,68 +184,6 @@ namespace NTNL.ViewModels
         }
         #endregion
 
-
-        #region Text変更通知プロパティ
-        private string _Text;
-
-        public string Text
-        {
-            get
-            { return _Text; }
-            set
-            {
-                if (_Text == value)
-                    return;
-                _Text = value;
-                if (_Text != "")
-                {
-                    isWrite = true;
-                }
-                else
-                {
-                    isWrite = false;
-                }
-                RaisePropertyChanged("Text");
-            }
-        }
-        #endregion
-
-
-        #region isWrite変更通知プロパティ
-        private bool _isWrite;
-
-        public bool isWrite
-        {
-            get
-            { return _isWrite; }
-            set
-            {
-                if (_isWrite == value)
-                    return;
-                _isWrite = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-
-        #region isExpand変更通知プロパティ
-        private bool _isExpand;
-
-        public bool isExpand
-        {
-            get
-            { return _isExpand; }
-            set
-            { 
-                if (_isExpand == value)
-                    return;
-                _isExpand = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
         
         #region SelectedAccount変更通知プロパティ
         private List<AccountViewModel> _SelectedAccount;
@@ -287,6 +227,120 @@ namespace NTNL.ViewModels
         }
         #endregion
 
+        #region Text変更通知プロパティ
+        private string _Text;
+
+        public string Text
+        {
+            get
+            { return _Text; }
+            set
+            {
+                if (_Text == value)
+                    return;
+                _Text = value;
+                if (_Text != "")
+                {
+                    isWrite = true;
+
+                }else if(_Text == ""){
+                    isReply = false;
+                    isWrite = false;
+                }
+                    
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+        #region isWrite変更通知プロパティ
+        private bool _isWrite;
+
+        public bool isWrite
+        {
+            get
+            { return _isWrite; }
+            set
+            {
+                if (_isWrite == value)
+                    return;
+                _isWrite = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+        #region isExpand変更通知プロパティ
+        private bool _isExpand;
+
+        public bool isExpand
+        {
+            get
+            { return _isExpand; }
+            set
+            {
+                if (_isExpand == value)
+                    return;
+                _isExpand = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+        #region isReply変更通知プロパティ
+        private bool _isReply;
+
+        public bool isReply
+        {
+            get
+            { return _isReply; }
+            set
+            {
+                if (_isReply == value)
+                    return;
+                _isReply = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region ReplyingStatus変更通知プロパティ
+        private StatusViewModel _ReplyingStatus;
+
+        public StatusViewModel ReplyingStatus
+        {
+            get
+            { return _ReplyingStatus; }
+            set
+            {
+                if (_ReplyingStatus == value)
+                    return;
+                _ReplyingStatus = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region statusID変更通知プロパティ
+        private long _statusID;
+
+        public long statusID
+        {
+            get
+            { return _statusID; }
+            set
+            {
+                if (_statusID == value)
+                    return;
+                _statusID = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
         #region TweetCommand
         private ListenerCommand<string> _TweetCommand;
 
@@ -307,10 +361,35 @@ namespace NTNL.ViewModels
             Console.WriteLine(parameter);
             if (selectedAccount != null)
             {
-                TwitterFacade.Instance.UpdateStatus(selectedAccount.account, parameter);
-                Text = "";
+                if (!isReply)
+                {
+                    TwitterFacade.Instance.UpdateStatus(selectedAccount.account, parameter);
+                    Text = "";
+                }
+                else if (isReply)
+                {
+                    TwitterFacade.Instance.ReplyToStatus(selectedAccount.account, parameter, ReplyingStatus.id);
+                    isReply = false;
+                    Text = "";
+                }
             }
 
+        }
+        #endregion
+
+        #region setReply
+        public void SetReplyTo(StatusViewModel st)
+        {
+            ReplyingStatus = st;
+            isReply = true;
+            isExpand = true;
+
+            var s = st.SourceStatus;
+            List<string> ru = s.Entities.UserMentions.Select(p => p.ScreenName).ToList();
+            if (!ru.Contains(s.User.ScreenName)) ru.Insert(0, s.User.ScreenName);
+            var t = new StringBuilder();
+            ru.ForEach(p => t.Append(String.Format("@{0} ", p)));
+            Text = t.ToString();
         }
         #endregion
     }

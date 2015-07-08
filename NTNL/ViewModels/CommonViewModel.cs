@@ -12,13 +12,11 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using NTNL.Models;
-using CoreTweet;
 
-namespace NTNL.ViewModels.items
+namespace NTNL.ViewModels
 {
-    public class UserViewModel : ViewModel
+    public class CommonViewModel : ViewModel
     {
-        
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
          *  lvcom   : ViewModelCommand
@@ -65,89 +63,125 @@ namespace NTNL.ViewModels.items
         {
         }
 
-        private User user;
-        private MainWindowViewModel main;
+        #region singleton
+        static CommonViewModel _instance;
 
-        public UserViewModel(User user, MainWindowViewModel main)
-        {
-            
-            this.user = user;
-            this.main = main;
-            this.Name = user.Name;
-            this.ScreenName = user.ScreenName;
-            this.ProfileImageUri = user.ProfileImageUrlHttps;
-        }
-
-        #region Name変更通知プロパティ
-        private string _Name = "Name";
-
-        public string Name
+        /// <summary>
+        /// DBFacadeの唯一のインスタンスを取得します。
+        /// </summary>
+        public static CommonViewModel Instance
         {
             get
-            { return _Name; }
+            {
+                if (_instance == null) _instance = new CommonViewModel();
+                return _instance;
+            }
+        }
+        #endregion
+
+
+        #region Text変更通知プロパティ
+        private string _Text;
+
+        public string Text
+        {
+            get
+            { return _Text; }
             set
             {
-                if (_Name == value)
+                if (_Text == value)
                     return;
-                _Name = value;
+                _Text = value;
+                if (_Text != "")
+                {
+                    isWrite = true;
+                }
+                else
+                {
+                    isWrite = false;
+                }
                 RaisePropertyChanged();
             }
         }
         #endregion
 
 
-        #region ScreenName変更通知プロパティ
-        private string _ScreenName = "ScreenName";
+        #region isWrite変更通知プロパティ
+        private bool _isWrite;
 
-        public string ScreenName
+        public bool isWrite
         {
             get
-            { return _ScreenName; }
+            { return _isWrite; }
             set
             {
-                if (_ScreenName == value)
+                if (_isWrite == value)
                     return;
-                _ScreenName = "@" + value;
+                _isWrite = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
 
 
-        #region IdString変更通知プロパティ
-        private string _IdString = "";
+        #region isExpand変更通知プロパティ
+        private bool _isExpand;
 
-        public string IdString
+        public bool isExpand
         {
             get
-            { return _IdString; }
+            { return _isExpand; }
             set
             {
-                if (_IdString == value)
+                if (_isExpand == value)
                     return;
-                _IdString = value;
+                _isExpand = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
 
 
-        #region ProfileImageUri変更通知プロパティ
-        private Uri _ProfileImageUri = null;
+        #region isReply変更通知プロパティ
+        private bool _isReply;
 
-        public Uri ProfileImageUri
+        public bool isReply
         {
             get
-            { return _ProfileImageUri; }
+            { return _isReply; }
             set
-            {
-                if (_ProfileImageUri == value)
+            { 
+                if (_isReply == value)
                     return;
-                _ProfileImageUri = value;
+                _isReply = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
 
+
+        #region statusID変更通知プロパティ
+        private long _statusID;
+
+        public long statusID
+        {
+            get
+            { return _statusID; }
+            set
+            { 
+                if (_statusID == value)
+                    return;
+                _statusID = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+
+        public CommonViewModel()
+        {
+
+        }
     }
 }

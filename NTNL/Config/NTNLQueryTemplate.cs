@@ -13,7 +13,8 @@ namespace NTNL.Config
     {
         public const string HomeQuery = "%ID%.HOME";
         public const string MentionQuery = "%ID%.MENTION";
-        public const string ActivityQuery = "%ID%,FAVORITE.FOLLOW";
+        public const string ActivityQuery = "%ID%.FAVORITE.FOLLOW";
+        public const string deleteStatusQuery = "%ID%.DELETE";
 
     }
 }

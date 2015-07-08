@@ -87,6 +87,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\MetroRadiance.Core.1.0.16\lib\net45\MetroRadiance.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Expression.Drawing" />
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\MetroRadiance.1.0.16\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
@@ -161,6 +162,7 @@
     <Compile Include="Config\DBConstants.cs" />
     <Compile Include="Config\TwitterConfig.cs" />
     <Compile Include="ViewModels\AccountManagerViewModel.cs" />
+    <Compile Include="ViewModels\CommonViewModel.cs" />
     <Compile Include="ViewModels\items\AccountViewModel.cs" />
     <Compile Include="ViewModels\items\StatusTimeLineViewModel.cs" />
     <Compile Include="ViewModels\items\TweetBoxWindowViewModel.cs" />

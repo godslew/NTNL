@@ -93,5 +93,15 @@ namespace NTNL.Models.Twitter
         {
             twUtils.updateStatus(account, text);
         }
+
+        public void ReplyToStatus(NTNLAccount account, string text, long id)
+        {
+            twUtils.replyToStatus(account, text, id);
+        }
+
+        public void RetweetStatus(NTNLAccount account, long id)
+        {
+            twUtils.retweetStatus(account, id);
+        }
     }
 }
