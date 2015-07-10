@@ -95,6 +95,25 @@ namespace NTNL.ViewModels
             this.id = SourceStatus.Id;
             this.User = new UserViewModel(SourceStatus.User, main);
             ExtractVia();
+
+            DispatcherHelper.UIDispatcher.BeginInvoke((Action)(() =>
+            {
+                if (SourceStatus.Entities != null)
+                {
+                    Medias = new ObservableSynchronizedCollection<StatusMediaViewModel>();
+
+                    if (SourceStatus.Entities.Media != null)
+                    {
+                        foreach (var i in SourceStatus.Entities.Media)
+                        {
+                            Medias.Add(new StatusMediaViewModel { Uri = i.MediaUrlHttps });
+                        }
+                    }
+
+                    HasMedia = Medias.Count != 0;
+
+                }
+            }));
         }
 
         public StatusViewModel(string _text)
@@ -229,8 +248,62 @@ namespace NTNL.ViewModels
             var m = reg.Match(SourceStatus.Source);
             if (!m.Success) return;
 
-            Via = "via" + m.Groups["client"].Value;
+            Via = "via " + m.Groups["client"].Value;
             
+        }
+        #endregion
+
+        #region HasMedia変更通知プロパティ
+        private bool _HasMedia;
+
+        public bool HasMedia
+        {
+            get
+            { return _HasMedia; }
+            set
+            {
+                if (_HasMedia == value)
+                    return;
+                _HasMedia = value;
+                if (value) {
+                    HasMediaVisibility = Visibility.Visible;
+                }
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region HasMediaVisibility変更通知プロパティ
+        private Visibility _HasMediaVisibility = Visibility.Hidden;
+
+        public Visibility HasMediaVisibility
+        {
+            get
+            { return _HasMediaVisibility; }
+            set
+            {
+                if (_HasMediaVisibility == value)
+                    return;
+                _HasMediaVisibility = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region Medias変更通知プロパティ
+        private ObservableSynchronizedCollection<StatusMediaViewModel> _Medias;
+
+        public ObservableSynchronizedCollection<StatusMediaViewModel> Medias
+        {
+            get
+            { return _Medias; }
+            set
+            {
+                if (_Medias == value)
+                    return;
+                _Medias = value;
+                RaisePropertyChanged();
+            }
         }
         #endregion
 
@@ -279,7 +352,6 @@ namespace NTNL.ViewModels
         }
         #endregion
 
-
         #region OpenUserCommand
         private ViewModelCommand _OpenUserCommand;
 
@@ -300,6 +372,38 @@ namespace NTNL.ViewModels
             main.OpenUser(this.User);
         }
         #endregion
+
+
+        #region deleteStatusCommand
+        private ViewModelCommand _deleteStatusCommand;
+
+        public ViewModelCommand deleteStatusCommand
+        {
+            get
+            {
+                if (_deleteStatusCommand == null)
+                {
+                    _deleteStatusCommand = new ViewModelCommand(deleteStatus);
+                }
+                return _deleteStatusCommand;
+            }
+        }
+
+        public void deleteStatus()
+        {
+            try
+            {
+                TwitterFacade.Instance.DeleteStatus(main.selectedAccount.account, id);
+               
+            }
+            catch (Exception)
+            {
+                
+                
+            }
+        }
+        #endregion
+
 
 
 

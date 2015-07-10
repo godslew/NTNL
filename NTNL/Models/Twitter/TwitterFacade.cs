@@ -104,5 +104,10 @@ namespace NTNL.Models.Twitter
         {
             twUtils.retweetStatus(account, id);
         }
+
+        public void DeleteStatus(NTNLAccount account, long id)
+        {
+            twUtils.destroyStatus(account, id);
+        }
     }
 }
