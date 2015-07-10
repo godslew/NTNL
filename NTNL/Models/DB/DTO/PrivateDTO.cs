@@ -10,7 +10,7 @@ namespace NTNL.Models.DB.DTO
 {
     class PrivateDTO
     {
-        public int ID { get; set ;  }
+       
         public String TwitterID{ get; set;}
         public String NGword { get; set;  }
     }

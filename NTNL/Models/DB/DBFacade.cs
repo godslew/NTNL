@@ -169,9 +169,9 @@ namespace NTNL.Models.DB
         }
         
         //Private Methods
-        public void insertPrivtate(int ID, String TwitterID, String NGword)
+        public void insertPrivtate(String TwitterID, String NGword)
         {
-            var _entity = new Private(ID, TwitterID, NGword);
+            var _entity = new Private(TwitterID, NGword);
             var dto = _entity.createDTO();
             var dao = new PrivateDAO(dbConnectionString);
             dao.insertPrivate(dto);
@@ -184,10 +184,10 @@ namespace NTNL.Models.DB
             return list;
         }
 
-        public void deletePrivate(PrivateDTO dto, int ID)
+        public void deletePrivate(PrivateDTO dto, String TwitterID, String NGword)
         {
             var dao = new PrivateDAO(dbConnectionString);
-            dao.deletePrivate(dto, ID);
+            dao.deletePrivate(dto, TwitterID, NGword);
         }
     }
 }
