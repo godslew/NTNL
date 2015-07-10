@@ -8,7 +8,7 @@
         xmlns:v="clr-namespace:NTNL.Views"
         xmlns:vm="clr-namespace:NTNL.ViewModels"
         xmlns:vmi="clr-namespace:NTNL.ViewModels.items"
-        Title="UserWindow" Height="300" Width="400">
+        Title="UserWindow" Height="300" Width="400" MaxWidth="400" MaxHeight="300" ResizeMode="NoResize">
 
     <Window.DataContext>
         <vmi:UserViewModel/>
@@ -39,9 +39,10 @@
         <Label Content="{Binding SpamBanner}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="276.6" Margin="10,0,0,0" Foreground="#FF0009F4" FontWeight="Bold"/>
         <Image v:Behaviors.LazySource="{Binding ProfileBgImageUri}" HorizontalAlignment="Left" Height="202" Margin="0,30,-0.4,0" VerticalAlignment="Top" Width="394" Opacity="0.7" Stretch="UniformToFill"/>
         <Image v:Behaviors.LazySource="{Binding ProfileImageUri}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="50" Height="50" Margin="175,60,0,0"/>
-        <StackPanel Margin="78,100,74.6,111" HorizontalAlignment="Center" Width="241">
+        <StackPanel Margin="78,100,74.6,40" HorizontalAlignment="Center" Width="241">
             <Label Content="{Binding Name}" Foreground="White" FontWeight="Bold" Height="31" HorizontalContentAlignment="Center" Padding="0" Margin="0,0,-0.2,0" VerticalContentAlignment="Bottom"/>
             <Label Content="{Binding ScreenName}" Foreground="White" FontWeight="Bold" Height="31" HorizontalContentAlignment="Center" Padding="0" Margin="0,0,-0.2,0"/>
+            <TextBlock Foreground="White" Text="{Binding Bio}" HorizontalAlignment="Center" FontSize="8" TextWrapping="Wrap" VerticalAlignment="Top"/>
         </StackPanel>
         <metro:CaptionButton HorizontalAlignment="Right" Margin="0,0,22.6,10" Width="40" Height="25" VerticalAlignment="Bottom"/>
     </Grid>

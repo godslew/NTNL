@@ -79,6 +79,8 @@ namespace NTNL.ViewModels.items
             this.ProfileImageUri = user.ProfileImageUrlHttps;
             this.SpamBanner = Spam.SpamTextCreate(user);
             this.ProfileBgImageUri = user.ProfileBannerUrl;
+            this.Bio = user.Description;
+            
         }
 
         public UserViewModel()
@@ -94,6 +96,7 @@ namespace NTNL.ViewModels.items
             this.ProfileImageUri = user.ProfileImageUrlHttps;
             this.ProfileBgImageUri = user.ProfileBannerUrl;
             this.SpamBanner = Spam.SpamTextCreate(user);
+            this.Bio = user.Description;
         }
 
         #region Name変更通知プロパティ
@@ -202,6 +205,25 @@ namespace NTNL.ViewModels.items
             }
         }
         #endregion
+
+
+        #region Bio変更通知プロパティ
+        private string _Bio;
+
+        public string Bio
+        {
+            get
+            { return _Bio; }
+            set
+            { 
+                if (_Bio == value)
+                    return;
+                _Bio = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
 
     }
 }
