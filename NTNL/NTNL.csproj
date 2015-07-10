@@ -157,6 +157,7 @@
     <Compile Include="Models\DB\Entity\Mute.cs" />
     <Compile Include="Models\DB\Entity\Private.cs" />
     <Compile Include="Models\DB\Entity\Tag.cs" />
+    <Compile Include="Models\DB\NTNLPrivate.cs" />
     <Compile Include="Models\Twitter\NTNLAccount.cs" />
     <Compile Include="Models\Twitter\StatusTimeLine.cs" />
     <Compile Include="Models\Twitter\TwitterUtils.cs" />
@@ -165,6 +166,8 @@
     <Compile Include="ViewModels\AccountManagerViewModel.cs" />
     <Compile Include="ViewModels\CommonViewModel.cs" />
     <Compile Include="ViewModels\items\AccountViewModel.cs" />
+    <Compile Include="ViewModels\items\PrivateListsViewModel.cs" />
+    <Compile Include="ViewModels\items\PrivateViewModel.cs" />
     <Compile Include="ViewModels\items\StatusMediaViewModel.cs" />
     <Compile Include="ViewModels\items\StatusTimeLineViewModel.cs" />
     <Compile Include="ViewModels\items\TweetBoxWindowViewModel.cs" />

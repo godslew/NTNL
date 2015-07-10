@@ -7,7 +7,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:NTNL.Views"
         xmlns:vm="clr-namespace:NTNL.ViewModels"
-        Title="SettingWindow" Height="450" Width="600" Background="#FF595454">
+        Title="SettingWindow" Height="367.725" Width="440.4" Background="#FF595454">
 
     <Window.DataContext>
         <vm:SettingWindowViewModel/>
@@ -34,6 +34,27 @@
     </i:Interaction.Triggers>
 
     <Grid>
-        <metro:SystemButtons Margin="447,0,-0.4,393.6" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <metro:SystemButtons HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <ListView HorizontalAlignment="Left" Height="176" Margin="10,20,0,0" VerticalAlignment="Top" Width="150" Background="{x:Null}" ItemsSource="{Binding Accounts}" SelectionMode="Single" BorderBrush="Black" SelectedValue="{Binding selectedAccount}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Foreground="White" Text="{Binding ScreenName}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <TextBox HorizontalAlignment="Left" Height="37" Margin="188,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" ToolTip="NG Word" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <metro:CaptionButton Margin="327,68,0,0" Width="82" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Add NGWord" Command="{Binding RegisterNGWordCommand, Mode=OneWay}" IsEnabled="{Binding IsWrite}"/>
+        <ListView HorizontalAlignment="Left" Height="199" Margin="188,102,0,0" VerticalAlignment="Top" Width="205" Background="{x:Null}" BorderBrush="#FF110000" ItemsSource="{Binding Privates}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Background="{x:Null}" Foreground="White" Text="{Binding NGword}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </metro:MetroWindow>

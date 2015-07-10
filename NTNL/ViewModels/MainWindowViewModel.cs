@@ -68,6 +68,7 @@ namespace NTNL.ViewModels
 
         PropertyChangedEventListener listener;
         public MainWindowViewViewModel View { get; private set; }
+        public SettingWindowViewModel setView { get; private set; }
         NTNLs ntnls;
         public CommonViewModel common { get; private set; }
 
@@ -83,7 +84,13 @@ namespace NTNL.ViewModels
                 ntnls.Accounts,
                 p => new AccountViewModel(p),
                 DispatcherHelper.UIDispatcher);
-            common.isExpand = false;
+            
+            setView.PrivateLists = ViewModelHelper.CreateReadOnlyDispatcherCollection(
+                ntnls.PrivateList,
+                p => new PrivateListsViewModel(this, p),
+                DispatcherHelper.UIDispatcher);
+
+            setView.Accounts = this.Accounts;
 
             listener = new PropertyChangedEventListener(ntnls);
             CompositeDisposable.Add(listener);
@@ -97,9 +104,11 @@ namespace NTNL.ViewModels
         public MainWindowViewModel()
         {
             View = new MainWindowViewViewModel();
-            common = CommonViewModel.Instance;
+            setView = new SettingWindowViewModel(this);
+            //common = CommonViewModel.Instance;
           
         }
+
 
         private void StartStream()
         {
@@ -127,7 +136,6 @@ namespace NTNL.ViewModels
                 return _AccountManagerCommand;
             }
         }
-
         public void AccountManager()
         {
             
@@ -135,6 +143,31 @@ namespace NTNL.ViewModels
             var message =  new TransitionMessage(typeof(Views.AccountManagerWindow), new AccountManagerViewModel(), TransitionMode.NewOrActive);
             Messenger.Raise(message);
             
+        }
+        #endregion
+
+        #region OpenSettingCommand
+        private ViewModelCommand _OpenSettingCommand;
+
+        public ViewModelCommand OpenSettingCommand
+        {
+            get
+            {
+                if (_OpenSettingCommand == null)
+                {
+                    _OpenSettingCommand = new ViewModelCommand(OpenSetting);
+                }
+                return _OpenSettingCommand;
+            }
+        }
+
+        public void OpenSetting()
+        {
+
+            //messageを使ってみた,非常につよい
+            var message = new TransitionMessage(typeof(Views.SettingWindow), this.setView, TransitionMode.Modal);
+            Messenger.Raise(message);
+
         }
         #endregion
 
@@ -220,7 +253,14 @@ namespace NTNL.ViewModels
                 if (_selectedAccount == value)
                     return;
                 _selectedAccount = value;
-                
+                foreach (var plist in setView.PrivateLists)
+                {
+                    if (plist.ID == value.account.ID)
+                    {
+                        setView.Privates = plist.Privates;
+                        Console.WriteLine(plist.ID);
+                    }
+                }
                 Console.WriteLine(value.ScreenName+""+value.IsSelected.ToString());
                 RaisePropertyChanged();
             }
@@ -393,7 +433,7 @@ namespace NTNL.ViewModels
         }
         #endregion
 
-        #region
+        #region OpenUser
         public async void OpenUser(UserViewModel user)
         {
             await Task.Run(() =>

@@ -32,8 +32,10 @@ namespace NTNL.Models
         private List<IDisposable> StreamManager { get; set; }
         public ObservableSynchronizedCollection<NTNLAccount> Accounts { get; private set; }
         public ObservableSynchronizedCollection<StatusTimeLine> StatusTimeLines { get; private set; }
+        public ObservableSynchronizedCollection<NTNLPrivate> PrivateList { get; private set; }
         private IConnectableObservable<StreamingMessage> Streaming { get; set; }
         public bool hasAccounts { get; set; }
+        public bool hasPrivateList { get; set; }
 
         #region construct
         private NTNLs()
@@ -44,7 +46,9 @@ namespace NTNL.Models
             StatusTimeLines = new ObservableSynchronizedCollection<StatusTimeLine>();
             StatusTimeLines.Add(new StatusTimeLine("HOME"));
             Accounts = new ObservableSynchronizedCollection<NTNLAccount>();
+            PrivateList = new ObservableSynchronizedCollection<NTNLPrivate>();
             installAccounts();
+            installPrivate();
         }
         #endregion
 
@@ -73,6 +77,45 @@ namespace NTNL.Models
                      }
                //  });
                       
+        }
+
+        public void installPrivate()
+        {
+            try
+            {
+                var list = db.getPrivateList();
+                if (list == null)
+                {
+                    hasPrivateList = false;
+                }
+                else
+                {
+                    if (hasAccounts)
+                    {
+                        hasPrivateList = true;
+                        PrivateList.Clear();
+                        foreach (var ac in Accounts)
+                        {
+                            PrivateList.Add(new NTNLPrivate(ac.ID));
+                        }
+                        foreach (var plist in PrivateList)
+                        {
+                            foreach (var dto in list)
+                            {
+                                plist.addNGWord(Helper.helper.StringToLong(dto.TwitterID), dto.NGword);
+                            }
+                        }
+
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+                
+                
+            }
+            
         }
 
         #region singleton

@@ -169,7 +169,7 @@ namespace NTNL.Models.DB
         }
         
         //Private Methods
-        public void insertPrivtate(String TwitterID, String NGword)
+        public void insertPrivate(String TwitterID, String NGword)
         {
             var _entity = new Private(TwitterID, NGword);
             var dto = _entity.createDTO();

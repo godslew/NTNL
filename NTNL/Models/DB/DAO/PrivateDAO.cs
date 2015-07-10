@@ -19,6 +19,7 @@ namespace NTNL.Models.DB.DAO
         }
         public void insertPrivate(PrivateDTO dto)
         {
+            
             try
             {
                 using (var cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
@@ -45,6 +46,7 @@ namespace NTNL.Models.DB.DAO
                         // コミット
                         trans.Commit();
                         cn.Close();
+                        
                     }
                 }
             }
@@ -65,11 +67,12 @@ namespace NTNL.Models.DB.DAO
                     SQLiteCommand cmd = cn.CreateCommand();
                     cmd.CommandText = "SELECT * FROM " + DBConstants.Private_TABLE;
                     SQLiteDataReader sr = cmd.ExecuteReader();
-
+                    
                     var list = new List<PrivateDTO>();
                     while (sr.Read())
                     {
-                        var dto = new Private(sr[DBConstants.param_Private_TwitterID].ToString() , sr[DBConstants.Private_NGword].ToString());
+                       
+                        var dto = new Private(sr[DBConstants.Private_TwitterID].ToString() , sr[DBConstants.Private_NGword].ToString());
                         list.Add(dto.createDTO());
                     }
                     cn.Close();

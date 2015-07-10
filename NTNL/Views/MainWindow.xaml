@@ -80,8 +80,10 @@
 			</ListBox>
 			<metro:CaptionButton Content="+" FontSize="20" Background="{x:Null}" ToolTip="add column" Margin="4,0,44,0" Height="50" Command="{Binding addColumnCommand, Mode=OneWay}" VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type metro:CaptionIcon}}}" Focusable="False" IsHitTestVisible="True" IsTabStop="False"/>
 		</StackPanel>
-		<metro:CaptionButton HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,600,0,0" Content="setting" Height="37" Width="53" Command="{Binding AccountManagerCommand, Mode=OneWay}"/>
-		<DockPanel Margin="0,30,0,0">
+		<metro:CaptionButton HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,600,0,0" Content="Add Account" Height="37" Width="80" Command="{Binding AccountManagerCommand, Mode=OneWay}"/>
+        <metro:CaptionButton HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,640,0,0" Content="Setting" Height="37" Width="53" Command="{Binding OpenSettingCommand, Mode=OneWay}"/>
+
+        <DockPanel Margin="0,30,0,0">
 			<Expander x:Name="tweetButton" Background="#9E000C7B" FontSize="18.667" FontFamily="Meiryo UI"  IsHitTestVisible="True" Focusable="True" ExpandDirection="Right" VerticalAlignment="Top" IsExpanded="{Binding isExpand}">
 
 				<Expander.Header>
