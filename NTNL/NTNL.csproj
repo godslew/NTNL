@@ -137,6 +137,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Config\NTNLQueryTemplate.cs" />
+    <Compile Include="Config\SpamConfig.cs" />
     <Compile Include="Helper\helper.cs" />
     <Compile Include="Models\Analyzer\ColumnQuery.cs" />
     <Compile Include="Models\DB\DAO\AccountDAO.cs" />
@@ -192,6 +193,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\items\UserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -213,6 +218,9 @@
     </Compile>
     <Compile Include="Views\items\TweetColumn.xaml.cs">
       <DependentUpon>TweetColumn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\items\UserWindow.xaml.cs">
+      <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

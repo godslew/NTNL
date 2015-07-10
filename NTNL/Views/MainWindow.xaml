@@ -135,6 +135,7 @@
                                                     <MenuItem Header="返信" Command="{Binding ReplyCommand, Mode=OneWay}" />
                                                     <MenuItem Header="RT" Command="{Binding RetweetCommand, Mode=OneWay}" />
 										            <MenuItem Header="favorite" />
+                                                    <MenuItem Header= "{Binding User.ScreenName}" Command="{Binding OpenUserCommand, Mode=OneWay}" />
 										        </ContextMenu>
 								             </Grid.ContextMenu>
 											<StackPanel Margin="40,25,25,0" Orientation="Vertical">

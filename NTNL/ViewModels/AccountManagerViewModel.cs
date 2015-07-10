@@ -119,7 +119,7 @@ namespace NTNL.ViewModels
                             Console.WriteLine(account.TwitterID);
                         }
                         ntnls.installAccounts();
-                        ntnls.StartStreaming(tokens);
+                        ntnls.StartStreaming(new NTNLAccount(tokens));
                     }
                     catch (Exception)
                     {

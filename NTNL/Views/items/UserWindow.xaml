@@ -1,0 +1,48 @@
+﻿<metro:MetroWindow x:Class="NTNL.Views.items.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+        xmlns:v="clr-namespace:NTNL.Views"
+        xmlns:vm="clr-namespace:NTNL.ViewModels"
+        xmlns:vmi="clr-namespace:NTNL.ViewModels.items"
+        Title="UserWindow" Height="300" Width="400">
+
+    <Window.DataContext>
+        <vmi:UserViewModel/>
+    </Window.DataContext>
+
+    <i:Interaction.Triggers>
+
+        <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
+        <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
+        <!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています -->
+
+        <!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます-->
+        <i:EventTrigger EventName="ContentRendered">
+            <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
+        </i:EventTrigger>
+
+        <!--Windowが閉じたタイミングでViewModelのDisposeメソッドが呼ばれます-->
+        <i:EventTrigger EventName="Closed">
+            <l:DataContextDisposeAction/>
+        </i:EventTrigger>
+
+        <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
+
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <metro:SystemButtons  HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <Label Content="{Binding SpamBanner}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="276.6" Margin="10,0,0,0" Foreground="#FF0009F4" FontWeight="Bold"/>
+        <Image v:Behaviors.LazySource="{Binding ProfileBgImageUri}" HorizontalAlignment="Left" Height="202" Margin="0,30,-0.4,0" VerticalAlignment="Top" Width="394" Opacity="0.7" Stretch="UniformToFill"/>
+        <Image v:Behaviors.LazySource="{Binding ProfileImageUri}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="50" Height="50" Margin="175,60,0,0"/>
+        <StackPanel Margin="78,100,74.6,111" HorizontalAlignment="Center" Width="241">
+            <Label Content="{Binding Name}" Foreground="White" FontWeight="Bold" Height="31" HorizontalContentAlignment="Center" Padding="0" Margin="0,0,-0.2,0" VerticalContentAlignment="Bottom"/>
+            <Label Content="{Binding ScreenName}" Foreground="White" FontWeight="Bold" Height="31" HorizontalContentAlignment="Center" Padding="0" Margin="0,0,-0.2,0"/>
+        </StackPanel>
+        <metro:CaptionButton HorizontalAlignment="Right" Margin="0,0,22.6,10" Width="40" Height="25" VerticalAlignment="Bottom"/>
+    </Grid>
+</metro:MetroWindow>

@@ -221,6 +221,7 @@ namespace NTNL.ViewModels
         }
         #endregion
 
+        #region Via抽出
         static Regex reg = new Regex("<a href=\"(?<url>.+)\" rel=\"nofollow\">(?<client>.+)</a>");
         
         public void ExtractVia()
@@ -231,7 +232,7 @@ namespace NTNL.ViewModels
             Via = "via" + m.Groups["client"].Value;
             
         }
-
+        #endregion
 
         #region ReplyCommand
         private ViewModelCommand _ReplyCommand;
@@ -277,6 +278,30 @@ namespace NTNL.ViewModels
             }
         }
         #endregion
+
+
+        #region OpenUserCommand
+        private ViewModelCommand _OpenUserCommand;
+
+        public ViewModelCommand OpenUserCommand
+        {
+            get
+            {
+                if (_OpenUserCommand == null)
+                {
+                    _OpenUserCommand = new ViewModelCommand(OpenUser);
+                }
+                return _OpenUserCommand;
+            }
+        }
+
+        public  void OpenUser()
+        {
+            main.OpenUser(this.User);
+        }
+        #endregion
+
+
 
 
     }

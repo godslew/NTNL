@@ -92,10 +92,10 @@ namespace NTNL.Models
         #endregion
 
         #region Streaming接続
-        public void StartStreaming(Tokens token)
+        public void StartStreaming(NTNLAccount account)
         {
             
-            Streaming = token.Streaming.StartObservableStream(
+            Streaming = account.Token.Streaming.StartObservableStream(
                 StreamingType.User,
                 new StreamingParameters(include_entities => "true", include_followings_activity => "true"))
                 .Publish();
@@ -109,7 +109,7 @@ namespace NTNL.Models
                         {
               
                             case MessageType.Create:
-                                NTNL_OnStatus(this, new NTNLMessageReceivedEventArgs<StatusMessage>(p as StatusMessage),token);
+                                NTNL_OnStatus(this, new NTNLMessageReceivedEventArgs<StatusMessage>(p as StatusMessage), account);
                                 break;
                             case MessageType.Event:
                                 //NTNL_OnEvent(this, new NTNLMessageReceivedEventArgs<EventMessage>(p as EventMessage));
@@ -134,26 +134,26 @@ namespace NTNL.Models
                     }, TaskCreationOptions.LongRunning)
                     .ContinueWith(t =>
                     {
-                        if (t.Exception != null && !t.IsCanceled) RestartStreaming(token);
+                        if (t.Exception != null && !t.IsCanceled) RestartStreaming(account);
                     });
                 },
                 (ex) =>
                 {
                     //LogInformation("エラーが発生したため再接続しました : " + ex.Message);
                    // SaveLog();
-                    RestartStreaming(token);
+                    RestartStreaming(account);
                 },
                 () =>
                 {
                    // LogInformation("UserStreamが切断されたため再接続しました");
                    // SaveLog();
-                    RestartStreaming(token);
+                    RestartStreaming(account);
                 }
             ));
             StreamManager.Add(Streaming.Connect());
         }
 
-        private void NTNL_OnStatus(object sender, NTNLMessageReceivedEventArgs<StatusMessage> e, Tokens token)
+        private void NTNL_OnStatus(object sender, NTNLMessageReceivedEventArgs<StatusMessage> e, NTNLAccount account)
         {
 
             var status = e.Message.Status;
@@ -161,15 +161,15 @@ namespace NTNL.Models
            Console.WriteLine(string.Format("{0}:{1}", status.User.ScreenName, status.Text));
            foreach (var tl in StatusTimeLines)
            {
-               tl.addStatus(status, token);
+               tl.addStatus(status, account);
            }
            
         }
 
-        public void RestartStreaming(Tokens token)
+        public void RestartStreaming(NTNLAccount account)
         {
             StopStreaming();
-            StartStreaming(token);
+            StartStreaming(account);
         }
 
         public void StopStreaming()

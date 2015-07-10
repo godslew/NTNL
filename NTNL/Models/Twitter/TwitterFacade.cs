@@ -63,6 +63,7 @@ namespace NTNL.Models.Twitter
             try
             {
                 var dtoList = db.getAccountList();
+                if (dtoList.Count < 1) { return null; }
                 foreach (AccountDTO dto in dtoList)
                 {
                     list.Add(new NTNLAccount(helper.StringToLong(dto.TwitterID), dto.CK, dto.CS, dto.AT, dto.ATS));

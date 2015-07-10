@@ -90,7 +90,7 @@ namespace NTNL.ViewModels
             //SelectedAccount = new List<AccountViewModel>();
             if (ntnls.hasAccounts)
             {
-                test();
+                StartStream();
             }
         }
 
@@ -101,7 +101,7 @@ namespace NTNL.ViewModels
           
         }
 
-        private void test()
+        private void StartStream()
         {
 
             var list = ntnls.Accounts;
@@ -109,7 +109,7 @@ namespace NTNL.ViewModels
             {
                 var ac = list.First();
                 Console.WriteLine(ac.Token.UserId+""+ac.Token.AccessToken);
-                ntnls.StartStreaming(list.First().Token);
+                ntnls.StartStreaming(ac);
             }
         }
 
@@ -390,6 +390,17 @@ namespace NTNL.ViewModels
             var t = new StringBuilder();
             ru.ForEach(p => t.Append(String.Format("@{0} ", p)));
             Text = t.ToString();
+        }
+        #endregion
+
+        #region
+        public async void OpenUser(UserViewModel user)
+        {
+            await Task.Run(() =>
+            {
+                var message = new TransitionMessage(typeof(Views.items.UserWindow), user, TransitionMode.Modal);
+                Messenger.Raise(message);
+            });
         }
         #endregion
     }

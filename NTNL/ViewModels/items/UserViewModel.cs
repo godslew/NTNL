@@ -13,6 +13,7 @@ using Livet.Messaging.Windows;
 
 using NTNL.Models;
 using CoreTweet;
+using NTNL.Models.Analyzer;
 
 namespace NTNL.ViewModels.items
 {
@@ -70,12 +71,29 @@ namespace NTNL.ViewModels.items
 
         public UserViewModel(User user, MainWindowViewModel main)
         {
-            
+
             this.user = user;
             this.main = main;
             this.Name = user.Name;
             this.ScreenName = user.ScreenName;
             this.ProfileImageUri = user.ProfileImageUrlHttps;
+            this.SpamBanner = Spam.SpamTextCreate(user);
+            this.ProfileBgImageUri = user.ProfileBannerUrl;
+        }
+
+        public UserViewModel()
+        {
+
+        }
+
+        public UserViewModel(User user)
+        {
+            this.user = user;
+            this.Name = user.Name;
+            this.ScreenName = user.ScreenName;
+            this.ProfileImageUri = user.ProfileImageUrlHttps;
+            this.ProfileBgImageUri = user.ProfileBannerUrl;
+            this.SpamBanner = Spam.SpamTextCreate(user);
         }
 
         #region Name変更通知プロパティ
@@ -144,6 +162,42 @@ namespace NTNL.ViewModels.items
                 if (_ProfileImageUri == value)
                     return;
                 _ProfileImageUri = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+        #region ProfileBgImageUri変更通知プロパティ
+        private Uri _ProfileBgImageUri;
+
+        public Uri ProfileBgImageUri
+        {
+            get
+            { return _ProfileBgImageUri; }
+            set
+            { 
+                if (_ProfileBgImageUri == value)
+                    return;
+                _ProfileBgImageUri = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+
+        #region SpamBanner変更通知プロパティ
+        private string _SpamBanner;
+
+        public string SpamBanner
+        {
+            get
+            { return _SpamBanner; }
+            set
+            { 
+                if (_SpamBanner == value)
+                    return;
+                _SpamBanner = value;
                 RaisePropertyChanged();
             }
         }
