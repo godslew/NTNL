@@ -106,7 +106,7 @@ namespace NTNL.Models.Twitter
         /// <param name="targetID"></param>
         public void destroyStatus(NTNLAccount account, long targetID)
         {
-
+            account.Token.Statuses.DestroyAsync(id => targetID);
         }
 
         /// <summary>

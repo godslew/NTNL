@@ -165,6 +165,7 @@
     <Compile Include="ViewModels\AccountManagerViewModel.cs" />
     <Compile Include="ViewModels\CommonViewModel.cs" />
     <Compile Include="ViewModels\items\AccountViewModel.cs" />
+    <Compile Include="ViewModels\items\StatusMediaViewModel.cs" />
     <Compile Include="ViewModels\items\StatusTimeLineViewModel.cs" />
     <Compile Include="ViewModels\items\TweetBoxWindowViewModel.cs" />
     <Compile Include="ViewModels\items\UserViewModel.cs" />

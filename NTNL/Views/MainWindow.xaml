@@ -132,16 +132,28 @@
 										<Grid Height="Auto" Width="290">
 											<Grid.ContextMenu>
 									            <ContextMenu>
-                                                    <MenuItem Header="返信" Command="{Binding ReplyCommand, Mode=OneWay}" />
-                                                    <MenuItem Header="RT" Command="{Binding RetweetCommand, Mode=OneWay}" />
+                                                    <MenuItem Header="reply" Command="{Binding ReplyCommand, Mode=OneWay}" />
+                                                    <MenuItem Header="retweet" Command="{Binding RetweetCommand, Mode=OneWay}" />
 										            <MenuItem Header="favorite" />
+                                                    <MenuItem Header="delete" Command="{Binding deleteStatusCommand, Mode=OneWay}" />
                                                     <MenuItem Header= "{Binding User.ScreenName}" Command="{Binding OpenUserCommand, Mode=OneWay}" />
 										        </ContextMenu>
 								             </Grid.ContextMenu>
 											<StackPanel Margin="40,25,25,0" Orientation="Vertical">
 												<TextBlock x:Name="text" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding text}" VerticalAlignment="Top" Height="Auto" Margin="0" Width="220" RenderTransformOrigin="0.489,0.461" Foreground="White" FontSize="10"/>
 												<Label x:Name="via" Content="{Binding Via}" FontSize="8"/>
-												<Label x:Name="retweet" Content="{Binding RetweetedBytext}" FontSize="8" Foreground="#FF00065C"/>
+												<Expander Header="image" FontSize="8" Visibility="{Binding HasMediaVisibility}">
+                                                    <ListBox ItemsSource="{Binding Medias}">
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <StackPanel>
+                                                                    <Image v:Behaviors.LazySource="{Binding Uri}" Width="250" Height="250"/>
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
+																								
+											     </Expander>
 											</StackPanel>
 											<DockPanel Margin="40,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
 												<Label Content="{Binding User.Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0" Foreground="White" FontSize="10"/>

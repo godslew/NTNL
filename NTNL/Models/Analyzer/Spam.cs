@@ -25,7 +25,7 @@ namespace NTNL.Models.Analyzer
             {
                 return "このユーザはスパムの可能性があります";
             }
-            return "このユーザはスパムではありません";
+            return "";
 
 
         }
