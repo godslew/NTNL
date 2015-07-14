@@ -86,7 +86,7 @@ namespace NTNL.Models.DB.DAO
             }
 
         }
-        public void deletePrivate(PrivateDTO dto, String TwitterID , String NGword)
+        public void deletePrivate(String TwitterID , String NGword)
         {
             try
             {

@@ -35,7 +35,7 @@
 
     <Grid>
         <metro:SystemButtons HorizontalAlignment="Right" VerticalAlignment="Top"/>
-        <ListView HorizontalAlignment="Left" Height="176" Margin="10,20,0,0" VerticalAlignment="Top" Width="150" Background="{x:Null}" ItemsSource="{Binding Accounts}" SelectionMode="Single" BorderBrush="Black" SelectedValue="{Binding selectedAccount}">
+        <ListView HorizontalAlignment="Left" Height="176" Margin="10,20,0,0" VerticalAlignment="Top" Width="150" Background="{x:Null}" ItemsSource="{Binding Accounts}" SelectionMode="Single" BorderBrush="Black" SelectedValue="{Binding selectedAccount}" ToolTip="Account list">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Foreground="White" Text="{Binding ScreenName}"/>
@@ -47,9 +47,9 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <TextBox HorizontalAlignment="Left" Height="37" Margin="188,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" ToolTip="NG Word" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox HorizontalAlignment="Left" Height="37" Margin="188,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" Background="{x:Null}" BorderBrush="#FF003ABC" Foreground="White" ToolTip="NG Word" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <metro:CaptionButton Margin="327,68,0,0" Width="82" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Add NGWord" Command="{Binding RegisterNGWordCommand, Mode=OneWay}" IsEnabled="{Binding IsWrite}"/>
-        <ListView HorizontalAlignment="Left" Height="199" Margin="188,102,0,0" VerticalAlignment="Top" Width="205" Background="{x:Null}" BorderBrush="#FF110000" ItemsSource="{Binding Privates}">
+        <ListView HorizontalAlignment="Left" Height="199" Margin="188,102,0,0" VerticalAlignment="Top" Width="205" Background="{x:Null}" BorderBrush="#FF110000" ItemsSource="{Binding Privates}" ToolTip="NGWord list">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Background="{x:Null}" Foreground="White" Text="{Binding NGword}"/>

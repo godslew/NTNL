@@ -85,7 +85,7 @@ namespace NTNL.Models.DB.DAO
             }
 
         }
-        public void deleteColumn(ColumnDTO dto , int NUM)
+        public void deleteColumn(int NUM)
         {
             try
             {
@@ -117,6 +117,51 @@ namespace NTNL.Models.DB.DAO
                 Console.WriteLine("column cannot delete.");
             }
 
+        }
+
+        /// <summary>
+        /// update column
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <param name="n"></param> <- change to target column num
+        public void updateColumn(ColumnDTO dto, int n)
+        {
+            try
+            {
+                using (var cn = new SQLiteConnection(DBConstants.DB_CONNECTION))
+                {
+                    cn.Open();
+                    using (SQLiteTransaction trans = cn.BeginTransaction())
+                    {
+                        SQLiteCommand cmd = cn.CreateCommand();
+
+                        // デリート文
+                        cmd.CommandText = "UPDATE " + DBConstants.Column_TABLE +" SET "+ DBConstants.COLUMN_NAME +" = @"+ DBConstants.param_COLUMN_NAME +", "+DBConstants.COLUMN_QUERY+" = @"+DBConstants.param_COLUMN_QUERY+", "+DBConstants.COLUMN_TwitterID+" = @"+DBConstants.param_COLUMN_TwitterID+", "+DBConstants.COLUMN_NUM+" = @"+DBConstants.param_COLUMN_NUM +" WHERE " + DBConstants.COLUMN_NUM + " = " + n;
+
+                        // パラメータのセット
+                        cmd.Parameters.Add(DBConstants.param_COLUMN_NUM, System.Data.DbType.Int32);
+                        cmd.Parameters.Add(DBConstants.param_COLUMN_NAME, System.Data.DbType.String);
+                        cmd.Parameters.Add(DBConstants.param_COLUMN_TwitterID, System.Data.DbType.String);
+                        cmd.Parameters.Add(DBConstants.param_COLUMN_QUERY, System.Data.DbType.String);
+
+                        // データの追加
+                        cmd.Parameters[DBConstants.param_COLUMN_NUM].Value = dto.NUM;
+                        cmd.Parameters[DBConstants.param_COLUMN_NAME].Value = dto.NAME;
+                        cmd.Parameters[DBConstants.param_COLUMN_TwitterID].Value = dto.TwitterID;
+                        cmd.Parameters[DBConstants.param_COLUMN_QUERY].Value = dto.QUERY;
+
+                        cmd.ExecuteNonQuery();
+
+                        // コミット
+                        trans.Commit();
+                        cn.Close();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("column cannot delete.");
+            }
         }
 
 

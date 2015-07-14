@@ -144,6 +144,7 @@
 											<StackPanel Margin="40,25,25,0" Orientation="Vertical">
 												<TextBlock x:Name="text" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding text}" VerticalAlignment="Top" Height="Auto" Margin="0" Width="220" RenderTransformOrigin="0.489,0.461" Foreground="White" FontSize="10"/>
 												<Label x:Name="via" Content="{Binding Via}" FontSize="8"/>
+												<Label Content="{Binding RetweetedBytext}" Foreground="#FF00105E" Visibility="{Binding IsRetweet}" FontSize="10.667"/>
 												<Expander Header="image" FontSize="8" Visibility="{Binding HasMediaVisibility}">
                                                     <ListBox ItemsSource="{Binding Medias}">
                                                         <ListBox.ItemTemplate>

@@ -161,11 +161,17 @@ namespace NTNL.Models.DB
             return list;
         }
 
-        public void deleteColumn(ColumnDTO dto , int NUM)
+        public void deleteColumn(int NUM)
         {
             var dao = new ColumnDAO(dbConnectionString);
-            dao.deleteColumn(dto, NUM);
+            dao.deleteColumn(NUM);
 
+        }
+
+        public void updateColumn(ColumnDTO dto, int NUM)
+        {
+            var dao = new ColumnDAO(dbConnectionString);
+            dao.updateColumn(dto, NUM);
         }
         
         //Private Methods
@@ -184,10 +190,10 @@ namespace NTNL.Models.DB
             return list;
         }
 
-        public void deletePrivate(PrivateDTO dto, String TwitterID, String NGword)
+        public void deletePrivate(String TwitterID, String NGword)
         {
             var dao = new PrivateDAO(dbConnectionString);
-            dao.deletePrivate(dto, TwitterID, NGword);
+            dao.deletePrivate(TwitterID, NGword);
         }
     }
 }

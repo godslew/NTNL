@@ -242,6 +242,7 @@ namespace NTNL.ViewModels
                         DBFacade.Instance.insertPrivate(selectedAccount.account.ID.ToString(), Text);
                         
                         ntnls.installPrivate();
+                       
                     }
                     catch (Exception)
                     {

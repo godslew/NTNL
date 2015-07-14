@@ -16,5 +16,8 @@ namespace NTNL.Config
         public const string ActivityQuery = "%ID%.FAVORITE.FOLLOW";
         public const string deleteStatusQuery = "%ID%.DELETE";
 
+        public const string QueryRegex = "%ID%";
+        
+
     }
 }
