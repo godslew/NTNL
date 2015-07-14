@@ -18,6 +18,7 @@ using NTNL.Models.Twitter;
 using System.Threading.Tasks;
 using NTNL.ViewModels.items;
 using System.Windows.Controls;
+using NTNL.Models.Analyzer;
 
 namespace NTNL.ViewModels
 {
@@ -398,22 +399,63 @@ namespace NTNL.ViewModels
 
         public void Tweet(string parameter)
         {
+            var analyze = new PrivateAnalyzer();
             Console.WriteLine(parameter);
+            if(ntnls.hasPrivateList){
+            foreach(var list in ntnls.PrivateList){
+                if (list.ID == selectedAccount.account.ID)
+                    {
+                        analyze.setWordList(list.NGList.ToList());
+                        analyze.setText(parameter);
+                        break;
+                     }
+                }
+            }
+            if (analyze.hasWordlist)
+            {
+                var clist = analyze.getContainNGwordList();
+                if (analyze.hasNGword)
+                {
+                    if (clist != null)
+                    {
+                        var Warning = new WarningViewModel(clist, this);
+                        var message = new TransitionMessage(typeof(Views.items.Warning), Warning, TransitionMode.Modal);
+                        Messenger.Raise(message);
+                    }
+                    else
+                    {
+                        sendTweet(selectedAccount.account, parameter);
+                    }
+                }
+                else if (!analyze.hasNGword)
+                {
+                    sendTweet(selectedAccount.account, parameter);
+                }
+            }
+            else
+            {
+                sendTweet(selectedAccount.account, parameter);
+            }
+        }
+        #endregion
+
+        #region sendTweet
+        public void sendTweet(NTNLAccount ac, string text)
+        {
             if (selectedAccount != null)
             {
                 if (!isReply)
                 {
-                    TwitterFacade.Instance.UpdateStatus(selectedAccount.account, parameter);
+                    TwitterFacade.Instance.UpdateStatus(selectedAccount.account, text);
                     Text = "";
                 }
                 else if (isReply)
                 {
-                    TwitterFacade.Instance.ReplyToStatus(selectedAccount.account, parameter, ReplyingStatus.id);
+                    TwitterFacade.Instance.ReplyToStatus(selectedAccount.account, text, ReplyingStatus.id);
                     isReply = false;
                     Text = "";
                 }
             }
-
         }
         #endregion
 

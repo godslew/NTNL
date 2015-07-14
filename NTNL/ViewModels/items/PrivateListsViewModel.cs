@@ -83,7 +83,7 @@ namespace NTNL.ViewModels.items
 
         }
 
-        #region Statuses変更通知プロパティ
+        #region Privates変更通知プロパティ
         private ReadOnlyDispatcherCollection<PrivateViewModel> _Privates;
 
         public ReadOnlyDispatcherCollection<PrivateViewModel> Privates

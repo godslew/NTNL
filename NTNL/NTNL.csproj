@@ -140,6 +140,7 @@
     <Compile Include="Config\SpamConfig.cs" />
     <Compile Include="Helper\helper.cs" />
     <Compile Include="Models\Analyzer\ColumnQuery.cs" />
+    <Compile Include="Models\Analyzer\PrivateAnalyzer.cs" />
     <Compile Include="Models\DB\DAO\AccountDAO.cs" />
     <Compile Include="Models\DB\DAO\ColumnDAO.cs" />
     <Compile Include="Models\DB\DAO\EntityDAO.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="ViewModels\items\StatusTimeLineViewModel.cs" />
     <Compile Include="ViewModels\items\TweetBoxWindowViewModel.cs" />
     <Compile Include="ViewModels\items\UserViewModel.cs" />
+    <Compile Include="ViewModels\items\WarningViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewViewModel.cs" />
     <Compile Include="ViewModels\SettingWindowViewModel.cs" />
     <Compile Include="Views\Behaviors.cs" />
@@ -201,6 +203,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\items\Warning.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -225,6 +231,9 @@
     </Compile>
     <Compile Include="Views\items\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\items\Warning.xaml.cs">
+      <DependentUpon>Warning.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
