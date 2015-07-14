@@ -44,7 +44,8 @@ namespace NTNL.Models
             tw = TwitterFacade.Instance;
             db = DBFacade.Instance;
             StatusTimeLines = new ObservableSynchronizedCollection<StatusTimeLine>();
-            StatusTimeLines.Add(new StatusTimeLine("HOME"));
+            StatusTimeLines.Add(new StatusTimeLine("HOME","HOME"));
+            StatusTimeLines.Add(new StatusTimeLine("MENTION", "MENTION"));
             Accounts = new ObservableSynchronizedCollection<NTNLAccount>();
             PrivateList = new ObservableSynchronizedCollection<NTNLPrivate>();
             installAccounts();
@@ -155,7 +156,7 @@ namespace NTNL.Models
                                 NTNL_OnStatus(this, new NTNLMessageReceivedEventArgs<StatusMessage>(p as StatusMessage), account);
                                 break;
                             case MessageType.Event:
-                                //NTNL_OnEvent(this, new NTNLMessageReceivedEventArgs<EventMessage>(p as EventMessage));
+                                NTNL_OnEvent(this, new NTNLMessageReceivedEventArgs<EventMessage>(p as EventMessage), account);
                                 break;
                             case MessageType.DirectMesssage:
                                 //NTNL_OnDirectMessage(this, new NTNLMessageReceivedEventArgs<DirectMessageMessage>(p as DirectMessageMessage));
@@ -204,9 +205,18 @@ namespace NTNL.Models
            Console.WriteLine(string.Format("{0}:{1}", status.User.ScreenName, status.Text));
            foreach (var tl in StatusTimeLines)
            {
-               tl.addStatus(status, account);
+               tl.addStatus(status, account, "HOME");
+               if (status.Entities.UserMentions.Any(p => p.Id == account.user.Id) && status.RetweetedStatus == null)
+               {
+                   tl.addStatus(status, account, "MENTION");
+               }
            }
            
+        }
+
+        private void NTNL_OnEvent(object sender, NTNLMessageReceivedEventArgs<EventMessage> e, NTNLAccount ac)
+        {
+            var s = e.Message;
         }
 
         public void RestartStreaming(NTNLAccount account)

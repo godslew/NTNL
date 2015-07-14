@@ -22,5 +22,10 @@ namespace NTNL.Models.Analyzer
 
 
 
+
+        public bool contain(string message)
+        {
+            return query.Contains(message);
+        }
     }
 }

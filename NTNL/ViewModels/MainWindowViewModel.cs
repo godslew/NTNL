@@ -428,6 +428,7 @@ namespace NTNL.ViewModels
             var s = st.SourceStatus;
             List<string> ru = s.Entities.UserMentions.Select(p => p.ScreenName).ToList();
             if (!ru.Contains(s.User.ScreenName)) ru.Insert(0, s.User.ScreenName);
+            if (ru.Count != 1 && ru.Contains(selectedAccount.ScreenName)) ru.Remove(selectedAccount.ScreenName);
             var t = new StringBuilder();
             ru.ForEach(p => t.Append(String.Format("@{0} ", p)));
             Text = t.ToString();

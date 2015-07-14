@@ -44,7 +44,7 @@ namespace NTNL.Models.Twitter
             this.Query = new ColumnQuery(_query);
         }
 
-        public void addStatus(Status _status, NTNLAccount account)
+        public void addStatus(Status _status, NTNLAccount account, string message)
         {
             /*
              * collectionにstatusを格納
@@ -55,7 +55,10 @@ namespace NTNL.Models.Twitter
                 //queryが定義されていたら
                 if (this.HasQuery)
                 {
-
+                    if (Query.contain(message))
+                    {
+                        Statuses.Insert(0, _status);
+                    }
 
                 }
                 else
