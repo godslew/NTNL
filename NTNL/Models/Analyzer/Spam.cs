@@ -32,10 +32,19 @@ namespace NTNL.Models.Analyzer
 
         public static bool SpamTweetAnalyzer(Status st)
         {
-            if ((double)(st.FavoriteCount / st.RetweetCount) <= SpamConfig.SpamTweetReFaPercent)
+            try
             {
-                return true;
+                if ((double)(st.FavoriteCount / st.RetweetCount) <= SpamConfig.SpamTweetReFaPercent)
+                {
+                    return true;
+                }
             }
+            catch (Exception)
+            {
+                
+               
+            }
+
             return false;
         }
     }
