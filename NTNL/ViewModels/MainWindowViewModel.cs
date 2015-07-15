@@ -445,5 +445,13 @@ namespace NTNL.ViewModels
             });
         }
         #endregion
+
+        #region SpamRetweetWarning
+        public void SpamRetweetWarning(StatusViewModel st)
+        {
+            var message = new TransitionMessage(typeof(Views.items.SpamWarning), st, TransitionMode.Modal);
+            Messenger.Raise(message);
+        }
+        #endregion
     }
 }

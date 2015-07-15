@@ -187,6 +187,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\items\SpamWarning.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\items\Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -223,6 +227,9 @@
     <Compile Include="Models\Twitter\TwitterFacade.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\items\StatusViewModel.cs" />
+    <Compile Include="Views\items\SpamWarning.xaml.cs">
+      <DependentUpon>SpamWarning.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\items\TweetBoxWindow.xaml.cs">
       <DependentUpon>TweetBoxWindow.xaml</DependentUpon>
     </Compile>

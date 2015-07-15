@@ -80,8 +80,8 @@
 			</ListBox>
 			<metro:CaptionButton Content="+" FontSize="20" Background="{x:Null}" ToolTip="add column" Margin="4,0,44,0" Height="50" Command="{Binding addColumnCommand, Mode=OneWay}" VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type metro:CaptionIcon}}}" Focusable="False" IsHitTestVisible="True" IsTabStop="False"/>
 		</StackPanel>
-		<metro:CaptionButton HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,600,0,0" Content="Add Account" Height="37" Width="80" Command="{Binding AccountManagerCommand, Mode=OneWay}"/>
-        <metro:CaptionButton HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,640,0,0" Content="Setting" Height="37" Width="53" Command="{Binding OpenSettingCommand, Mode=OneWay}"/>
+		<metro:CaptionButton HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,600,0,0" Content="Add Account" Height="37" Width="80" Command="{Binding AccountManagerCommand, Mode=OneWay}" ToolTip="Add Account"/>
+        <metro:CaptionButton HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,640,0,0" Content="Setting" Height="37" Width="53" Command="{Binding OpenSettingCommand, Mode=OneWay}" ToolTip="Setting"/>
 
         <DockPanel Margin="0,30,0,0">
 			<Expander x:Name="tweetButton" Background="#9E000C7B" FontSize="18.667" FontFamily="Meiryo UI"  IsHitTestVisible="True" Focusable="True" ExpandDirection="Right" VerticalAlignment="Top" IsExpanded="{Binding isExpand}">
@@ -90,17 +90,17 @@
 					<TextBlock Width="118" Text="New Tweet" Background="#FF132882"/>
 				</Expander.Header>
 				<Grid Height="655" Width="349">
-					<TextBox x:Name="textBox" HorizontalAlignment="Left" Height="82" Margin="158,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" ToolTip="今何してる？" UndoLimit="500" FontSize="10" Background="Transparent" Foreground="White" BorderBrush="Black" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+					<TextBox x:Name="textBox" HorizontalAlignment="Left" Height="82" Margin="158,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" ToolTip="今何してる？" UndoLimit="500" FontSize="10" Background="Transparent" Foreground="White" BorderBrush="Black" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True">
 						<TextBox.InputBindings>
 							<KeyBinding Key="Enter" Modifiers="Control" Command="{Binding TweetCommand, Mode=OneWay}" CommandParameter="{Binding Text, ElementName=textBox}"/>
 						</TextBox.InputBindings>
 					</TextBox>
-					<metro:CaptionButton Margin="288,193,0,0" Content="Tweet" Width="51" Height="30"  Focusable="True" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" IsEnabled="{Binding isWrite}" CommandParameter="{Binding Text, ElementName=textBox}" Command="{Binding TweetCommand, Mode=OneWay}"/>
+					<metro:CaptionButton Margin="288,193,0,0" Content="Tweet" Width="51" Height="30"  Focusable="True" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" IsEnabled="{Binding isWrite}" CommandParameter="{Binding Text, ElementName=textBox}" Command="{Binding TweetCommand, Mode=OneWay}" ToolTip="Tweet(Ctrl+Enter)"/>
 					<ListView Background="Transparent" Margin="158,0,63,554" ItemsSource="{Binding Accounts}" SelectedValue="{Binding selectedAccount}" SelectionMode="Single" >
 						<ListView.ItemTemplate>
 							<DataTemplate>
 								<DockPanel>
-									<TextBlock Text="{Binding ScreenName}" FontSize="10"/>
+									<TextBlock Text="{Binding ScreenName}" FontSize="10" ToolTip="{Binding ScreenName}"/>
 								</DockPanel>
                                 
 							</DataTemplate>
@@ -149,9 +149,9 @@
                                                     <ListBox ItemsSource="{Binding Medias}">
                                                         <ListBox.ItemTemplate>
                                                             <DataTemplate>
-                                                                <StackPanel>
+                                                                <DockPanel>
                                                                     <Image v:Behaviors.LazySource="{Binding Uri}" Width="250" Height="250"/>
-                                                                </StackPanel>
+                                                                </DockPanel>
                                                             </DataTemplate>
                                                         </ListBox.ItemTemplate>
                                                     </ListBox>

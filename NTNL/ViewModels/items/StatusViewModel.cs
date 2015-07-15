@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Windows;
 using NTNL.Models.Twitter;
+using NTNL.Models.Analyzer;
 
 namespace NTNL.ViewModels
 {
@@ -36,6 +37,11 @@ namespace NTNL.ViewModels
 
         public void Initialize()
         {
+        }
+
+        public StatusViewModel()
+        {
+
         }
 
         public StatusViewModel(MainWindowViewModel mw, Status _status){
@@ -306,7 +312,14 @@ namespace NTNL.ViewModels
         {
             if (main.selectedAccount != null)
             {
-                TwitterFacade.Instance.RetweetStatus(main.selectedAccount.account, id);
+                if (Spam.SpamTweetAnalyzer(SourceStatus))
+                {
+                    main.SpamRetweetWarning(this);
+                }
+                else
+                {
+                    TwitterFacade.Instance.RetweetStatus(main.selectedAccount.account, id);
+                }
             }
         }
         #endregion
@@ -360,6 +373,28 @@ namespace NTNL.ViewModels
                 
                 
             }
+        }
+        #endregion
+
+
+        #region RetweetOKCommand
+        private ViewModelCommand _RetweetOKCommand;
+
+        public ViewModelCommand RetweetOKCommand
+        {
+            get
+            {
+                if (_RetweetOKCommand == null)
+                {
+                    _RetweetOKCommand = new ViewModelCommand(RetweetOK);
+                }
+                return _RetweetOKCommand;
+            }
+        }
+
+        public void RetweetOK()
+        {
+            TwitterFacade.Instance.RetweetStatus(main.selectedAccount.account, id);
         }
         #endregion
 
