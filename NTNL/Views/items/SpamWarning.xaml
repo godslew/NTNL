@@ -9,7 +9,7 @@
         xmlns:vi="clr-namespace:NTNL.Views.items"
         xmlns:vm="clr-namespace:NTNL.ViewModels"
         xmlns:vmi="clr-namespace:NTNL.ViewModels.items"
-        Title="SpamWarning" Height="303.284" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+        Title="SpamWarning" Width="400.560" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Height="356.096">
 
     <Window.DataContext>
         <vm:StatusViewModel/>
@@ -37,23 +37,23 @@
 
     <Grid>
         <TextBlock  Foreground="Red" Text="Warning!!" FontWeight="Bold" TextDecorations="{x:Null}" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"/>
-        <StackPanel Margin="60,40,44,110.4" Orientation="Vertical">
-        	<Grid Height="Auto" Width="290" HorizontalAlignment="Left" VerticalAlignment="Top">
-        		<StackPanel Margin="40,25,25,0" Orientation="Vertical">
-        			<TextBlock x:Name="text" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding text}" VerticalAlignment="Top" Height="Auto" Margin="0" Width="220" RenderTransformOrigin="0.489,0.461" Foreground="White" FontSize="10"/>
-        			<Label x:Name="via" Content="{Binding Via}" FontSize="8"/>
-        		</StackPanel>
-        		<DockPanel Margin="40,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-        			<Label Content="{Binding User.Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0" Foreground="White" FontSize="10"/>
-        			<Label Content="{Binding User.ScreenName}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0" Foreground="White" FontSize="10"/>
-        		</DockPanel>
-        		<StackPanel Orientation="Vertical">
-        			<Image v:Behaviors.LazySource="{Binding User.ProfileImageUri}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" MaxWidth="30" MaxHeight="30"/>
-        		</StackPanel>
-        	</Grid>
-        	<metro:PromptTextBox TextWrapping="Wrap" Text="このTweetはスパムの可能性があります本当にRetweetしますか？" Background="{x:Null}" Foreground="#FF000C92" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <StackPanel Margin="60,40,60,0" Orientation="Vertical">
+            <Grid Height="Auto" Width="290" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <StackPanel Margin="40,25,25,0" Orientation="Vertical">
+                    <TextBlock x:Name="text" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding text}" VerticalAlignment="Top" Height="Auto" Margin="0" Width="220" RenderTransformOrigin="0.489,0.461" Foreground="White" FontSize="10"/>
+                    <Label x:Name="via" Content="{Binding Via}" FontSize="8"/>
+                </StackPanel>
+                <DockPanel Margin="40,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Label Content="{Binding User.Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0" Foreground="White" FontSize="10"/>
+                    <Label Content="{Binding User.ScreenName}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" Width="Auto" Margin="0" Foreground="White" FontSize="10"/>
+                </DockPanel>
+                <StackPanel Orientation="Vertical">
+                    <Image v:Behaviors.LazySource="{Binding User.ProfileImageUri}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" MaxWidth="30" MaxHeight="30"/>
+                </StackPanel>
+            </Grid>
+            <metro:PromptTextBox TextWrapping="Wrap" Text="このTweetはスパムの可能性があります本当にRetweetしますか？" Background="{x:Null}" Foreground="Red" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{x:Null}"/>
         </StackPanel>
-        <metro:CaptionButton Margin="51,199,179.6,10.2" Width="Auto" Height="Auto" Content="OK" FontWeight="Bold" FontSize="16" Command="{Binding RetweetOKCommand, Mode=OneWay}">
+        <metro:CaptionButton Margin="51,199,179.6,10.2" Width="Auto" Height="Auto" Content="OK" FontWeight="Bold" FontSize="16" Command="{Binding RetweetOKCommand, Mode=OneWay}" VerticalAlignment="Bottom">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <l:WindowInteractionMessageAction>
@@ -64,7 +64,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </metro:CaptionButton>
-        <metro:CaptionButton Margin="182,199,45.6,10.2" Width="Auto" Height="Auto" Content="Cancel" FontWeight="Bold" FontSize="16">
+        <metro:CaptionButton Margin="182,199,45.6,10.2" Width="Auto" Height="Auto" Content="Cancel" FontWeight="Bold" FontSize="16" VerticalAlignment="Bottom">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <l:WindowInteractionMessageAction>
