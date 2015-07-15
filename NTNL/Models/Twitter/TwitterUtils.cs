@@ -114,9 +114,9 @@ namespace NTNL.Models.Twitter
         /// </summary>
         /// <param name="account"></param>
         /// <param name="targetID"></param>
-        public void destroyFavorite(NTNLAccount account, long targetID)
+        public void destroyFavorite(NTNLAccount account, long TargetID)
         {
-
+            account.Token.Favorites.DestroyAsync(id => TargetID);
         }
 
         /// <summary>
@@ -129,5 +129,10 @@ namespace NTNL.Models.Twitter
 
         }
 
+
+        public void createFavorite(NTNLAccount account, long TargetID)
+        {
+            account.Token.Favorites.CreateAsync(id => TargetID);
+        }
     }
 }

@@ -47,6 +47,7 @@ namespace NTNL.ViewModels
         public StatusViewModel(MainWindowViewModel mw, Status _status){
             this.SourceStatus = _status;
             ReceivedStatus = SourceStatus;
+            IsFavorite = Visibility.Hidden;
             if (SourceStatus.RetweetedStatus != null)
             {
                 SourceStatus = SourceStatus.RetweetedStatus;
@@ -170,6 +171,25 @@ namespace NTNL.ViewModels
             }
         }
         #endregion
+
+
+        #region IsFavorite変更通知プロパティ
+        private Visibility _IsFavorite = Visibility.Hidden;
+
+        public Visibility IsFavorite
+        {
+            get
+            { return _IsFavorite; }
+            set
+            { 
+                if (_IsFavorite == value)
+                    return;
+                _IsFavorite = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
 
         #region RetweetingUser変更通知プロパティ
         private UserViewModel _RetweetingUser;
@@ -398,6 +418,75 @@ namespace NTNL.ViewModels
         }
         #endregion
 
+
+        #region FavoriteCommand
+        private ViewModelCommand _FavoriteCommand;
+
+        public ViewModelCommand FavoriteCommand
+        {
+            get
+            {
+                if (_FavoriteCommand == null)
+                {
+                    _FavoriteCommand = new ViewModelCommand(Favorite);
+                }
+                return _FavoriteCommand;
+            }
+        }
+
+        public void Favorite()
+        {
+            if (main.selectedAccount != null)
+            {
+                try
+                {
+                    TwitterFacade.Instance.CreateFavorite(main.selectedAccount.account, id);
+                    IsFavorite = Visibility.Visible;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Permission Error");
+
+                }
+            }
+        }
+        #endregion
+
+
+        #region UnFavoriteCommand
+        private ViewModelCommand _UnFavoriteCommand;
+
+        public ViewModelCommand UnFavoriteCommand
+        {
+            get
+            {
+                if (_UnFavoriteCommand == null)
+                {
+                    _UnFavoriteCommand = new ViewModelCommand(UnFavorite);
+                }
+                return _UnFavoriteCommand;
+            }
+        }
+
+        public void UnFavorite()
+        {
+            if (main.selectedAccount != null)
+            {
+                
+                try
+                {
+                     TwitterFacade.Instance.DestroyFavorite(main.selectedAccount.account, id);
+                     IsFavorite = Visibility.Hidden;
+                 }
+                 catch (Exception)
+                 {
+
+                     Console.WriteLine("Permission Error");
+                 }
+
+             }
+        }
+        #endregion
 
 
 

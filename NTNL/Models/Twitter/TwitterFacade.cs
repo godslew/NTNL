@@ -109,5 +109,15 @@ namespace NTNL.Models.Twitter
         {
             twUtils.destroyStatus(account, id);
         }
+
+        public void CreateFavorite(NTNLAccount account, long id)
+        {
+            twUtils.createFavorite(account, id);
+        }
+
+        public void DestroyFavorite(NTNLAccount account, long id)
+        {
+            twUtils.destroyFavorite(account, id);
+        }
     }
 }

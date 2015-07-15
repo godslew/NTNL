@@ -136,7 +136,8 @@
 									            <ContextMenu>
                                                     <MenuItem Header="reply" Command="{Binding ReplyCommand, Mode=OneWay}" />
                                                     <MenuItem Header="retweet" Command="{Binding RetweetCommand, Mode=OneWay}" />
-										            <MenuItem Header="favorite" />
+										            <MenuItem Header="favorite" Command="{Binding FavoriteCommand, Mode=OneWay}" />
+                                                    <MenuItem Header="unfavorite" Command="{Binding UnFavoriteCommand, Mode=OneWay}" />
                                                     <MenuItem Header="delete" Command="{Binding deleteStatusCommand, Mode=OneWay}" />
                                                     <MenuItem Header= "{Binding User.ScreenName}" Command="{Binding OpenUserCommand, Mode=OneWay}" />
 										        </ContextMenu>
@@ -164,7 +165,7 @@
 											</DockPanel>
 											<StackPanel Orientation="Vertical">
 												<Image v:Behaviors.LazySource="{Binding User.ProfileImageUri}" RenderTransformOrigin="0.484,0.544" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" MaxWidth="30" MaxHeight="30"/>
-												<ed:RegularPolygon Fill="#FFECFF00" HorizontalAlignment="Left" Height="15" InnerRadius="0.47211" PointCount="5" Stretch="Fill" Stroke="#00000000" VerticalAlignment="Top" Width="15" StrokeThickness="1"/>
+												<ed:RegularPolygon Fill="#FFECFF00" HorizontalAlignment="Left" Height="15" InnerRadius="0.47211" PointCount="5" Stretch="Fill" Stroke="#00000000" VerticalAlignment="Top" Width="15" StrokeThickness="1" Visibility="{Binding IsFavorite}"/>
 												<Rectangle Height="15" Stroke="#FF01CE04" StrokeThickness="1" Width="15" HorizontalAlignment="Left" VerticalAlignment="Top" ClipToBounds="True" RadiusY="1" RadiusX="1" Visibility="{Binding IsRetweet}"/>
 											</StackPanel>
 										</Grid>
